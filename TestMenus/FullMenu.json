@@ -1,0 +1,3095 @@
+{
+  "menuVersion": 1,
+  "categories": {
+    "stories": {
+      "levels": [
+        {
+          "levelName": [
+            "IN CLASS",
+            "TODAY"
+          ],
+          "levelNumber": 12,
+          "levelVersion": 2,
+          "sort_order": 1,
+          "puzzles": [
+            {
+              "id": 122,
+              "puzzleName": "Today at the start of class",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "CLASS",
+              "clue": [
+                "TODAY,",
+                "AT THE START",
+                "OF"
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 123,
+              "puzzleName": "Our teacher, Mrs Briggs",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "BRIGGS",
+              "clue": [
+                "AT THE START",
+                "OF CLASS,",
+                "OUR TEACHER,",
+                "MRS."
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 124,
+              "puzzleName": "Mrs. Briggs announceos",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "THE DAY!",
+              "clue": [
+                "MRS. BRIGGS",
+                "ANNOUNCEOS,",
+                ".OKAY KIDS!",
+                ".TODAY IS"
+              ],
+              "winMessage": [
+                "SO EXCITED!"
+              ],
+              "level": 12
+            },
+            {
+              "id": 125,
+              "puzzleName": "You get your MAGiEs",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "DATA EXPLORERS",
+              "clue": [
+                "TODAY,",
+                "YOU FINALLY",
+                "GET YOUR"
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 126,
+              "puzzleName": "We were too nervous",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "CHEEROS",
+              "clue": [
+                "ALL OF US",
+                "WERE TOO",
+                "NERVOUS TO"
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 127,
+              "puzzleName": "Roll out the cart",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "CART",
+              "clue": [
+                "MRS. BRIGGS",
+                "ROLLED OUT",
+                "THE"
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 128,
+              "puzzleName": "Rolls to each desk",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "DESK",
+              "clue": [
+                "WITHOUT ANY",
+                "CEREMONY, SHE",
+                "ROLLS THE",
+                "CART TO EACH"
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 129,
+              "puzzleName": "On each desk",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "A DEVICE",
+              "clue": [
+                "ON EACH DESK",
+                "SHE SETTOS",
+                "..."
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 130,
+              "puzzleName": "Accessories",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "A BAG",
+              "clue": [
+                "WITH",
+                "THE DEVICE,",
+                "SHE ALSO",
+                "SETTOS"
+              ],
+              "winMessage": [
+                "TO HOLDOS"
+              ],
+              "level": 12
+            },
+            {
+              "id": 131,
+              "puzzleName": "AA Batteries",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "AA BATTERIES",
+              "clue": [
+                "SHE SETTOS",
+                "THE DEVICE,",
+                "A BAG"
+              ],
+              "winMessage": [
+                "TO POWEROS"
+              ],
+              "level": 12
+            },
+            {
+              "id": 132,
+              "puzzleName": "Bricks of cards",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "CARDS",
+              "clue": [
+                "THE DEVICE,",
+                "A BAG,",
+                "AA BATTERIES,",
+                "THREE",
+                "SHRINKWRAPPED",
+                "BRICKS",
+                "OF THICK",
+                "PAPER"
+              ],
+              "winMessage": [],
+              "level": 12
+            },
+            {
+              "id": 136,
+              "puzzleName": "Reusable plastic cards",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "PLASTIC CARDS",
+              "clue": [
+                "SHE ALSO",
+                "GIVEOS",
+                "A SHORT STACK",
+                "OF"
+              ],
+              "winMessage": [
+                "THESE SHOULD",
+                "LAST LONGER",
+                "THAN THE",
+                "PAPER CARDS.",
+                "SO WE CAN",
+                "USE THEM",
+                "FOR HOMEWORK",
+                "OVER",
+                "AND OVER",
+                "AND OVER",
+                "AND OVER",
+                "...",
+                "YOU GET",
+                "THE IDEA."
+              ],
+              "level": 12
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "THE CARDS",
+            "LOOK LIKE"
+          ],
+          "levelNumber": 13,
+          "levelVersion": 1,
+          "sort_order": 2,
+          "puzzles": [
+            {
+              "id": 133,
+              "puzzleName": "Magnetic stripe",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "MAGNETIC TAPE",
+              "clue": [
+                "ON THE",
+                "PAPER CARDS",
+                "IS WHAT",
+                "LOOKS LIKE",
+                "A PIECE",
+                "OF"
+              ],
+              "winMessage": [],
+              "level": 13
+            },
+            {
+              "id": 134,
+              "puzzleName": "Like VHS video tape",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "VHS CASSETTE",
+              "clue": [
+                "MAGNETIC TAPE",
+                "...",
+                "AS IF SOMEONE",
+                "UNRAVELLED",
+                "AN ENTIRE"
+              ],
+              "winMessage": [],
+              "level": 13
+            },
+            {
+              "id": 135,
+              "puzzleName": "And cut it up",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "SNIPPETS",
+              "clue": [
+                "LIKE SOMEONE",
+                "UNRAVELLED A",
+                "VHS CASSETTE",
+                "AND CUT",
+                "THE TAPE",
+                "INTO LITTLE"
+              ],
+              "winMessage": [
+                "AND THEN",
+                "GLUED ALL",
+                "THE SNIPPETS",
+                "ONTO",
+                "THE CARDS."
+              ],
+              "level": 13
+            },
+            {
+              "id": 137,
+              "puzzleName": "The plastic cards look like",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "GIFT CARDS",
+              "clue": [
+                "THE",
+                "PLASTIC CARDS",
+                "LOOK",
+                "JUST LIKE"
+              ],
+              "winMessage": [],
+              "level": 13
+            },
+            {
+              "id": 138,
+              "puzzleName": "Or frequent diner cards",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "FAST FOOD STATION",
+              "clue": [
+                "GIFT CARDS",
+                "OR FREQUENT",
+                "DINER CARDS",
+                "FROM A"
+              ],
+              "winMessage": [],
+              "level": 13
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "AFTER SCHOOL",
+            "AT THE MALL"
+          ],
+          "levelNumber": 8,
+          "levelVersion": 1,
+          "sort_order": 3,
+          "puzzles": [
+            {
+              "id": 82,
+              "puzzleName": "Done with school",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "DAY",
+              "clue": [
+                "PROTI IS DONE",
+                "WITH SCHOOL",
+                "FOR THE"
+              ],
+              "winMessage": [],
+              "level": 8
+            },
+            {
+              "id": 83,
+              "puzzleName": "Take MAGiE home",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "MAGIE DEVICES",
+              "clue": [
+                "MRS. BRIGGS",
+                "LETTOS",
+                "STUDENTS",
+                "TAKEOS"
+              ],
+              "winMessage": [
+                "HOME",
+                "FOR THE NIGHT"
+              ],
+              "level": 8
+            },
+            {
+              "id": 84,
+              "puzzleName": "To the mall 1",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "MALL",
+              "clue": [
+                "PROTI TAKEOS",
+                "MAGIE AND",
+                "HEADS TO THE"
+              ],
+              "winMessage": [],
+              "level": 8
+            },
+            {
+              "id": 85,
+              "puzzleName": "What is at the mall",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "SIGNAL HUT",
+              "clue": [
+                "PROTI WANTS",
+                "TO BROWSE",
+                "AT THE"
+              ],
+              "winMessage": [
+                "THE PLACE",
+                "FOR",
+                "TECHNOLOGY!"
+              ],
+              "level": 8
+            },
+            {
+              "id": 86,
+              "puzzleName": "What is at the Signal Hut",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "ELECTRONICS",
+              "clue": [
+                "THE",
+                "SIGNAL HUT",
+                "SELLS VARIOUS"
+              ],
+              "winMessage": [
+                "ALSO..."
+              ],
+              "level": 8
+            },
+            {
+              "id": 111,
+              "puzzleName": "Also components",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "COMPONENTS",
+              "clue": [
+                "SIGNAL HUT",
+                "ALSO SELLS",
+                "ELECTRONIC"
+              ],
+              "winMessage": [
+                "LIKE SWITCHES",
+                "AND KNOBS"
+              ],
+              "level": 8
+            },
+            {
+              "id": 112,
+              "puzzleName": "They also sell things for MAGiE",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "MAGIE!",
+              "clue": [
+                "SIGNAL HUT",
+                "ALSO SELLS",
+                "COMPONENTS,",
+                "MODS, AND",
+                "ACCESSORIES",
+                "FOR"
+              ],
+              "winMessage": [
+                "YES!"
+              ],
+              "level": 8
+            },
+            {
+              "id": 87,
+              "puzzleName": "Not much at the hut",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "NOT MUCH",
+              "clue": [
+                "WHAT IS NEW",
+                "AT THE SIG",
+                "TODAY?"
+              ],
+              "winMessage": [
+                "SO PROTI",
+                "HEADS OUT",
+                "INTO THE MALL"
+              ],
+              "level": 8
+            },
+            {
+              "id": 88,
+              "puzzleName": "Scented candles",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CANDLES",
+              "clue": [
+                "THE OTHER",
+                "STORES AT",
+                "THE MALL",
+                "SELL",
+                "SCENTED"
+              ],
+              "winMessage": [
+                "SNIFF!"
+              ],
+              "level": 8
+            },
+            {
+              "id": 108,
+              "puzzleName": "And sparkly clothes",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CLOTHES",
+              "clue": [
+                "SCENTED",
+                "CANDLES AND",
+                "SPARKLEY"
+              ],
+              "winMessage": [],
+              "level": 8
+            },
+            {
+              "id": 109,
+              "puzzleName": "Proti is not interested",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "NOT INTERESTED",
+              "clue": [
+                "SCENTED",
+                "CANDLES",
+                "AND SPARKLEY",
+                "CLOTHES",
+                "...",
+                "IN",
+                "SUCH THINGS",
+                "PROTI IS"
+              ],
+              "winMessage": [
+                "AND SO",
+                "PROTI HEADS",
+                "UPSTAIRS."
+              ],
+              "level": 8
+            }
+          ]
+        }
+      ],
+      "sort_order": 1
+    },
+    "at the mall": {
+      "levels": [
+        {
+          "levelName": [
+            "UPSTAIRS",
+            "AT THE MALL"
+          ],
+          "levelNumber": 9,
+          "levelVersion": 1,
+          "sort_order": 4,
+          "puzzles": [
+            {
+              "id": 89,
+              "puzzleName": "Very few stores upstairs",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "OFFICES",
+              "clue": [
+                "UPSTAIRS",
+                "AT THE MALL,",
+                "THERE ARE",
+                "VERY FEW",
+                "STORES",
+                "BUT THERE ARE"
+              ],
+              "winMessage": [
+                "OFFICES?",
+                "BOREOS.",
+                "WHAT ELSE?"
+              ],
+              "level": 9
+            },
+            {
+              "id": 90,
+              "puzzleName": "Also storage rooms",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "THE ROBOTS",
+              "clue": [
+                "UPSTAIRS",
+                "IS AlSO WHERE",
+                "THE EMPLOYEES",
+                "OF THE MALL",
+                "STORE AND",
+                "MAINTAIN"
+              ],
+              "winMessage": [
+                "NOW THAT",
+                "IS COOL!"
+              ],
+              "level": 9
+            },
+            {
+              "id": 91,
+              "puzzleName": "What kind of robots?",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "SECUREOS",
+              "clue": [
+                "ONE DOOR",
+                "READS"
+              ],
+              "winMessage": [
+                "PROTI GUESSES",
+                "THAT",
+                ".SECUREOS.",
+                "ARE NOT A",
+                "SANDWICH",
+                "COOKIE"
+              ],
+              "level": 9
+            },
+            {
+              "id": 92,
+              "puzzleName": "CLEANOS",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CLEANOS",
+              "clue": [
+                "THE NEXT DOOR",
+                "SAYS"
+              ],
+              "winMessage": [
+                "PROTI",
+                "HAS SEEN MANY",
+                "CLEANING BOTS",
+                "AROUND",
+                "THE MALL"
+              ],
+              "level": 9
+            },
+            {
+              "id": 93,
+              "puzzleName": "Here comes a mop bot",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CLEANOS TWENTY TWO",
+              "clue": [
+                "IN FACT,",
+                "HERE COMES",
+                "ONE NOW.",
+                "STENCILED ON",
+                "THE SIDE OF",
+                "THE BOT IS"
+              ],
+              "winMessage": [],
+              "level": 9
+            },
+            {
+              "id": 94,
+              "puzzleName": "CLEANOS 22 width",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "ONE HUNDRED TEN",
+              "clue": [
+                "PROTI",
+                "ESTIMATES",
+                "THAT",
+                "CLEANOS",
+                "TWENTY TWO",
+                "IS ABOUT"
+              ],
+              "winMessage": [
+                "CENTIMETERS",
+                "WIDE"
+              ],
+              "level": 9
+            },
+            {
+              "id": 95,
+              "puzzleName": "CLEANOS 22 height",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "FIFTY FIVE",
+              "clue": [
+                "PROTI",
+                "ESTIMATES",
+                "THE HEIGHT",
+                "OF CLEANOS",
+                "TWENTY TWO",
+                "AT"
+              ],
+              "winMessage": [
+                "CENTIMETERS",
+                "HIGH"
+              ],
+              "level": 9
+            },
+            {
+              "id": 96,
+              "puzzleName": "CLEANOS 22 has a card reader",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CARD READER!",
+              "clue": [
+                "CLEANOS",
+                "TWENTY TWO",
+                "IS BASICALLY",
+                "ROUND.",
+                "BUT ONE PART",
+                "SEEMS LIKE",
+                "THE FRONT",
+                "...",
+                "ON THE FRONT",
+                "IS",
+                "A"
+              ],
+              "winMessage": [
+                "IT LOOKS",
+                "JUST LIKE",
+                "THE ONE",
+                "ON MAGIE!"
+              ],
+              "level": 9
+            },
+            {
+              "id": 97,
+              "puzzleName": "There is also a keyboard",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "KEYPAD",
+              "clue": [
+                "THER IS ALSO",
+                "AN ALPHA"
+              ],
+              "winMessage": [
+                "ALMOST",
+                "JUST LIKE",
+                "THE ONE",
+                "ON MAGIE!"
+              ],
+              "level": 9
+            },
+            {
+              "id": 98,
+              "puzzleName": "Closing time",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CLOSING",
+              "clue": [
+                "DOWNSTAIRS",
+                "PROTI HEARS",
+                "THE",
+                "LOUDSPEAKER",
+                "ANNOUNCEOS",
+                ".KUCHH.",
+                "THE MALL",
+                "IS NOW"
+              ],
+              "winMessage": [
+                "PLEASE",
+                "VACATE",
+                "THE PREMESIS",
+                ".KKCH."
+              ],
+              "level": 9
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "CLOSING TIME"
+          ],
+          "levelNumber": 10,
+          "levelVersion": 1,
+          "sort_order": 5,
+          "puzzles": [
+            {
+              "id": 99,
+              "puzzleName": "Must not loiter",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "LOITERING",
+              "clue": [
+                "PROTI KNOWS",
+                "NOT TO BE",
+                "CAUGHT"
+              ],
+              "winMessage": [
+                "AT THE MALL"
+              ],
+              "level": 10
+            },
+            {
+              "id": 100,
+              "puzzleName": "Secureos will come for you",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "SECUREOS",
+              "clue": [
+                "WHEN PEOPLE",
+                "LOITER AT",
+                "THE MALL",
+                "THEY GET",
+                "CHASED OUT",
+                "BY THE",
+                "SECURITY BOTS",
+                "...",
+                "WHICH PROTI",
+                "NOW KNOWS",
+                "ARE CALLED"
+              ],
+              "winMessage": [],
+              "level": 10
+            },
+            {
+              "id": 101,
+              "puzzleName": "So Proti gets out before it is too late",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "LEFT",
+              "clue": [
+                "THE SECUREOS",
+                "HEAD RIGHT TO",
+                "THE ELEVATORS",
+                "SO PROTI",
+                "HEADS"
+              ],
+              "winMessage": [
+                "TOWARDS",
+                "THE STAIRS"
+              ],
+              "level": 10
+            },
+            {
+              "id": 102,
+              "puzzleName": "Out through the food court",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "FOOD COURT",
+              "clue": [
+                "AFTER GOING",
+                "DOWNSTAIRS",
+                "PROTI PASSES",
+                "THROUGH THE"
+              ],
+              "winMessage": [
+                "AND OUTSIDE",
+                "TOWARDS",
+                "HOME."
+              ],
+              "level": 10
+            },
+            {
+              "id": 103,
+              "puzzleName": "Lying awake that night",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "HYPOTHESIZES",
+              "clue": [
+                "LYING AWAKE",
+                "THAT NIGHT,",
+                "PROTI"
+              ],
+              "winMessage": [],
+              "level": 10
+            },
+            {
+              "id": 104,
+              "puzzleName": "Proti hypothesizes",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "THE MALL",
+              "clue": [
+                "PROTI",
+                "HYPOTHESIZES",
+                "THAT THE",
+                "EMPLOYEES OF"
+              ],
+              "winMessage": [],
+              "level": 10
+            },
+            {
+              "id": 105,
+              "puzzleName": "They must encode programs",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "ENCODE PROGRAMS",
+              "clue": [
+                "THE EMPLOYEES",
+                "MUST"
+              ],
+              "winMessage": [],
+              "level": 10
+            },
+            {
+              "id": 106,
+              "puzzleName": "Encode them onto cards",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "ONTO CARDS",
+              "clue": [
+                "THEY MUST",
+                "ENCODE",
+                "PROGRAMS"
+              ],
+              "winMessage": [],
+              "level": 10
+            },
+            {
+              "id": 107,
+              "puzzleName": "And then swipe them",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "SWIPE THEM",
+              "clue": [
+                "THEY ENCODE",
+                "THE PROGRAMS",
+                "ONTO CARDS",
+                "AND THEN"
+              ],
+              "winMessage": [
+                "THROUGH THE",
+                "CARD READER"
+              ],
+              "level": 10
+            },
+            {
+              "id": 110,
+              "puzzleName": "That has to be it",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "THAT HAS TO BE IT!",
+              "clue": [
+                "THEY ENCODE",
+                "THE PROGRAMS",
+                "ONTO CARDS",
+                "AND THEN",
+                "SWIPE THEM",
+                "INTO",
+                "THE BOTS."
+              ],
+              "winMessage": [
+                "IT JUST",
+                "HAS TO!"
+              ],
+              "level": 10
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "PONDEROS",
+            "MOP BOT"
+          ],
+          "levelNumber": 11,
+          "levelVersion": 1,
+          "sort_order": 6,
+          "puzzles": [
+            {
+              "id": 113,
+              "puzzleName": "The next morning",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "ENCODING ASSIGNMENTS",
+              "clue": [
+                "THE NEXT",
+                "MORNING",
+                "PROTI GOES",
+                "TO SCHOOL",
+                "AS USUAL."
+              ],
+              "winMessage": [],
+              "level": 11
+            },
+            {
+              "id": 114,
+              "puzzleName": "MAGiE beepos",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "BEEPOS",
+              "clue": [
+                "AFTER",
+                "AN ASSIGNMENT",
+                "IS FINISHED,",
+                "MAGIE"
+              ],
+              "winMessage": [
+                "AND THEN",
+                "PROTI KNOWS",
+                "WHAT TO DO"
+              ],
+              "level": 11
+            },
+            {
+              "id": 115,
+              "puzzleName": "Proti swipes the card",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "SWIPE A BLANK CARD",
+              "clue": [
+                "WHEN",
+                "MAGIE BEEPOS,",
+                "PROTI KNOWS",
+                "TO"
+              ],
+              "winMessage": [],
+              "level": 11
+            },
+            {
+              "id": 116,
+              "puzzleName": "MAGiE writes the bits",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "WRITES THE BITS",
+              "clue": [
+                "WHEN PROTI",
+                "SWIPES THE",
+                "CARD THROUGH,",
+                "MAGIE"
+              ],
+              "winMessage": [
+                "ONTO THE CARD"
+              ],
+              "level": 11
+            },
+            {
+              "id": 117,
+              "puzzleName": "The mob bot is intimidating",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "IS INTIMIDATING",
+              "clue": [
+                "THE MOP BOT,",
+                "CLEANOS",
+                "TWENTY TWO,"
+              ],
+              "winMessage": [
+                "BUT..."
+              ],
+              "level": 11
+            },
+            {
+              "id": 118,
+              "puzzleName": "But it is just a robot",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "IS JUST A ROBOT",
+              "clue": [
+                "BUT CLEANOS",
+                "TWENTY TWO"
+              ],
+              "winMessage": [],
+              "level": 11
+            },
+            {
+              "id": 119,
+              "puzzleName": "It is not happy",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "HAPPY OR SAD",
+              "clue": [
+                "IT IS NOT"
+              ],
+              "winMessage": [],
+              "level": 11
+            },
+            {
+              "id": 121,
+              "puzzleName": "It does not get mad",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "GET MAD",
+              "clue": [
+                "IT DOES NOT"
+              ],
+              "winMessage": [],
+              "level": 11
+            },
+            {
+              "id": 120,
+              "puzzleName": "It will not seek revenge",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "SEEK REVENGE",
+              "clue": [
+                "IT WILL NOT",
+                "FIND OUT",
+                "THAT",
+                "PROTI WAS",
+                "THE ONE WHO",
+                "REPROGRAMMED",
+                "IT.",
+                "IT WILL NOT"
+              ],
+              "winMessage": [
+                "HUNTING PROTI",
+                "WITH AN",
+                "UNCEASING",
+                "DRIVE TO",
+                "TERMINATE",
+                "ALL",
+                "MALL PATRONS",
+                "WHO DARE",
+                "TO OBSTRUCT",
+                "THE HARVEST",
+                "OF SCENTED",
+                "CANDLES AND",
+                "SPARKLEY",
+                "CLOTHES.",
+                "...",
+                "THOSE",
+                "PRODUCTS,",
+                "SO ESSENTIAL",
+                "TO THE",
+                "ULTIMATE GOAL",
+                "...",
+                "TO SUBJUGATE",
+                "ALL HUMANS!",
+                "...",
+                "FORCING THEM",
+                "TO BOW DOWN",
+                "BEFORE THEIR",
+                "NEW",
+                "ROBOT",
+                "OVERLORDS!!!",
+                "...",
+                "NO.",
+                "...",
+                "IT WILL NOT",
+                "DO THAT.",
+                "...",
+                "IT IS JUST",
+                "A MOP BOT."
+              ],
+              "level": 11
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "WHAT KIND",
+            "OF COMMANDS?"
+          ],
+          "levelNumber": 14,
+          "levelVersion": 1,
+          "sort_order": 7,
+          "puzzles": [
+            {
+              "id": 139,
+              "puzzleName": "What will CLEANOS 22 do?",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "ATTACKOS!",
+              "clue": [
+                "PROTI IS",
+                "SURE THAT",
+                "CLEANOS",
+                "TWENTY TWO",
+                "WILL NOT"
+              ],
+              "winMessage": [
+                "BUT WHAT",
+                "WILL CLEANOS",
+                "DO?"
+              ],
+              "level": 14
+            },
+            {
+              "id": 140,
+              "puzzleName": "What kind of commands?",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "COMMANDS",
+              "clue": [
+                "BUT",
+                "WHAT KIND",
+                "OF"
+              ],
+              "winMessage": [
+                "CAN PROTI",
+                "GIVE TO",
+                "CLEANOS",
+                "TWENTY TWO?"
+              ],
+              "level": 14
+            },
+            {
+              "id": 145,
+              "puzzleName": "Proti wants to reados",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "TO READOS",
+              "clue": [
+                "PROTI WANTS"
+              ],
+              "winMessage": [
+                "THOSE",
+                "COMMANDS",
+                "FROM CLEANOS."
+              ],
+              "level": 14
+            },
+            {
+              "id": 146,
+              "puzzleName": "But Cleanos has no screen",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "NO SCREEN",
+              "clue": [
+                "BUT CLEANOS",
+                "HAS"
+              ],
+              "winMessage": [],
+              "level": 14
+            },
+            {
+              "id": 147,
+              "puzzleName": "It must be able to writeos",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "THE CARDS OF PROTI!",
+              "clue": [
+                "CLEANOS",
+                "TWENTY TWO",
+                "MUST BE ABLE",
+                "TO WRITEOS TO"
+              ],
+              "winMessage": [],
+              "level": 14
+            },
+            {
+              "id": 141,
+              "puzzleName": "The Signal Hut has a demo computer",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "TO BUYOS.",
+              "clue": [
+                "THE",
+                "SIGNAL HUT",
+                "HAS A",
+                "DEMO COMPUTER",
+                "TO CONVINCE",
+                "SHOPPERS"
+              ],
+              "winMessage": [],
+              "level": 14
+            },
+            {
+              "id": 142,
+              "puzzleName": "The demo computer has many programs",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "MANY PROGRAMS",
+              "clue": [
+                "THE",
+                "DEMO COMPUTER",
+                "OF THE",
+                "SIGNAL HUT",
+                "HAS"
+              ],
+              "winMessage": [],
+              "level": 14
+            },
+            {
+              "id": 143,
+              "puzzleName": "Proti will learn",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "TO WRITEOS TO",
+              "clue": [
+                "PROTI WILL",
+                "LEARN HOW",
+                "TO COMMAND",
+                "THE",
+                "DEMO COMPUTER",
+                "OF SIGNAL HUT"
+              ],
+              "winMessage": [
+                "THE CARDS",
+                "OF PROTI."
+              ],
+              "level": 14
+            },
+            {
+              "id": 144,
+              "puzzleName": "Then Proti will command",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CLEANOS TWENTY TWO",
+              "clue": [
+                "THEN",
+                "PROTI WILL",
+                "COMMAND"
+              ],
+              "winMessage": [
+                "TO WRITEOS TO",
+                "THE CARDS",
+                "OF PROTI."
+              ],
+              "level": 14
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "NERVOUS",
+            "SHOPOS"
+          ],
+          "levelNumber": 15,
+          "levelVersion": 1,
+          "sort_order": 8,
+          "puzzles": [
+            {
+              "id": 148,
+              "puzzleName": "Proti is nervous",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "NERVOUS",
+              "clue": [
+                "AT THE",
+                "SIGNAL HUT,",
+                "PROTI IS"
+              ],
+              "winMessage": [],
+              "level": 15
+            },
+            {
+              "id": 149,
+              "puzzleName": "Proti tries to look casual",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "LOOK CASUAL",
+              "clue": [
+                "PROTI TRIES",
+                "TO"
+              ],
+              "winMessage": [
+                "WHILE",
+                "BROWSING",
+                "AROUND THE",
+                "MAGIE SECTION"
+              ],
+              "level": 15
+            },
+            {
+              "id": 150,
+              "puzzleName": "Proti sees a card wallet",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CARD WALLET",
+              "clue": [
+                "PROTI SEES A"
+              ],
+              "winMessage": [
+                "THAT WOULD",
+                "BE NICE."
+              ],
+              "level": 15
+            },
+            {
+              "id": 151,
+              "puzzleName": "Better than plastic zipper bags",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "ZIPPER BAGS",
+              "clue": [
+                "A CARD WALLET",
+                "WOULD BE",
+                "MUCH BETTER",
+                "THAN THE",
+                "PLASTIC"
+              ],
+              "winMessage": [
+                "THAT",
+                "CURRENTLY",
+                "HOLDOS CARDS."
+              ],
+              "level": 15
+            },
+            {
+              "id": 152,
+              "puzzleName": "Proti buyos",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "MORE RELAXED",
+              "clue": [
+                "PROTI BUYOS",
+                "THE WALLET",
+                "AND STARTS",
+                "FEELING"
+              ],
+              "winMessage": [],
+              "level": 15
+            },
+            {
+              "id": 153,
+              "puzzleName": "Proti sits down",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "PROTI SITS DOWN",
+              "clue": [
+                "FEELING",
+                "RELAXED,"
+              ],
+              "winMessage": [
+                "AT THE",
+                "DEMO COMPUTER"
+              ],
+              "level": 15
+            },
+            {
+              "id": 154,
+              "puzzleName": "Proti setos cards and wallet",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "TABLE OF THE DEMO COMPUTER",
+              "clue": [
+                "PROTI SETOS",
+                "OLD",
+                "PLASTIC BAGS",
+                "AND NEW",
+                "CARD WALLET",
+                "ONTO THE"
+              ],
+              "winMessage": [],
+              "level": 15
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "SIGNAL HUT",
+            "DEMO COMPUTER"
+          ],
+          "levelNumber": 16,
+          "levelVersion": 1,
+          "sort_order": 9,
+          "puzzles": [
+            {
+              "id": 158,
+              "puzzleName": "Taped to the table",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "A SHEET OF PAPER.",
+              "clue": [
+                "ON THE TABLE",
+                "WHERE PROTI",
+                "SETOS WALLET",
+                "AND CARDS,",
+                "PROTI FINDS"
+              ],
+              "winMessage": [
+                "SOMEONE",
+                "HAS TAPEOS."
+              ],
+              "level": 16
+            },
+            {
+              "id": 159,
+              "puzzleName": "The paper is a help sheet",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "COMMANDS OF THE COMPUTER",
+              "clue": [
+                "ON THE SHEET",
+                "ARE PRINTOS",
+                "THE MAIN"
+              ],
+              "winMessage": [
+                "HELP",
+                "LIST",
+                "LOAD .PGM.",
+                "RUN",
+                "READ",
+                "SAVE .PGM."
+              ],
+              "level": 16
+            },
+            {
+              "id": 160,
+              "puzzleName": "Proti types .list.",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "LIST",
+              "clue": [
+                "ON THE",
+                "KEYBOARD,",
+                "PROTI",
+                "TYPEOS"
+              ],
+              "winMessage": [
+                "AND PRESSES",
+                ".ENTER."
+              ],
+              "level": 16
+            },
+            {
+              "id": 161,
+              "puzzleName": "The computer lists",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "LOAD .ROCKS.",
+              "clue": [
+                "THE COMPUTER",
+                "LISTOS",
+                "GAME PROGRAMS",
+                "...",
+                "BROS",
+                "KLANK",
+                "ROCKS",
+                "TENNIS",
+                "...",
+                "PROTI",
+                "TYPEOS"
+              ],
+              "winMessage": [
+                "AND PRESSES",
+                ".ENTER."
+              ],
+              "level": 16
+            },
+            {
+              "id": 162,
+              "puzzleName": "Proti types .run.",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "RUN",
+              "clue": [
+                "THE COMPUTER",
+                "BEEPOS",
+                "...",
+                "PROTI TYPEOS"
+              ],
+              "winMessage": [
+                "AND PRESSES",
+                "ENTER"
+              ],
+              "level": 16
+            },
+            {
+              "id": 163,
+              "puzzleName": "The game starts",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "AND THINKOS",
+              "clue": [
+                "ROCKS RUNS",
+                "...",
+                "PROTI PLAYOS"
+              ],
+              "winMessage": [],
+              "level": 16
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "PLAYING AND",
+            "THINKING"
+          ],
+          "levelNumber": 17,
+          "levelVersion": 1,
+          "sort_order": 10,
+          "puzzles": [
+            {
+              "id": 155,
+              "puzzleName": "Proti quits the game",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "THE BACK BUTTON",
+              "clue": [
+                "PROTI PLAYOS",
+                "AND THINKOS.",
+                "...",
+                "PROTI PRESSES"
+              ],
+              "winMessage": [
+                "THE COMPUTER",
+                "QUITOS AND",
+                "BEEPOS."
+              ],
+              "level": 17
+            },
+            {
+              "id": 164,
+              "puzzleName": "Proti types .write.",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "WRITE",
+              "clue": [
+                "PROTI TYPEOS"
+              ],
+              "winMessage": [
+                "AND PRESSES",
+                "ENTER",
+                "...",
+                "THE COMPUTER",
+                "BEEPOS"
+              ],
+              "level": 17
+            },
+            {
+              "id": 165,
+              "puzzleName": "Proti swipes a card",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "SWIPEOS",
+              "clue": [
+                "THE COMPUTER",
+                "BEEPOS.",
+                "PROTI TAKEOS",
+                "A BLANK CARD",
+                "AND"
+              ],
+              "winMessage": [
+                "THROUGH THE",
+                "CARD SLOT",
+                "ON THE",
+                "DEMO COMPUTER",
+                "...",
+                "IT BEEPOS."
+              ],
+              "level": 17
+            },
+            {
+              "id": 166,
+              "puzzleName": "Proti swipeos the card through MAGiE",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "CARD SLOT ON MAGIE",
+              "clue": [
+                "PROTI SWIPEOS",
+                "THE SAME CARD",
+                "THROUGH THE"
+              ],
+              "winMessage": [
+                "MAGIE BEEPOS."
+              ],
+              "level": 17
+            },
+            {
+              "id": 167,
+              "puzzleName": "A bunch of gibberish",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "GIBBERISH",
+              "clue": [
+                "ON THE SCREEN",
+                "OF MAGIE",
+                "APPEAROS",
+                "A BUNCH OF"
+              ],
+              "winMessage": [
+                "LOAD A, RO1X",
+                "LOAD B, RO2X",
+                "SUB  A, B",
+                "BEQ  A4A0",
+                "JUMP A100",
+                "LOAD A, RO1Y",
+                "LOAD B, R02Y",
+                "SUB  A, B",
+                "BEQ  A810",
+                "JUMP A100"
+              ],
+              "level": 17
+            },
+            {
+              "id": 168,
+              "puzzleName": "Proti guesses that the gibberish is a program",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "A PROGRAM",
+              "clue": [
+                "PROTI",
+                "GUESSOS THAT",
+                "THE GIBBERISH",
+                "IS"
+              ],
+              "winMessage": [
+                "THE PROGRAM",
+                "FOR THE GAME",
+                ".ROCKS. THAT",
+                "PROTI PLAYOS."
+              ],
+              "level": 17
+            }
+          ]
+        }
+      ],
+      "sort_order": 2
+    },
+    "online": {
+      "levels": [
+        {
+          "levelName": [
+            "TEDIUM"
+          ],
+          "levelNumber": 6,
+          "levelVersion": 1,
+          "sort_order": 4,
+          "puzzles": [
+            {
+              "id": 68,
+              "puzzleName": "Getting Tedious",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "TEDIOUS",
+              "clue": [
+                "THIS",
+                "IS GETTING"
+              ],
+              "winMessage": [
+                "AGREED.",
+                "IT IS GETTING",
+                "TEDIOUS"
+              ],
+              "level": 6
+            },
+            {
+              "id": 69,
+              "puzzleName": "Let us devise",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "DEVISE",
+              "clue": [
+                "LET US"
+              ],
+              "winMessage": [
+                "DEVISE WHAT?"
+              ],
+              "level": 6
+            },
+            {
+              "id": 70,
+              "puzzleName": "Devise a more efficient",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "A MORE EFFICIENT",
+              "clue": [
+                "LET US",
+                "DEVISE"
+              ],
+              "winMessage": [
+                "A MORE",
+                "EFFICIENT",
+                "...",
+                "WHAT?"
+              ],
+              "level": 6
+            },
+            {
+              "id": 71,
+              "puzzleName": "More efficient means",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "MEANS OF",
+              "clue": [
+                "LET US DEVISE",
+                "A MORE",
+                "EFFICIENT"
+              ],
+              "winMessage": [
+                "MEANS OF",
+                "...",
+                "WHAT?"
+              ],
+              "level": 6
+            },
+            {
+              "id": 72,
+              "puzzleName": "Communication",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "COMMUNICATION",
+              "clue": [
+                "A MORE",
+                "EFFICIENT",
+                "MEANS OF"
+              ],
+              "winMessage": [
+                "MORE",
+                "EFFICIENT",
+                "SOUNDS GOOD!"
+              ],
+              "level": 6
+            },
+            {
+              "id": 73,
+              "puzzleName": "Each letter",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "EACH LETTER",
+              "clue": [
+                "MORE",
+                "EFFICIENT",
+                "SOUNDS GOOD",
+                "BUT HOW?"
+              ],
+              "winMessage": [],
+              "level": 6
+            },
+            {
+              "id": 74,
+              "puzzleName": "Each letter is represented",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "REPRESENTED",
+              "clue": [
+                "EACH LETTER",
+                "IS"
+              ],
+              "winMessage": [
+                "BY WHAT?"
+              ],
+              "level": 6
+            },
+            {
+              "id": 75,
+              "puzzleName": "Five bits",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "FIVE BITS",
+              "clue": [
+                "EACH LETTER",
+                "IS",
+                "REPRESENTED",
+                "BY"
+              ],
+              "winMessage": [
+                "OKAY..."
+              ],
+              "level": 6
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "WHAT FOR?"
+          ],
+          "levelNumber": 4,
+          "levelVersion": 1,
+          "sort_order": 5,
+          "puzzles": [
+            {
+              "id": 30,
+              "puzzleName": "25 you",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "YOU",
+              "clue": [
+                "WHAT CAN",
+                "YOU USE",
+                "MAGIE FOR?"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 31,
+              "puzzleName": "26 can",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "CAN",
+              "clue": [
+                "WHAT CAN",
+                "YOU USE",
+                "MAGIE FOR?",
+                "...",
+                "YOU"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 32,
+              "puzzleName": "27 use",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "USE",
+              "clue": [
+                "YOU CAN"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 33,
+              "puzzleName": "28 me",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "MAGIE",
+              "clue": [
+                "YOU CAN",
+                "USE"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 34,
+              "puzzleName": "29 to",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "TO",
+              "clue": [
+                "YOU CAN USE",
+                "MAGIE"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 35,
+              "puzzleName": "30 decode",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "DECODE",
+              "clue": [
+                "YOU CAN USE",
+                "MAGIE TO"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 36,
+              "puzzleName": "31 bits",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "BITS",
+              "clue": [
+                "YOU CAN USE",
+                "MAGIE TO",
+                "DECODE"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 37,
+              "puzzleName": "32 into",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "INTO",
+              "clue": [
+                "YOU CAN USE",
+                "MAGIE TO",
+                "DECODE",
+                "BITS"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 38,
+              "puzzleName": "33 words",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "WORDS",
+              "clue": [
+                "DECODE",
+                "BITS INTO"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 39,
+              "puzzleName": "34 you",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "YOU",
+              "clue": [
+                "USE MAGIE",
+                "TO DECODE",
+                "BITS INTO",
+                "WORDS."
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 40,
+              "puzzleName": "35 can",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "CAN",
+              "clue": [
+                "YOU"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 41,
+              "puzzleName": "36 also",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "ALSO",
+              "clue": [
+                "YOU CAN"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 42,
+              "puzzleName": "37 use",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "USE",
+              "clue": [
+                "YOU CAN ALSO"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 43,
+              "puzzleName": "38 bits",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "BITS",
+              "clue": [
+                "YOU CAN ALSO",
+                "USE"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 44,
+              "puzzleName": "39 for",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "FOR",
+              "clue": [
+                "ALSO USE BITS"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 45,
+              "puzzleName": "40 spaces",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "SPACES",
+              "clue": [
+                "USE BITS FOR"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 46,
+              "puzzleName": "41 and",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "AND",
+              "clue": [
+                "USE BITS FOR",
+                "SPACES"
+              ],
+              "winMessage": [],
+              "level": 4
+            },
+            {
+              "id": 47,
+              "puzzleName": "42 punctuation",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "PUNCTUATION",
+              "clue": [
+                "USE BITS FOR",
+                "SPACES AND"
+              ],
+              "winMessage": [],
+              "level": 4
+            }
+          ]
+        }
+      ],
+      "sort_order": 3
+    },
+    "tutorials": {
+      "levels": [],
+      "sort_order": 4
+    },
+    "ALPHA LENGTH ENCODING": {
+      "levels": [
+        {
+          "levelName": [
+            "ALPHA LENGTH",
+            "LETTERS"
+          ],
+          "levelNumber": 1,
+          "levelVersion": 1,
+          "sort_order": 1,
+          "puzzles": [
+            {
+              "id": 1,
+              "puzzleName": "01 Intro",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "",
+              "clue": [
+                "1 IS .A.",
+                "2 IS .B.",
+                "3 IS .C.",
+                "..."
+              ],
+              "winMessage": [
+                "26 IS .Z."
+              ],
+              "level": 1
+            },
+            {
+              "id": 2,
+              "puzzleName": "02 Type A",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "A",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "CORRECT!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 3,
+              "puzzleName": "03 B",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "B",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "HOORAY!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 4,
+              "puzzleName": "04 C",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "C",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "CORRECT!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 5,
+              "puzzleName": "05 D",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "D",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "DELIGHTFUL!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 6,
+              "puzzleName": "06 H",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "H",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "HOORAY!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 7,
+              "puzzleName": "07 M",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "M",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "MARVELOUS!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 8,
+              "puzzleName": "08 N",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "N",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "NICE!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 9,
+              "puzzleName": "09 O",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "O",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "OH YEAH!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 10,
+              "puzzleName": "10 S",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "S",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "SENSATIONAL!"
+              ],
+              "level": 1
+            },
+            {
+              "id": 11,
+              "puzzleName": "11 Z",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "Z",
+              "clue": [
+                "TYPE",
+                "THE LETTER",
+                "INDICATED BY",
+                "THE BITS"
+              ],
+              "winMessage": [
+                "ZOUNDS!",
+                "I THINK",
+                "YOU GET",
+                "THE IDEA"
+              ],
+              "level": 1
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "ALPHA LENGTH",
+            "WORDS"
+          ],
+          "levelNumber": 2,
+          "levelVersion": 1,
+          "sort_order": 2,
+          "puzzles": [
+            {
+              "id": 12,
+              "puzzleName": "12 character space",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "AH",
+              "clue": [
+                "CAN WE PUT",
+                "TWO LETTERS",
+                "IN A ROW?"
+              ],
+              "winMessage": [
+                "INDEED",
+                "WE CAN!"
+              ],
+              "level": 2
+            },
+            {
+              "id": 13,
+              "puzzleName": "13 Longer word",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "NICE",
+              "clue": [
+                "LET US TRY",
+                "A SLIGHTLY",
+                "LONGER WORD"
+              ],
+              "winMessage": [
+                "IT IS NICE",
+                "IS IT NOT?"
+              ],
+              "level": 2
+            },
+            {
+              "id": 18,
+              "puzzleName": "14 Hello",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "HELLO",
+              "clue": [
+                "GREETINGS"
+              ],
+              "winMessage": [
+                "HI THERE!"
+              ],
+              "level": 2
+            },
+            {
+              "id": 14,
+              "puzzleName": "15 by the way",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "WAY",
+              "clue": [
+                "BY THE"
+              ],
+              "winMessage": [
+                "BY THE WAY",
+                "…"
+              ],
+              "level": 2
+            },
+            {
+              "id": 22,
+              "puzzleName": "16 my name is",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "MAGIE",
+              "clue": [
+                "MY NAME IS"
+              ],
+              "winMessage": [],
+              "level": 2
+            },
+            {
+              "id": 24,
+              "puzzleName": "17 magnetic",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "MAGNETIC",
+              "clue": [
+                "I AM YOUR"
+              ],
+              "winMessage": [],
+              "level": 2
+            },
+            {
+              "id": 25,
+              "puzzleName": "23 interactive",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "INTERACTIVE",
+              "clue": [
+                "I AM YOUR",
+                "MAGNETIC"
+              ],
+              "winMessage": [],
+              "level": 2
+            },
+            {
+              "id": 26,
+              "puzzleName": "24 explorer",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "EXPLORER",
+              "clue": [
+                "MAGNETIC",
+                "INTERACTIVE"
+              ],
+              "winMessage": [],
+              "level": 2
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "ALPHA LENGTH",
+            "PUNCTUATION"
+          ],
+          "levelNumber": 5,
+          "levelVersion": 1,
+          "sort_order": 3,
+          "puzzles": [
+            {
+              "id": 48,
+              "puzzleName": "43 for",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "FOR",
+              "clue": [
+                "USE BITS FOR",
+                "PUNCTUATION"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 49,
+              "puzzleName": "44 example",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "EXAMPLE",
+              "clue": [
+                "USE BITS FOR",
+                "PUNCTUATION.",
+                "FOR"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 50,
+              "puzzleName": "45 A",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "A",
+              "clue": [
+                "FOR EXAMPLE"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 51,
+              "puzzleName": "46 space",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "SPACE",
+              "clue": [
+                "FOR EXAMPLE",
+                "A"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 52,
+              "puzzleName": "47 between",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "BETWEEN",
+              "clue": [
+                "FOR EXAMPLE",
+                "A SPACE"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 53,
+              "puzzleName": "48 words",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "WORDS",
+              "clue": [
+                "FOR EXAMPLE",
+                "A SPACE",
+                "BETWEEN"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 54,
+              "puzzleName": "49 is",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "IS",
+              "clue": [
+                "A SPACE",
+                "BETWEEN WORDS"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 55,
+              "puzzleName": "50 two zeros",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "TWO ZEROS",
+              "clue": [
+                "A SPACE",
+                "BETWEEN WORDS",
+                "IS"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 56,
+              "puzzleName": "51 a period",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "A PERIOD",
+              "clue": [
+                "A SPACE",
+                "BETWEEN WORDS",
+                "IS TWO ZEROS",
+                "."
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 57,
+              "puzzleName": "52 is three zeros",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "IS THREE ZEROS.",
+              "clue": [
+                "A SPACE",
+                "BETWEEN WORDS",
+                "IS TWO ZEROS.",
+                "A PERIOD"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 58,
+              "puzzleName": "53 is a",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "IS A",
+              "clue": [
+                "A PERIOD IS",
+                "THREE ZEROS."
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 59,
+              "puzzleName": "54 question mark",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "QUESTION MARK",
+              "clue": [
+                "A PERIOD IS",
+                "THREE ZEROS.",
+                "IS A"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 64,
+              "puzzleName": "59 and just so",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "AND JUST SO",
+              "clue": [
+                "EXCLAMATION",
+                "MARKS ARE",
+                "SIX ZEROS!"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 60,
+              "puzzleName": "55 four zeros?",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "FOUR ZEROS?",
+              "clue": [
+                "A PERIOD",
+                "IS TWO ZEROS.",
+                "IS A",
+                "QUESTION MARK"
+              ],
+              "winMessage": [
+                "YES IT IS!"
+              ],
+              "level": 5
+            },
+            {
+              "id": 65,
+              "puzzleName": "60 you know",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "YOU KNOW,",
+              "clue": [
+                "AND JUST SO"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 66,
+              "puzzleName": "61 a comma",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "A COMMA",
+              "clue": [
+                "AND JUST SO",
+                "YOU KNOW,"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 67,
+              "puzzleName": "62 is five zeros",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "IS FIVE ZEROS.",
+              "clue": [
+                "AND JUST SO",
+                "YOU KNOW,",
+                "A COMMA"
+              ],
+              "winMessage": [
+                "NOW YOU KNOW",
+                "ENOUGH",
+                "PUNCTUATION",
+                "FOR BASIC",
+                "READING AND",
+                "WRITING."
+              ],
+              "level": 5
+            },
+            {
+              "id": 61,
+              "puzzleName": "56 and an",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "AND AN",
+              "clue": [
+                "IS A",
+                "QUESTION MARK",
+                "FOUR ZEROS?",
+                "YES IT IS!"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 62,
+              "puzzleName": "57 exclamation mark",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "EXCLAMATION MARK",
+              "clue": [
+                "QUESTION MARK",
+                "IS THREE",
+                "ZEROS.",
+                "AND AN"
+              ],
+              "winMessage": [],
+              "level": 5
+            },
+            {
+              "id": 63,
+              "puzzleName": "58 is six zeros!",
+              "type": "Decode",
+              "encoding": "AlphaLengthA1",
+              "init": "",
+              "winText": "IS SIX ZEROS!",
+              "clue": [
+                "AN",
+                "EXCLAMATION",
+                "MARK"
+              ],
+              "winMessage": [],
+              "level": 5
+            }
+          ]
+        }
+      ],
+      "sort_order": 10
+    },
+    "FIVE BIT A1  ENCODING": {
+      "levels": [
+        {
+          "levelName": [
+            "FIVE BIT",
+            "LETTERS"
+          ],
+          "levelNumber": 7,
+          "levelVersion": 1,
+          "sort_order": 4,
+          "puzzles": [
+            {
+              "id": 169,
+              "puzzleName": "It is simple, but weird",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "",
+              "clue": [
+                "COMPARED TO",
+                "THE ENCODING",
+                "THAT WE CALL",
+                "ALPHA LENGTH,",
+                "FIVE BIT A1",
+                "IS MUCH MORE",
+                "EFFICIENT.",
+                "MORE COMPACT.",
+                "IT NEEDS FAR",
+                "FEWER BITS",
+                "TO REPRESENT",
+                "THE SAME",
+                "LETTERS."
+              ],
+              "winMessage": [
+                "BUT",
+                "IT IS WEIRD."
+              ],
+              "level": 7
+            },
+            {
+              "id": 76,
+              "puzzleName": "Instead of variable length",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "",
+              "clue": [
+                "ALPHA LENGTH",
+                "ENCODING USES",
+                "A DIFFERENT",
+                "NUMBER",
+                "OF BITS",
+                "FOR EACH",
+                "LETTER."
+              ],
+              "winMessage": [],
+              "level": 7
+            },
+            {
+              "id": 170,
+              "puzzleName": "Each letter is exactly five bits",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "",
+              "clue": [
+                ".FIVE BIT.",
+                "ENCODING IS",
+                "CALLED THAT",
+                "BECAUSE EACH",
+                "LETTER IS",
+                "EXACTLY",
+                "FIVE BITS",
+                "LONG."
+              ],
+              "winMessage": [
+                "MAKES SENSE."
+              ],
+              "level": 7
+            },
+            {
+              "id": 171,
+              "puzzleName": "And A is the first bit",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "A",
+              "clue": [
+                "THE LETTER",
+                ".A. IS",
+                "REPRESENTED",
+                "BY TURNING ON",
+                "ONLY THE BIT",
+                "THAT IS",
+                "FURTHEST TO",
+                "THE RIGHT",
+                "...",
+                "LIKE THIS"
+              ],
+              "winMessage": [
+                "SOME PEOPLE",
+                "CALL THAT BIT",
+                "THE",
+                ".RIGHTMOST.",
+                "BIT."
+              ],
+              "level": 7
+            },
+            {
+              "id": 77,
+              "puzzleName": "B is the second bit",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "B",
+              "clue": [
+                "THE NEXT BIT,",
+                "TO THE LEFT",
+                "INDICATES",
+                "THE LETTER"
+              ],
+              "winMessage": [
+                "THE LETTER C",
+                "IS WHERE",
+                "IT GETS WEIRD"
+              ],
+              "level": 7
+            },
+            {
+              "id": 78,
+              "puzzleName": "But the C",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "C",
+              "clue": [
+                "THE LETTER",
+                ".C. IS NOT",
+                "REPRESENTED",
+                "BY THE BIT",
+                "TO THE LEFT",
+                "OF .B."
+              ],
+              "winMessage": [
+                "THIS IS HOW",
+                "WE CAN",
+                "REPRESENT",
+                "SO MANY",
+                "LETTERS",
+                "WITH JUST",
+                "FIVE BITS."
+              ],
+              "level": 7
+            },
+            {
+              "id": 79,
+              "puzzleName": "Carry the 1 to D",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winText": "D",
+              "clue": [
+                "LETTER .D.",
+                "USES THE",
+                "NEXT BIT",
+                "TO THE LEFT.",
+                "LIKE .B.",
+                "AFTER .A."
+              ],
+              "winMessage": [
+                "WHENEVER",
+                "THE RIGHTMOST",
+                "BITS",
+                "ARE FULL,",
+                "WE FLIP THEM",
+                "AND THEN SET",
+                "THE NEXT BIT",
+                "TO THE LEFT",
+                "TO REPRESENT",
+                "THE NEXT",
+                "LETTER."
+              ],
+              "level": 7
+            },
+            {
+              "id": 80,
+              "puzzleName": "EFG",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "ABCD",
+              "winText": "ABCDEFG",
+              "clue": [
+                "THE BITS FOR",
+                "E F AND G",
+                "REPEAT THE",
+                "PATTERN FOR",
+                "A B AND C",
+                "WHILE KEEPING",
+                "THE THIRD BIT",
+                "SET TO .ON."
+              ],
+              "winMessage": [
+                ".D. PLUS .A.",
+                "EQUALS .E."
+              ],
+              "level": 7
+            },
+            {
+              "id": 81,
+              "puzzleName": "Now we set the fourth bit",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "H",
+              "winText": "HIJKLMNO",
+              "clue": [
+                "NOW WE SET",
+                "THE FOURTH",
+                "BIT FOR .H.",
+                "AND REPEAT",
+                "THE WHOLE",
+                "PATTERN AGAIN"
+              ],
+              "winMessage": [],
+              "level": 7
+            },
+            {
+              "id": 172,
+              "puzzleName": "The rest of the alphabet",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "P",
+              "winText": "PQRSTUVWXYZ",
+              "clue": [
+                ".P. IS THE",
+                "LEFTMOST BIT.",
+                "AND THEN",
+                "THE PATTERN",
+                "REPEATS."
+              ],
+              "winMessage": [
+                "AND WE STILL",
+                "HAVE SOME",
+                "BITS LEFT",
+                "TO USE FOR",
+                "PUNCTUATION!"
+              ],
+              "level": 7
+            }
+          ]
+        },
+        {
+          "levelName": [
+            "FIVE BIT",
+            "PUNCTUATION"
+          ],
+          "levelNumber": 18,
+          "levelVersion": 1,
+          "sort_order": 5,
+          "puzzles": []
+        }
+      ],
+      "sort_order": 11
+    }
+  }
+}

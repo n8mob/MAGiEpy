@@ -1,0 +1,29 @@
+{
+  "menuVersion": 1,
+  "categories": {
+    "only": {
+      "levels": [
+        {
+          "levelName": [
+            "ONLY LEVEL"
+          ],
+          "puzzles": [
+            {
+              "puzzleName": "Only Puzzle",
+              "init": "",
+              "winText": "WIN",
+              "clue": [
+                "TRY TO",
+                "WIN"
+              ],
+              "winMessage": [
+                "YOU",
+                "WIN!"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
