@@ -4,14 +4,19 @@ import time
 
 import requests
 
-from MagieModel import Menu
+from MagieModel import Game, Menu
 
 
-def print_menu(scr: curses.window, json_path):
+def start_game(scr: curses.window, json_path):
     with open(json_path) as menu_file:
         full_menu = Menu(scr, file=menu_file)
 
-    full_menu.print_menu_choice()
+    game = Game(scr, full_menu)
+
+    game.choose_level()
+
+    game.start_level()
+
     scr.getch()
 
 
@@ -100,4 +105,4 @@ def guess_loop(scr: curses.window):
 
 
 if __name__ == '__main__':
-    curses.wrapper(print_menu, 'TestMenus/FullMenu.json')
+    curses.wrapper(start_game, 'TestMenus/FullMenu.json')

@@ -37,7 +37,7 @@ class MenuTest(unittest.TestCase):
         actual_level = actual_category.levels[0]
 
         self.assertIsNotNone(actual_level)
-        self.assertEqual(['ONLY LEVEL'], actual_level.levelName)
+        self.assertEqual(['THIS IS THE', 'ONLY LEVEL'], actual_level.levelName)
 
         self.assertIsNotNone(actual_level.puzzles)
         self.assertEqual(len(actual_level.puzzles), 1)
