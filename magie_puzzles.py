@@ -19,53 +19,12 @@ def start_game(scr: curses.window, json_path):
 
     game.start_level()
 
+    while not game.level.is_finished():
+        game.start_puzzle()
+
+        game.level.go_to_next_puzzle()
+
     scr.getch()
-
-
-def choose_from_dict(choices, prompt):
-    choice_menu = list(choices.keys())
-    for i, choice_name in enumerate(choice_menu):
-        print(f"{i}: {choice_name}")
-    choice = input(prompt + ' ')
-    if str.isnumeric(choice):
-        return choices[choice_menu[int(choice)]]
-    else:
-        return choices[choice]
-
-
-def choose_from_list(choices, prompt):
-    for i, choice_name in enumerate(choices):
-        print(f'\n{i}: {choice_name}')
-
-    choice = input(prompt + ' ')
-    return int(choice)
-
-
-def try_a_puzzle(scr: curses.window):
-    url = 'https://puzzles.magiegame.com/menus/'
-    response = requests.get(url)
-    category_menu = CategoryMenu(response.json()[0])
-    chosen_category = choose_from_dict(category_menu.categories_by_name, 'which category?')
-    for level in chosen_category:
-        for puzzle in level['puzzles']:
-            print()
-            CategoryMenu.print(puzzle['clue'])
-            print()
-            CategoryMenu.print(puzzle['init'])
-
-            guess_phrase = None
-            guess_char = None
-            win_index = 0
-            win_char = puzzle['winText'][win_index]
-
-            while guess_phrase != puzzle['winText']:
-                guess_char = scr.getch()
-                if guess_char == win_char:
-                    print(puzzle['winText'][:win_index])
-                else:
-                    print('\b')
-
-            print('\nCORRECT')
 
 
 def guess_loop(scr: curses.window):

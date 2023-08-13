@@ -1,10 +1,11 @@
 import curses
 import json
+import time
 from types import SimpleNamespace
 
 TITLE_LINE =    '============='
 SUBTITLE_LINE = '-------------'
-
+LEVEL_START_PAUSE = 0.2
 
 class Menu:
     def __init__(self, scr: curses.window, serialized='', file=None):
@@ -42,21 +43,34 @@ class Level:
     def __init__(self, deserialized = None):
         if not deserialized:
             deserialized = SimpleNamespace()
+
         self.levelName = deserialized.levelName or 'charlie is rad'
         self.puzzles = []
+        self.current_puzzle_index = -1
 
         for puzzle in deserialized.puzzles:
             self.puzzles.append(Puzzle(puzzle))
+
+    def go_to_next_puzzle(self):
+        for index, puzzle in enumerate(self.puzzles):
+            if not puzzle.isSolved:
+                self.current_puzzle_index = index
+                return
+
+    def is_finished(self):
+        for puzzle in self.puzzles:
+            if not puzzle.isSolved:
+                return False
+        return True
 
 
 class Puzzle:
     def __init__(self, deserialized):
         self.clue = deserialized.clue or []
         self.init = deserialized.init
-
-
-class Line:
-    pass
+        self.winText = deserialized.winText
+        self.winMessage = deserialized.winMessage
+        self.isSolved = False
 
 
 class Game:
@@ -68,6 +82,12 @@ class Game:
         self.category = None
         self.level = None
         self.puzzle = None
+
+        curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
+        curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)
+
+        self.incorrect_color = curses.color_pair(1) | curses.A_BOLD
+        self.correct_color = curses.color_pair(2) | curses.A_BOLD
 
     def reset(self):
         self.y = 0
@@ -119,21 +139,48 @@ class Game:
     def start_level(self):
         self.reset()
 
-        self.write_lines(self.level.levelName)
-        self.write_lines(TITLE_LINE)
-
         if not self.level.puzzles:
             self.write_lines('No puzzles!')
             return
 
-        self.puzzle = self.level.puzzles[0]
+        if self.level.is_finished():
+            self.reset()
+            self.write_lines(self.level.levelName)
+            self.y += 1
+            self.write_lines('LEVEL FINISHED!')
+
+        time.sleep(LEVEL_START_PAUSE)
+
+        self.level.go_to_next_puzzle()
+
+    def start_puzzle(self):
+        self.reset()
+        self.write_lines(self.level.levelName)
+        self.write_lines(TITLE_LINE)
 
         self.y += 1
 
-        self.write_lines(self.puzzle.clue)
+        puzzle = self.level.puzzles[self.level.current_puzzle_index]
+
+        self.write_lines(puzzle.clue)
         self.write_lines(SUBTITLE_LINE)
-
         self.y += 1
 
-        self.write_lines(self.puzzle.init)
+        self.write_lines(puzzle.init)
 
+        guess_char_index = len(puzzle.init)
+
+        while not puzzle.isSolved:
+            self.x = guess_char_index
+            guess_char = chr(int(self.scr.getch(self.y, guess_char_index))).upper()
+            if guess_char == puzzle.winText[guess_char_index]:
+                self.scr.addch(self.y, guess_char_index, guess_char, self.correct_color)
+                guess_char_index += 1
+                puzzle.isSolved = guess_char_index >= len(puzzle.winText)
+            else:
+                self.scr.addch(self.y, guess_char_index, guess_char, self.incorrect_color)
+
+        self.x = 0
+        self.y += 1
+        self.write_lines(puzzle.winMessage)
+        self.scr.getch(self.y, self.x)
