@@ -2,6 +2,8 @@ import curses
 import json
 from types import SimpleNamespace
 
+TITLE_LINE =    '============='
+SUBTITLE_LINE = '-------------'
 
 
 class Menu:
@@ -27,34 +29,30 @@ class Menu:
 class Category:
     def __init__(self, name, deserialized):
         self.name = name
-        self.levels = deserialized.levels
+        self.sort_order = deserialized.sort_order
+        self.levels = []
+
+        for level in deserialized.levels:
+            self.levels.append(Level(level))
+
         self.current_level = None
-
-    def prompt_for_level(self, scr):
-        output_line = 0
-
-        for i, level in enumerate(self.levels):
-            choice_indicator = f'{i}: '
-            scr.addstr(output_line, 0, choice_indicator)
-            left_margin = len(choice_indicator)
-            for line in level.name_lines:
-                scr.addstr(output_line, left_margin, f'{line}')
-                output_line += 1
-
-        level_number = int(chr(scr.getch()))
-        self.current_level = self.levels[level_number]
-        return  self.current_level
 
 
 class Level:
-    def __init__(self, deserialized):
-        self.levelName = deserialized.levelName or []
-        self.puzzles = deserialized.puzzles or []
+    def __init__(self, deserialized = None):
+        if not deserialized:
+            deserialized = SimpleNamespace()
+        self.levelName = deserialized.levelName or 'charlie is rad'
+        self.puzzles = []
+
+        for puzzle in deserialized.puzzles:
+            self.puzzles.append(Puzzle(puzzle))
 
 
 class Puzzle:
     def __init__(self, deserialized):
         self.clue = deserialized.clue or []
+        self.init = deserialized.init
 
 
 class Line:
@@ -64,62 +62,78 @@ class Line:
 class Game:
     def __init__(self, scr: curses.window, menu: Menu):
         self.scr = scr
+        self.y = 0
+        self.x = 0
         self.menu = menu
         self.category = None
         self.level = None
         self.puzzle = None
 
-    def write_lines(self, lines, indicator='', y=0, x=0):
-        self.scr.addstr(y, x, indicator)
-        x += len(indicator) + 1
-
-        for line in lines:
-            self.scr.addstr(y, x, line)
-            y += 1
-
-        return y
-
-    def choose_category(self):
-        y = 0
-
+    def reset(self):
+        self.y = 0
+        self.x = 0
         self.scr.clear()
 
-        for category in self.menu.categories:
-            self.write_lines([category.name], f'{y}: ', y, 0)
-            y += 1
+    def write_lines(self, lines, indicator=''):
+        if isinstance(lines, str):
+            lines = lines.split('\n')
 
-        y += 1
+        if indicator:
+            self.scr.addstr(self.y, self.x, indicator)
+            self.x = len(indicator) + 1
 
-        self.scr.addstr(y, 0, 'select category: ')
+        for line in lines:
+            self.scr.addstr(self.y, self.x, line)
+            self.y += 1
+
+        self.x = 0
+
+    def choose_category(self):
+        self.reset()
+
+        for index, category in enumerate(self.menu.categories):
+            self.write_lines(category.name, f'{index}: ')
+
+        self.y += 1
+
+        self.write_lines('select category: ')
         category_number = int(chr(self.scr.getch()))
         self.category = self.menu.categories[category_number]
 
     def choose_level(self):
-        self.scr.clear()
+        self.reset()
 
-        self.write_lines(self.category.name)
+        self.write_lines([self.category.name, TITLE_LINE])
 
-        y = 2
+        self.y += 1
 
         for index, level in enumerate(self.category.levels):
-            y = self.write_lines(level.levelName, f'{index}: ', y, 0)
+            self.write_lines(level.levelName, f'{index}: ')
 
-        y += 1
+        self.y += 1
 
-        self.scr.addstr(y, 0, 'select level: ')
+        self.write_lines('select level: ')
         level_number = int(chr(self.scr.getch()))
         self.level = self.category.levels[level_number]
-        self.puzzle = self.level[0]
 
     def start_level(self):
-        self.scr.clear()
+        self.reset()
+
         self.write_lines(self.level.levelName)
+        self.write_lines(TITLE_LINE)
 
-        y = len(self.level.levelName) + 2
+        if not self.level.puzzles:
+            self.write_lines('No puzzles!')
+            return
 
-        y = self.write_lines(self.puzzle.clue)
+        self.puzzle = self.level.puzzles[0]
 
-        y += 1
+        self.y += 1
 
-        y = self.write_lines(self.puzzle.init)
+        self.write_lines(self.puzzle.clue)
+        self.write_lines(SUBTITLE_LINE)
+
+        self.y += 1
+
+        self.write_lines(self.puzzle.init)
 

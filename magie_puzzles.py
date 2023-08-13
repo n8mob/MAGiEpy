@@ -13,6 +13,8 @@ def start_game(scr: curses.window, json_path):
 
     game = Game(scr, full_menu)
 
+    game.choose_category()
+
     game.choose_level()
 
     game.start_level()
