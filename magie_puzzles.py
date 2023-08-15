@@ -4,8 +4,10 @@ import time
 
 import requests
 
-from MagieModel import Game, Menu
+from MagieModel import Menu
+from Game import Game
 
+MENU_PAUSE = 0.4
 
 def start_game(scr: curses.window, json_path):
     with open(json_path) as menu_file:
@@ -13,18 +15,34 @@ def start_game(scr: curses.window, json_path):
 
     game = Game(scr, full_menu)
 
+    quitos = False
+
     game.choose_category()
 
-    game.choose_level()
+    while not quitos:
+        game.choose_level()
 
-    game.start_level()
+        game.start_level()
 
-    while not game.level.is_finished():
-        game.start_puzzle()
+        while not game.level.is_finished():
+            game.start_puzzle()
 
-        game.level.go_to_next_puzzle()
+            game.level.go_to_next_puzzle()
+        game.write_lines(['GOOD WORK!', 'YOU FINISHOS'] + game.level.levelName)
 
-    scr.getch()
+        time.sleep(MENU_PAUSE)
+
+        game.write_lines(['Q .... QUITOS',
+                          'C ... CHOOSOS',
+                          'ANYTHING ELSE',
+                          'TO PLAYOS'])
+
+        choice = scr.getkey().upper()
+
+        if choice == 'Q':
+            quitos = True
+        elif choice in ['M', 'B', 'U']:
+            break
 
 
 def guess_loop(scr: curses.window):
