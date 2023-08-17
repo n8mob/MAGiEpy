@@ -1,21 +1,27 @@
 import curses
 import json
-from types import SimpleNamespace
+
+DEFAULT_ENCODING = '5bA1'
+
+DEFAULT_PUZZLE_TYPE = 'Decode'
+
 
 class Menu:
     def __init__(self, scr: curses.window, serialized='', file=None):
-        self.categories = []
         if serialized:
-            deserialized = json.loads(serialized, object_hook=lambda d: SimpleNamespace(**d))
+            deserialized = json.loads(serialized)
         elif file:
-            deserialized = json.load(file, object_hook=lambda d: SimpleNamespace(**d))
+            deserialized = json.load(file)
         else:
             return
 
-        self.categories_by_name = deserialized.categories.__dict__
+        self.categories_by_name = {}
+        self.categories = []
 
-        for category_name, deserialized_category in self.categories_by_name.items():
-            self.categories.append(Category(category_name, deserialized_category))
+        for category_name, deserialized_category in deserialized['categories'].items():
+            category = Category(category_name, deserialized_category)
+            self.categories_by_name[category_name] = category
+            self.categories.append(category)
 
         self.category = None
 
@@ -23,27 +29,30 @@ class Menu:
 
 
 class Category:
+    next_sort = 0
+
     def __init__(self, name, deserialized):
         self.name = name
-        self.sort_order = deserialized.sort_order
+        self.sort_order = deserialized.get('sort_order', Category.next_sort)
+        Category.next_sort = self.sort_order + 1
         self.levels = []
 
-        for level in deserialized.levels:
+        for level in deserialized['levels']:
             self.levels.append(Level(level))
 
         self.current_level = None
 
 
 class Level:
-    def __init__(self, deserialized = None):
+    def __init__(self, deserialized=None):
         if not deserialized:
-            deserialized = SimpleNamespace()
+            deserialized = {}
 
-        self.levelName = deserialized.levelName or 'charlie is rad'
+        self.levelName = deserialized.get('levelName', [])
         self.puzzles = []
         self.current_puzzle_index = -1
 
-        for puzzle in deserialized.puzzles:
+        for puzzle in deserialized.get('puzzles', []):
             self.puzzles.append(Puzzle(puzzle))
 
     def go_to_next_puzzle(self):
@@ -60,12 +69,24 @@ class Level:
 
 
 class Puzzle:
-    def __init__(self, deserialized):
-        self.clue = deserialized.clue or []
-        self.init = deserialized.init
-        self.winText = deserialized.winText
-        self.winMessage = deserialized.winMessage
-        self.isSolved = False
-        self.type = deserialized.type
-        self.encoding = deserialized.encoding
+    def __init__(self, deserialized=None):
+        if not deserialized:
+            deserialized = {}
 
+        self.puzzleName = deserialized.get('puzzleName', '')
+
+        self.clue = deserialized.get('clue', None)
+        if not self.clue:
+            self.clue = []
+
+        self.init = deserialized.get('init', '')
+        if not self.init:
+            self.init = ''
+
+        self.winText = deserialized.get('winText', '')
+        if not self.winText:
+            self.winText = ''
+        self.winMessage = deserialized.get('winMessage', [])
+        self.isSolved = False
+        self.type = deserialized.get('type', DEFAULT_PUZZLE_TYPE)
+        self.encoding = deserialized.get('encoding', DEFAULT_ENCODING)

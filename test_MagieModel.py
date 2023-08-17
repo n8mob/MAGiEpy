@@ -1,4 +1,3 @@
-import curses
 import json
 import unittest
 from unittest.mock import Mock
@@ -56,12 +55,13 @@ class MenuTest(unittest.TestCase):
             full_menu = Menu(self.screen, file=full_file)
 
         self.assertIsNotNone(full_menu)
-        self.assertEqual(len(full_menu.categories), 6)
+        self.assertEqual(5, len(full_menu.categories))
 
         self.assertEqual('stories', full_menu.categories[0].name)
         self.assertEqual('at the mall', full_menu.categories[1].name)
-        self.assertEqual('online', full_menu.categories[2].name)
-        self.assertEqual('tutorials', full_menu.categories[3].name)
+        self.assertEqual('TEDIUM', full_menu.categories[2].name)
+        self.assertEqual('ALPHA LENGTH ENCODING', full_menu.categories[3].name)
+        self.assertEqual('FIVE BIT A1  ENCODING', full_menu.categories[4].name)
 
         at_the_mall = full_menu.categories_by_name['at the mall']
         self.assertEqual(len(at_the_mall.levels), 7)
@@ -77,38 +77,38 @@ class MenuTest(unittest.TestCase):
 class LevelTests(unittest.TestCase):
     def test_NoArgInit(self):
         actual = Level()
-        self.assertEqual(actual.name_lines, [])
-        self.assertEqual(actual.puzzles, [])
+        self.assertEqual([], actual.levelName)
+        self.assertEqual([], actual.puzzles)
 
 
 class PuzzleTests(unittest.TestCase):
     def test_initWithNoArgs(self):
         actual = Puzzle()
 
-        self.assertEqual(actual.clue_lines, [])
-        self.assertEqual(actual.win_text, '')
-        self.assertEqual(actual.init_text, '')
+        self.assertEqual([], actual.clue)
+        self.assertEqual('', actual.winText)
+        self.assertEqual('', actual.init)
 
     def test_initWithEmptyArgs(self):
-        actual = Puzzle(clue_lines=[], win_text='', init_text='')
+        actual = Puzzle({'clue': [], 'winText': '', 'init': ''})
 
-        self.assertEqual(actual.clue_lines, [])
-        self.assertEqual(actual.win_text, '')
-        self.assertEqual(actual.init_text, '')
+        self.assertEqual([], actual.clue)
+        self.assertEqual('', actual.winText)
+        self.assertEqual('', actual.init)
 
     def test_initWithEmptyStrings(self):
-        actual = Puzzle(clue_lines='', win_text='', init_text='')
+        actual = Puzzle({'clue': '', 'winText': '', 'init': ''})
 
-        self.assertEqual(actual.clue_lines, [])
-        self.assertEqual(actual.win_text, '')
-        self.assertEqual(actual.init_text, '')
+        self.assertEqual([], actual.clue)
+        self.assertEqual('', actual.winText)
+        self.assertEqual('', actual.init)
 
     def test_initWithNoneArgs(self):
-        actual = Puzzle(clue_lines=None, win_text=None, init_text=None)
+        actual = Puzzle({'clue': None, 'winText': None, 'init': None})
 
-        self.assertEqual(actual.clue_lines, [])
-        self.assertEqual(actual.win_text, '')
-        self.assertEqual(actual.init_text, '')
+        self.assertEqual([], actual.clue, [])
+        self.assertEqual('', actual.winText)
+        self.assertEqual('', actual.init)
 
 
 if __name__ == '__main__':
