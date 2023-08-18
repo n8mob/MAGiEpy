@@ -1,6 +1,6 @@
 import unittest
 
-from Encodings import FixedWidthEncoder
+from Encodings import FixedWidthEncoding
 
 A1 = {
     'A': 1,
@@ -11,7 +11,7 @@ A1 = {
 
 class TestFixedEncoding(unittest.TestCase):
     def setUp(self) -> None:
-        self.encoding_under_test = FixedWidthEncoder(5, A1)
+        self.encoding_under_test = FixedWidthEncoding(5, A1)
 
     def test_reversed_dictionary(self):
         self.assertIsNotNone(self.encoding_under_test.decoding)
@@ -44,6 +44,20 @@ class TestFixedEncoding(unittest.TestCase):
 
     def test_decode_Zero(self):
         self.assertEqual('_', self.encoding_under_test.decode(0))
+
+    def test_encode_B_width_8(self):
+        self.encoding_under_test = FixedWidthEncoding(8, A1)
+        self.assertEqual('00000010', self.encoding_under_test.encode_bit_string('B'))
+
+    def test_decode_bit_string_1(self):
+        self.assertEqual('A', self.encoding_under_test.decode_bit_string('1'))
+
+    def test_decode_bit_string_10(self):
+        self.assertEqual('B', self.encoding_under_test.decode_bit_string('10'))
+
+    def test_decode_bit_string_0(self):
+        self.assertEqual('_', self.encoding_under_test.decode_bit_string('0'))
+
 
 if __name__ == '__main__':
     unittest.main()
