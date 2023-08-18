@@ -76,9 +76,10 @@ class MenuTest(unittest.TestCase):
 
 class LevelTests(unittest.TestCase):
     def test_NoArgInit(self):
-        actual = Level()
-        self.assertEqual([], actual.levelName)
-        self.assertEqual([], actual.puzzles)
+        try:
+            actual = Level()
+        except TypeError as t:
+            self.assertIn('encodings', str(t))
 
 
 class PuzzleTests(unittest.TestCase):

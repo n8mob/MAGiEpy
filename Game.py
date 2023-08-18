@@ -32,7 +32,7 @@ class Game:
         self.x = 0
         self.scr.clear()
 
-    def write_lines(self, lines, encoding, indicator=''):
+    def write_lines(self, lines, indicator=''):
         if isinstance(lines, str):
             lines = lines.split('\n')
 
@@ -41,7 +41,7 @@ class Game:
             self.x = len(indicator) + 1
 
         for line in lines:
-            self.scr.addstr(self.y, self.x, encoding.encode(line))
+            self.scr.addstr(self.y, self.x, line)
             self.y += 1
 
         self.x = 0
@@ -104,7 +104,7 @@ class Game:
         self.write_lines(SUBTITLE_LINE)
         self.y += 1
 
-        self.write_lines(puzzle.init, self.encodings[puzzle.encoding])
+        self.write_lines(puzzle.init)
 
         guess_char_index = len(puzzle.init)
 
@@ -113,10 +113,12 @@ class Game:
             guess_char = chr(int(self.scr.getch(self.y, guess_char_index))).upper()
             if guess_char == puzzle.winText[guess_char_index]:
                 self.scr.addch(self.y, guess_char_index, guess_char, self.correct_color)
+                self.scr.addstr(self.y + 1, 0, puzzle.encoding.encode_bit_string(guess_char), self.correct_color)
                 guess_char_index += 1
                 puzzle.isSolved = guess_char_index >= len(puzzle.winText)
             else:
                 self.scr.addch(self.y, guess_char_index, guess_char, self.incorrect_color)
+                self.scr.addstr(self.y + 1, 0, puzzle.encoding.encode_bit_string(guess_char), self.incorrect_color)
 
         self.x = 0
         self.y += 1

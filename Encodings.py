@@ -11,13 +11,10 @@ class BinaryEncoding(Encoding):
         self.width = width
 
     def decode_bit_string(self, b):
-        enc = int(b, 2)
-        return self.decode(enc)
+        pass
 
     def encode_bit_string(self, c):
-        b = self.encode(c)
-
-        return f'{self.encode(c) :0{self.width}b}'
+        pass
 
 
 class FixedWidthEncoding(BinaryEncoding):
@@ -33,3 +30,12 @@ class FixedWidthEncoding(BinaryEncoding):
 
     def encode(self, c):
         return self.encoding[c] if c in self.encoding else self.default_encoded
+
+    def decode_bit_string(self, b):
+        enc = int(b, 2)
+        return self.decode(enc)
+
+    def encode_bit_string(self, c):
+        b = self.encode(c)
+
+        return f'{self.encode(c) :0{self.width}b}'
