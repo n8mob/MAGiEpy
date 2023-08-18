@@ -25,6 +25,8 @@ class Menu:
 
         self.category = None
 
+        self.encodings = deserialized['encodings']
+
         self.scr = scr
 
 

@@ -9,7 +9,7 @@ A1 = {
 }
 
 
-class MyTestCase(unittest.TestCase):
+class TestFixedEncoding(unittest.TestCase):
     def setUp(self) -> None:
         self.encoding_under_test = FixedWidthEncoder(5, A1)
 

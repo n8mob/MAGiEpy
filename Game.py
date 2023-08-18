@@ -7,6 +7,7 @@ TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
 LEVEL_START_PAUSE = 0.2
 
+
 class Game:
     def __init__(self, scr: curses.window, menu: Menu):
         self.scr = scr
@@ -18,14 +19,13 @@ class Game:
         self.puzzle = None
         self.encodings = {}
 
-        for encoding in menu.encodings:
-
-
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)
+        curses.init_pair(3, curses.COLOR_YELLOW, curses.COLOR_BLACK)
 
         self.incorrect_color = curses.color_pair(1) | curses.A_BOLD
         self.correct_color = curses.color_pair(2) | curses.A_BOLD
+        self.unknown_color = curses.color_pair(3) | curses.A_BOLD
 
     def reset(self):
         self.y = 0
