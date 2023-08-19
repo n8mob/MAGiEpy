@@ -78,6 +78,9 @@ class Level:
                 return False
         return True
 
+    def get_current_puzzle(self):
+        return self.puzzles[self.current_puzzle_index]
+
 
 class Puzzle:
     def __init__(self, deserialized=None, menu=None):

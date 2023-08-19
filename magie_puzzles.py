@@ -30,12 +30,12 @@ def start_game(scr: curses.window, json_path):
 
             game.level.go_to_next_puzzle()
 
-        game.write_lines([SUBTITLE_LINE, '', 'GOOD WORK!', 'YOU FINISHOS'] + game.level.levelName)
+        game.write_text([SUBTITLE_LINE, '', 'GOOD WORK!', 'YOU FINISHOS'] + game.level.levelName)
 
         time.sleep(MENU_PAUSE)
-        game.write_lines(TITLE_LINE)
+        game.write_text(TITLE_LINE)
 
-        game.write_lines(['Q .... QUITOS',
+        game.write_text(['Q .... QUITOS',
                           'C ... CHOOSOS',
                           'ANYTHING ELSE',
                           'TO PLAYOS'])
