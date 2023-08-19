@@ -49,4 +49,4 @@ def start_game(scr: curses.window, json_path):
 
 
 if __name__ == '__main__':
-    curses.wrapper(start_game, 'TestMenus/FullMenu.json')
+    curses.wrapper(start_game, 'TestMenus/MinimalMenu.json')

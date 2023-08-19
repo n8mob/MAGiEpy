@@ -2,6 +2,7 @@ import curses
 import time
 
 from MagieModel import Menu
+from Encodings import BinaryEncoding
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
@@ -43,6 +44,12 @@ class Game:
             self.y += 1
 
         self.x = 0
+
+    def write_bits(self, s, encoding: BinaryEncoding, left_padding='  ', right_padding=' '):
+
+        for c in s:
+            bits = encoding.encode_bit_string(c)
+            self.write_text(bits + right_padding + c, left_padding)
 
     def choose_category(self):
         self.reset()
@@ -102,7 +109,7 @@ class Game:
         self.write_text(SUBTITLE_LINE)
         self.y += 1
 
-        self.write_text(puzzle.init)
+        self.write_bits(puzzle.init, puzzle.encoding)
 
         guess_char_index = len(puzzle.init)
 
