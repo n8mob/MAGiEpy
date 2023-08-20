@@ -155,7 +155,8 @@ class Game:
                         bit_colors[i] = self.incorrect_color
 
                 guess_char = puzzle.encoding.decode_bit_string(guess_char_bits)
-                self.write_bits(guess_char_bits, bit_colors, suffix=f'{guess_char:>{puzzle.encoding.width}}')
+                padding = 1 + puzzle.encoding.width - len(guess_char_bits)
+                self.write_bits(guess_char_bits, bit_colors, suffix=f' {guess_char:>{padding}}')
 
             if guess_char == win_char:
                 guess_char_index += 1
