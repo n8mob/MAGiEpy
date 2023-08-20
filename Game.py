@@ -56,11 +56,13 @@ class Game:
         self.scr.addstr(self.y, self.x, prefix)
         self.x += len(prefix)
 
+        i = self.x
+
         for i in range(self.x, self.x + len(char_bits)):
             if i < len(char_bits) and i < len(bit_colors):
                 self.scr.addch(self.y, i, char_bits[i], bit_colors[i])
 
-        self.scr.addstr(self.y, self.x, suffix)
+        self.scr.addstr(self.y, i, suffix)
         self.x = x_before
         self.y += 1
 
