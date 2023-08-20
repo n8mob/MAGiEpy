@@ -17,6 +17,8 @@ class Game:
         self.menu = menu
         self.category = None
         self.level = None
+        self.on_bit_keys = ['1']
+        self.off_bit_keys = ['0']
 
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)
@@ -45,27 +47,24 @@ class Game:
 
         self.x = 0
 
-    def write_bit_char(self, char_bits, bit_colors=None, prefix='  ', suffix=' ', ):
-        bit_x = self.x
+    def write_bits(self, char_bits=None, bit_colors=None, prefix='  ', suffix=' '):
+        if not char_bits:
+            char_bits = []
 
-        if not bit_colors:
-            bit_colors =  [self.unknown_color] * len(char_bits)
-        elif len(bit_colors) < len(char_bits):
-            bit_colors += [self.unknown_color] * (len(char_bits) - len(bit_colors))
+        bit_x = self.x
+        known_bit_colors = bit_colors or []
+
+        if len(known_bit_colors) < len(char_bits):
+            known_bit_colors += [self.unknown_color] * (len(char_bits) - len(known_bit_colors))
 
         self.scr.addstr(self.y, bit_x, prefix)
         bit_x += len(prefix)
 
         for i in range(len(char_bits)):
-            self.scr.addch(self.y, bit_x + i, char_bits[i], bit_colors[i])
+            self.scr.addch(self.y, bit_x + i, char_bits[i], known_bit_colors[i])
 
         self.scr.addstr(self.y, bit_x + len(char_bits), suffix)
         self.y += 1
-
-    def write_plain_bit_string(self, s, encoding: BinaryEncoding, left_padding='  ', right_padding=' '):
-        for c in s:
-            bits = encoding.encode_bit_string(c)
-            self.write_text(bits + right_padding + c, left_padding)
 
     def choose_category(self):
         self.reset()
@@ -127,16 +126,25 @@ class Game:
 
         for c in puzzle.init:
             char_bits = puzzle.encoding.encode_bit_string(c)
-            self.write_bit_char(char_bits, suffix=f' {c}')
+            self.write_bits(char_bits, suffix=f' {c}')
 
         guess_char_index = len(puzzle.init)
+        guess_char_bits = []
 
         while not puzzle.isSolved:
-            guess_char = self.scr.getkey().upper()
             win_char = puzzle.winText[guess_char_index]
-            guess_char_bits = puzzle.encoding.encode_bit_string(guess_char)
             win_char_bits = puzzle.encoding.encode_bit_string(win_char)
-            bit_colors = [self.unknown_color] * len(puzzle.encoding.encode_bit_string(guess_char))
+
+            guess_bit = self.scr.getkey()
+            if guess_bit in self.on_bit_keys:
+                guess_bit = '1'
+            elif guess_bit in self.off_bit_keys:
+                guess_bit = '0'
+            else:
+                continue
+
+            guess_char_bits += [guess_bit]
+            bit_colors = [self.unknown_color] * puzzle.encoding.width
 
             for i in range(len(guess_char_bits)):
                 if guess_char_bits[i] == win_char_bits[i]:
@@ -144,7 +152,9 @@ class Game:
                 else:
                     bit_colors[i] = self.incorrect_color
 
-            self.write_bit_char(puzzle.encoding.encode_bit_string(guess_char), bit_colors, suffix=f' {guess_char}')
+            guess_char = puzzle.encoding.decode_bit_string(guess_char_bits)
+            self.write_bits(guess_char_bits, bit_colors, suffix=f' {guess_char}')
+
             if guess_char == win_char:
                 guess_char_index += 1
                 puzzle.isSolved = guess_char_index >= len(puzzle.winText)
