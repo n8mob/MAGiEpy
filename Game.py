@@ -46,24 +46,20 @@ class Game:
         self.x = 0
 
     def write_bit_char(self, char_bits, bit_colors=None, prefix='  ', suffix=' ', ):
-        x_before = self.x
+        bit_x = self.xq
 
         if not bit_colors:
             bit_colors =  [self.unknown_color] * len(char_bits)
         elif len(bit_colors) < len(char_bits):
             bit_colors += [self.unknown_color] * (len(char_bits) - len(bit_colors))
 
-        self.scr.addstr(self.y, self.x, prefix)
-        self.x += len(prefix)
+        self.scr.addstr(self.y, bit_x, prefix)
+        bit_x += len(prefix)
 
-        i = self.x
+        for i in range(len(char_bits)):
+            self.scr.addch(self.y, bit_x + i, char_bits[i], bit_colors[i])
 
-        for i in range(self.x, self.x + len(char_bits)):
-            if i < len(char_bits) and i < len(bit_colors):
-                self.scr.addch(self.y, i, char_bits[i], bit_colors[i])
-
-        self.scr.addstr(self.y, i, suffix)
-        self.x = x_before
+        self.scr.addstr(self.y, bit_x + len(char_bits), suffix)
         self.y += 1
 
     def write_plain_bit_string(self, s, encoding: BinaryEncoding, left_padding='  ', right_padding=' '):
@@ -149,7 +145,11 @@ class Game:
                     bit_colors[i] = self.incorrect_color
 
             self.write_bit_char(puzzle.encoding.encode_bit_string(guess_char), bit_colors, suffix=f' {guess_char}')
-
+            if guess_char == win_char:
+                guess_char_index += 1
+                puzzle.isSolved = guess_char_index >= len(puzzle.winText)
+            else:
+                self.y -= 1
 
         self.x = 0
         self.y += 1
