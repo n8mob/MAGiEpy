@@ -136,7 +136,7 @@ class Game:
             win_char = puzzle.winText[guess_char_index]
             win_char_bits = puzzle.encoding.encode_bit_string(win_char)
 
-            while len(guess_char_bits) <= puzzle.encoding.width:
+            while len(guess_char_bits) < puzzle.encoding.width:
                 guess_bit = self.scr.getkey()
                 if guess_bit in self.on_bit_keys:
                     guess_bit = '1'
@@ -162,6 +162,8 @@ class Game:
                 guess_char_index += 1
                 puzzle.isSolved = guess_char_index >= len(puzzle.winText)
                 self.y += 1
+            else:
+                guess_char_bits.clear()
 
         self.x = 0
         self.y += 1
