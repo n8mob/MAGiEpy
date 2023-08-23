@@ -46,7 +46,7 @@ class Game:
         self.x = 0
 
     def write_bit_char(self, char_bits, bit_colors=None, prefix='  ', suffix=' ', ):
-        bit_x = self.xq
+        bit_x = self.x
 
         if not bit_colors:
             bit_colors =  [self.unknown_color] * len(char_bits)
