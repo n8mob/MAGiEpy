@@ -25,30 +25,33 @@ class MenuTest(unittest.TestCase):
 
         self.assertIsNotNone(actual_menu)
         self.assertIsNotNone(actual_menu.categories)
-        self.assertEqual(len(actual_menu.categories), 1)
+        self.assertEqual(len(actual_menu.categories), 2)
 
-        actual_category = actual_menu.categories[0]
+        self.assertIn('tests', actual_menu.categories_by_name)
+        self.assertIn('other', actual_menu.categories_by_name)
+
+        actual_category = actual_menu.categories_by_name['other']
         self.assertIsNotNone(actual_category)
-        self.assertEqual('only', actual_category.name)
+        self.assertEqual('other', actual_category.name)
         self.assertIsNotNone(actual_category.levels)
         self.assertEqual(len(actual_category.levels), 1)
 
         actual_level = actual_category.levels[0]
 
         self.assertIsNotNone(actual_level)
-        self.assertEqual(['THIS IS THE', 'ONLY LEVEL'], actual_level.levelName)
+        self.assertEqual(['THIS IS THE', 'FIRST LEVEL'], actual_level.levelName)
 
         self.assertIsNotNone(actual_level.puzzles)
-        self.assertEqual(len(actual_level.puzzles), 1)
+        self.assertEqual(len(actual_level.puzzles), 2)
 
         actual_puzzle = actual_level.puzzles[0]
 
         self.assertIsNotNone(actual_puzzle)
-        self.assertEqual(actual_puzzle.puzzleName, 'Only Puzzle')
-        self.assertEqual(actual_puzzle.init, '')
-        self.assertEqual(actual_puzzle.winText, 'WIN')
-        self.assertEqual(actual_puzzle.clue, ['TRY TO', 'WIN'])
-        self.assertEqual(actual_puzzle.winMessage, ['YOU', 'WIN!'])
+        self.assertEqual(actual_puzzle.puzzleName, 'Initial')
+        self.assertEqual(actual_puzzle.init, '_ABCD')
+        self.assertEqual(actual_puzzle.winText, '_ABCDEFG')
+        self.assertEqual(actual_puzzle.clue, ['CONTINUE', 'THE PATTERN'])
+        self.assertEqual(actual_puzzle.winMessage, ['THAT IS', 'CORRECT!'])
 
     def test_fullMenu(self):
         with open('TestMenus/FullMenu.json') as full_file:
@@ -84,32 +87,25 @@ class LevelTests(unittest.TestCase):
 
 class PuzzleTests(unittest.TestCase):
     def test_initWithNoArgs(self):
-        actual = Puzzle()
-
-        self.assertEqual([], actual.clue)
-        self.assertEqual('', actual.winText)
-        self.assertEqual('', actual.init)
+        try:
+            _ = Puzzle()
+        except ValueError as ve:
+            self.assertIn('encoding', str(ve))
 
     def test_initWithEmptyArgs(self):
-        actual = Puzzle({'clue': [], 'winText': '', 'init': ''})
+        menu = Mock()
+        menu.encodings = {}
 
-        self.assertEqual([], actual.clue)
-        self.assertEqual('', actual.winText)
-        self.assertEqual('', actual.init)
-
-    def test_initWithEmptyStrings(self):
-        actual = Puzzle({'clue': '', 'winText': '', 'init': ''})
-
-        self.assertEqual([], actual.clue)
-        self.assertEqual('', actual.winText)
-        self.assertEqual('', actual.init)
+        try:
+            _ = Puzzle({'clue': [], 'winText': '', 'init': ''}, menu)
+        except ValueError as ve:
+            self.assertIn('encoding', str(ve))
 
     def test_initWithNoneArgs(self):
-        actual = Puzzle({'clue': None, 'winText': None, 'init': None})
-
-        self.assertEqual([], actual.clue, [])
-        self.assertEqual('', actual.winText)
-        self.assertEqual('', actual.init)
+        try:
+            _ = Puzzle({'clue': None, 'winText': None, 'init': None}, None)
+        except ValueError as ve:
+            self.assertIn('encoding', str(ve))
 
 
 if __name__ == '__main__':

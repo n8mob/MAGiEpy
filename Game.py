@@ -2,12 +2,11 @@ import curses
 import time
 
 from MagieModel import Menu
-from Encodings import BinaryEncoding
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
 LEVEL_START_PAUSE = 0.2
-
+DEBUG = False
 
 class Game:
     def __init__(self, scr: curses.window, menu: Menu):
@@ -19,14 +18,18 @@ class Game:
         self.level = None
         self.on_bit_keys = ['1']
         self.off_bit_keys = ['0']
+        self.backspace_keys = [curses.KEY_BACKSPACE, 127, 0x7f]
+        self.system_window = scr
 
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)
         curses.init_pair(3, curses.COLOR_YELLOW, curses.COLOR_BLACK)
+        curses.init_pair(4, curses.COLOR_RED, curses.COLOR_YELLOW)
 
         self.incorrect_color = curses.color_pair(1) | curses.A_BOLD
         self.correct_color = curses.color_pair(2) | curses.A_BOLD
         self.unknown_color = curses.color_pair(3) | curses.A_BOLD
+        self.error_color = curses.color_pair(4)
 
     def reset(self):
         self.y = 0
@@ -128,24 +131,38 @@ class Game:
             self.write_bits(char_bits, suffix=f' {c}')
             self.y += 1
 
-        guess_char = None
+        guess_text = list(puzzle.init)
         guess_char_index = len(puzzle.init)
-        guess_char_bits = []
 
-        while not puzzle.isSolved:
+        while guess_text != puzzle.winText:
             win_char = puzzle.winText[guess_char_index]
-            win_char_bits = puzzle.encoding.encode_bit_string(win_char)
+            win_char_bits = list(puzzle.encoding.encode_bit_string(win_char))
+            guess_char = None
+            guess_char_bits = []
 
             while len(guess_char_bits) < puzzle.encoding.width:
-                guess_bit = self.scr.getkey()
-                if guess_bit in self.on_bit_keys:
-                    guess_bit = '1'
-                elif guess_bit in self.off_bit_keys:
-                    guess_bit = '0'
+                key_code = self.scr.getch()
+                if key_code in self.backspace_keys:
+                    if DEBUG:
+                        self.system_window.addstr(self.y + 1, self.x + 5, f'key code of type "{type(key_code)}": {key_code}')
+                    if guess_char_bits:
+                        guess_char_bits.pop()
+                    else:
+                        guess_char_index -= 1
+                        guess_char = guess_text[guess_char_index]
+                        guess_char_bits = list(puzzle.encoding.encode_bit_string(guess_char))
+                        self.y -= 1
+                    self.scr.refresh()
                 else:
-                    continue
+                    guess_bit = chr(key_code)
+                    if guess_bit in self.on_bit_keys:
+                        guess_bit = '1'
+                    elif guess_bit in self.off_bit_keys:
+                        guess_bit = '0'
+                    else:
+                        continue
+                    guess_char_bits += [guess_bit]
 
-                guess_char_bits += [guess_bit]
                 bit_colors = [self.unknown_color] * puzzle.encoding.width
 
                 for i in range(len(guess_char_bits)):
@@ -159,8 +176,11 @@ class Game:
                 self.write_bits(guess_char_bits, bit_colors, suffix=f' {guess_char:>{padding}}')
 
             if guess_char == win_char:
+                if guess_char_index < len(guess_text):
+                    guess_text.append(guess_char)
+                else:
+                    guess_text[guess_char_index] = guess_char
                 guess_char_index += 1
-                puzzle.isSolved = guess_char_index >= len(puzzle.winText)
                 self.y += 1
             else:
                 guess_char_bits.clear()

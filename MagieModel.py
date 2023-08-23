@@ -53,35 +53,6 @@ class Category:
         self.current_level = None
 
 
-class Level:
-    def __init__(self, deserialized=None, menu=None):
-        if not deserialized:
-            deserialized = {}
-
-        self.menu = menu
-        self.levelName = deserialized.get('levelName', [])
-        self.puzzles = []
-        self.current_puzzle_index = -1
-
-        for puzzle in deserialized.get('puzzles', []):
-            self.puzzles.append(Puzzle(puzzle, menu))
-
-    def go_to_next_puzzle(self):
-        for index, puzzle in enumerate(self.puzzles):
-            if not puzzle.isSolved:
-                self.current_puzzle_index = index
-                return
-
-    def is_finished(self):
-        for puzzle in self.puzzles:
-            if not puzzle.isSolved:
-                return False
-        return True
-
-    def get_current_puzzle(self):
-        return self.puzzles[self.current_puzzle_index]
-
-
 class Puzzle:
     def __init__(self, deserialized=None, menu=None):
         if not deserialized:
@@ -105,4 +76,37 @@ class Puzzle:
         self.isSolved = False
         self.type = deserialized.get('type', DEFAULT_PUZZLE_TYPE)
         self.encoding_id = deserialized.get('encoding', DEFAULT_ENCODING)
+        if not menu or not menu.encodings or self.encoding_id not in menu.encodings:
+            raise ValueError(f'Cannot find encoding {self.encoding_id} in menu.encodings')
+
         self.encoding = menu.encodings[self.encoding_id]
+
+
+class Level:
+    def __init__(self, deserialized=None, menu=None):
+        if not deserialized:
+            deserialized = {}
+
+        self.menu = menu
+        self.levelName = deserialized.get('levelName', [])
+        self.puzzles: [Puzzle] = []
+        self.current_puzzle_index = -1
+
+        for puzzle in deserialized.get('puzzles', []):
+            self.puzzles.append(Puzzle(puzzle, menu))
+
+    def go_to_next_puzzle(self):
+        for index, puzzle in enumerate(self.puzzles):
+            if not puzzle.isSolved:
+                self.current_puzzle_index = index
+                return
+
+    def is_finished(self):
+        for puzzle in self.puzzles:
+            if not puzzle.isSolved:
+                return False
+        return True
+
+    def get_current_puzzle(self) -> Puzzle:
+        """The puzzle currently being played for this level"""
+        return self.puzzles[self.current_puzzle_index]
