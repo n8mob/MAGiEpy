@@ -176,7 +176,7 @@ class Game:
                 self.write_bits(guess_char_bits, bit_colors, suffix=f' {guess_char:>{padding}}')
 
             if guess_char == win_char:
-                if guess_char_index < len(guess_text):
+                if guess_char_index <= len(guess_text):
                     guess_text.append(guess_char)
                 else:
                     guess_text[guess_char_index] = guess_char
