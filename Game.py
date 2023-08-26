@@ -9,13 +9,13 @@ SUBTITLE_LINE = '-------------'
 LEVEL_START_PAUSE = 0.2
 DEBUG = True
 SYSTEM_WINDOW_HEIGHT = 4
+MENU_PAUSE = 0.4
+
 
 class Game:
-    def __init__(self, scr: curses.window, menu: Menu):
-        self.magie = MagieDisplay(scr, ColorScheme.default_color_scheme())
-        self.y = 0
-        self.x = 0
+    def __init__(self, menu: Menu, magie: MagieDisplay):
         self.menu = menu
+        self.magie = magie
         self.category = None
         self.level = None
         self.on_bit_keys = ['1']
@@ -24,27 +24,59 @@ class Game:
 
         self.system_window = curses.newwin(SYSTEM_WINDOW_HEIGHT, curses.COLS, curses.LINES - SYSTEM_WINDOW_HEIGHT, 0)
 
+    def run(self):
+        quitos_game = False
+        quitos_level = False
+
+        while not quitos_game:
+            self.choose_category()
+
+            while not quitos_level:
+                self.choose_level()
+
+                self.start_level()
+
+                while not self.level.is_finished():
+                    self.start_puzzle()
+
+                    self.level.go_to_next_puzzle()
+
+                self.magie.main.write([SUBTITLE_LINE, '', 'GOOD WORK!', 'YOU FINISHOS', 'LEVEL', ''] + self.level.levelName)
+                time.sleep(MENU_PAUSE)
+                self.magie.main.write(TITLE_LINE)
+                self.magie.main.write(['Q .... QUITOS',
+                                       'C ... CHOOSOS',
+                                       'ANYTHING ELSE',
+                                       'TO PLAYOS'])
+
+                choice = self.magie.getkey()
+
+                if choice == 'Q':
+                    quitos_level = True
+                elif choice in ['M', 'B', 'U']:
+                    break
+
     def choose_category(self):
         self.magie.reset()
 
+        self.magie.title.write(['CHOOSOS', 'CATEGORY'])
+
         for index, category in enumerate(self.menu.categories):
-            self.magie.title.write(category.name, f'{index}: ')
+            self.magie.main.write(category.name, f'{index}: ')
 
-        self.y += 1
-
-        self.magie.main.write('select category: ')
         category_number = int(chr(self.magie.getch()))
         self.category = self.menu.categories[category_number]
 
     def choose_level(self):
         self.magie.reset()
 
-        self.magie.title.write([self.category.name, TITLE_LINE])
+        self.magie.title.write(self.category.name)
+
+        self.magie.main.write(['SELECTOS', 'LEVEL', SUBTITLE_LINE])
 
         for index, level in enumerate(self.category.levels):
             self.magie.main.write(level.levelName, f'{index}: ')
 
-        self.magie.main.write('select level: ')
         level_number = int(self.magie.getkey())
         self.level = self.category.levels[level_number]
 
@@ -72,7 +104,6 @@ class Game:
 
         self.magie.main.write(puzzle.clue)
         self.magie.main.write(SUBTITLE_LINE)
-        self.y += 1
 
         for c in puzzle.init:
             char_bits = puzzle.encoding.encode_bit_string(c)
@@ -88,13 +119,12 @@ class Game:
                 key_code = self.magie.getch()
                 if key_code in self.backspace_keys:
                     self.magie.note.write(f'key code of type "{type(key_code)}": {key_code}')
-                    if guess_char_bits:
-                        guess_char_bits.pop()
-                    else:
+                    if not guess_char_bits:
                         guess_char_index -= 1
                         guess_char = guess_text[guess_char_index]
                         guess_char_bits = list(puzzle.encoding.encode_bit_string(guess_char))
                         self.magie.back('row')
+                    guess_char_bits.pop()
 
                 else:
                     guess_bit = chr(key_code)
@@ -120,17 +150,16 @@ class Game:
 
                     guess_char = puzzle.encoding.decode_bit_string(guess_char_bits)
                     padding = 1 + puzzle.encoding.width - len(guess_char_bits)
-                    self.magie.main.write_bits(guess_char_bits, bit_colors, suffix=f' {guess_char:>{padding}}')
+                    self.magie.main.write_bits(guess_char_bits, bit_colors, suffix=f' {guess_char:>{padding}}', stay_on_line=True)
 
                     if guess_char == win_char:
                         if guess_char_index >= len(guess_text):
                             guess_text.append(guess_char)
                         else:
                             guess_text[guess_char_index] = guess_char
+                        self.magie.main.advance_guess_char()
                         guess_char_index += 1
-                        self.y += 1
-                    else:
-                        guess_char_bits.clear()
+
 
         self.magie.main.write(puzzle.winMessage)
         self.magie.getch()

@@ -4,6 +4,7 @@ TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
 
 
+# noinspection PyUnresolvedReferences,PyAttributeOutsideInit,DuplicatedCode
 class Reference:
     def write_text(self, lines, indicator=''):
         if isinstance(lines, str):
@@ -66,7 +67,14 @@ class ColorScheme:
 
 
 class MagieWindow:
-    def __init__(self, window, colors: ColorScheme, height, width, default_bit='0', title_line=None):
+    def __init__(self,
+                 window: curses.window,
+                 colors: ColorScheme,
+                 height,
+                 width,
+                 default_bit='0',
+                 title_line=None,
+                 auto_clear=False):
         self.window = window
         self.colors = colors
         self.height = height
@@ -75,6 +83,7 @@ class MagieWindow:
         self.x = 0
         self.default_bit = default_bit
         self.title_line = title_line
+        self.auto_clear = auto_clear
 
     def reset(self):
         self.y = 0
@@ -82,6 +91,9 @@ class MagieWindow:
         self.window.clear()
 
     def write(self, lines, prefix=''):
+        if self.auto_clear:
+            self.reset()
+
         if isinstance(lines, str):
             lines = lines.split('\n')
 
@@ -96,12 +108,14 @@ class MagieWindow:
             self.y += 1
 
         if self.title_line:
-            self.window.addstr(self.y, x, TITLE_LINE)
+            self.window.addstr(self.y, self.x, self.title_line)
             self.y += 1
 
-    def write_bits(self, bits=None, bit_colors=None, prefix='  ', suffix=' ', bit_width=13):
+        self.window.refresh()
+
+    def write_bits(self, bits=None, bit_colors=None, stay_on_line=False, prefix='  ', suffix=' ', bit_width=None):
         if not bits:
-            bits = [self.default_bit] * bit_width
+            bits = [self.default_bit] * (bit_width or self.width)
 
         bit_x = self.x
         known_bit_colors = bit_colors or []
@@ -113,37 +127,63 @@ class MagieWindow:
         bit_x += len(prefix)
 
         for i in range(len(bits)):
-            self.window.addch(self.y, bit_x + i, bits[i], known_bit_colors[i])
+            if self.y >= self.height or self.x >= self.width:
+                raise IndexError(f"Seems like we're off the end of the display: {self.describe_state()}")
+            try:
+                self.window.addch(self.y, bit_x + i, bits[i], known_bit_colors[i])
+            except curses.error as cerror:
+                raise RuntimeError(
+                    f"Unknown error writing bit '{bits[i]}' at column {bit_x} ( {self.describe_state()} )", cerror)
 
         self.window.addstr(self.y, bit_x + len(bits), suffix)
+
+        if not stay_on_line:
+            self.advance_guess_char()
+
+    def advance_guess_char(self):
         self.y += 1
 
+    def reverse_guess_char(self):
+        self.y -= 1
+
+    def describe_state(self):
+        return f"{self.y=}, {self.height=}, {self.x=}, {self.width=}"
+
+
 class MagieDisplay:
-    def __init__(self, scr: curses.window, colors: ColorScheme, default_bit='0', title_height=4, note_height=4):
+    def __init__(self,
+                 scr: curses.window,
+                 colors: ColorScheme,
+                 default_bit='0',
+                 title_height=4,
+                 note_height=4,
+                 display_width=None):
         self.full_screen = scr
         self.default_bit = default_bit
         self.colors = colors
+        self.display_width = display_width or curses.COLS
 
         puzzle_display_height = curses.LINES - (title_height + note_height)
 
         self.title = MagieWindow(
-            curses.newwin(title_height, curses.COLS, 0, 0),
+            curses.newwin(title_height, self.display_width, 0, 0),
             colors,
             title_height,
-            curses.COLS,
+            self.display_width,
             title_line=TITLE_LINE
         )
-        self.note = MagieWindow(
-            curses.newwin(note_height, curses.COLS, curses.LINES - note_height, 0),
-            colors,
-            note_height,
-            curses.COLS
-        )
         self.main = MagieWindow(
-            curses.newwin(puzzle_display_height, curses.COLS, title_height, 0),
+            curses.newwin(puzzle_display_height, self.display_width, title_height, 0),
             colors,
             puzzle_display_height,
-            curses.COLS
+            self.display_width
+        )
+        self.note = MagieWindow(
+            curses.newwin(note_height, self.display_width, curses.LINES - note_height, 0),
+            colors,
+            note_height,
+            self.display_width,
+            auto_clear=True
         )
 
     def reset(self):
