@@ -9,7 +9,7 @@ DEFAULT_PUZZLE_TYPE = 'Decode'
 
 
 class Menu:
-    def __init__(self, scr: curses.window, serialized='', file=None):
+    def __init__(self, serialized='', file=None):
         if serialized:
             deserialized = json.loads(serialized)
         elif file:
@@ -33,8 +33,6 @@ class Menu:
             self.categories.append(category)
 
         self.category = None
-
-        self.scr = scr
 
 
 class Category:

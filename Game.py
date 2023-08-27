@@ -18,6 +18,7 @@ class Game:
         self.magie = magie
         self.category = None
         self.level = None
+        self.puzzle = None
         self.on_bit_keys = ['1']
         self.off_bit_keys = ['0']
         self.backspace_keys = [curses.KEY_BACKSPACE, 127, 0x7f]
@@ -29,63 +30,30 @@ class Game:
         quitos_level = False
 
         while not quitos_game:
-            self.choose_category()
+            self.category = self.magie.select_category(self.menu)
 
             while not quitos_level:
-                self.choose_level()
+                self.level = self.magie.select_level(self.category)
 
-                self.start_level()
+                self.magie.start_level(self.level)
 
                 while not self.level.is_finished():
-                    self.start_puzzle()
-
+                    self.magie.start_puzzle(self.level.get_current_puzzle())
                     self.level.go_to_next_puzzle()
 
-                self.magie.main.write([SUBTITLE_LINE, '', 'GOOD WORK!', 'YOU FINISHOS', 'LEVEL', ''] + self.level.levelName)
-                time.sleep(MENU_PAUSE)
-                self.magie.main.write(TITLE_LINE)
-                self.magie.main.write(['Q .... QUITOS',
-                                       'C ... CHOOSOS',
-                                       'ANYTHING ELSE',
-                                       'TO PLAYOS'])
+                self.magie.finish_level(self.level)
 
-                choice = self.magie.getkey()
-
-                if choice == 'Q':
-                    quitos_level = True
-                elif choice in ['M', 'B', 'U']:
-                    break
-
-    def choose_category(self):
-        self.magie.reset()
-
-        self.magie.title.write(['CHOOSOS', 'CATEGORY'])
-
-        for index, category in enumerate(self.menu.categories):
-            self.magie.main.write(category.name, f'{index}: ')
-
-        category_number = int(chr(self.magie.getch()))
-        self.category = self.menu.categories[category_number]
-
-    def choose_level(self):
-        self.magie.reset()
-
-        self.magie.title.write(self.category.name)
-
-        self.magie.main.write(['SELECTOS', 'LEVEL', SUBTITLE_LINE])
-
-        for index, level in enumerate(self.category.levels):
-            self.magie.main.write(level.levelName, f'{index}: ')
-
-        level_number = int(self.magie.getkey())
-        self.level = self.category.levels[level_number]
+                quitos_level = True
 
     def start_level(self):
         self.magie.reset()
 
         if not self.level.puzzles:
-            self.magie.note.write('No puzzles!')
+            self.magie.show_error('No puzzles!')
             return
+
+        self.puzzle = self.level.go_to_next_puzzle()
+        self.magie.start_puzzle(self.puzzle)
 
         if self.level.is_finished():
             self.magie.reset()

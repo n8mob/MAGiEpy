@@ -6,14 +6,14 @@ import requests
 
 from MagieModel import Menu
 from Game import Game, SUBTITLE_LINE, TITLE_LINE
-from magie_display import MAGiEDisplay, ColorScheme
+from magie_display import MAGiEDisplay, ColorScheme, CursesMAGiE
 
 
 def start_game(scr: curses.window, json_path):
     with open(json_path) as menu_file:
-        menu = Menu(scr, file=menu_file)
+        menu = Menu(file=menu_file)
 
-    magie = MAGiEDisplay(scr, ColorScheme.default_color_scheme())
+    magie = CursesMAGiE(scr, ColorScheme.default_color_scheme())
 
     game = Game(menu, magie)
     game.run()

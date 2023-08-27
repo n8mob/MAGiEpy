@@ -1,6 +1,6 @@
 import curses
 
-from MagieModel import Menu, Category, Puzzle
+from MagieModel import Menu, Category, Puzzle, Level
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
@@ -48,14 +48,22 @@ class MAGiEDisplay:
     def boot_up(self):
         pass
 
-    def select_category(self, menu: Menu):
+    def select_category(self, menu: Menu) -> Category:
         pass
 
-    def select_level(self, category: Category):
+    def select_level(self, category: Category) -> Level:
+        pass
+
+    def start_level(self, level: Level):
+        pass
+
+    def finish_level(self, level: Level):
+        pass
+
+    def navigation_menu(self, prompt, options):
         pass
 
     def start_puzzle(self, puzzle: Puzzle):
-        self.puzzle = puzzle
         pass
 
     def guess_bit(self, bit):
@@ -67,13 +75,14 @@ class MAGiEDisplay:
     def guess_text(self, text):
         pass
 
+    def show_error(self, error):
+        pass
+
     def reset(self):
         pass
 
 
 class ConsoleMAGiE(MAGiEDisplay):
-    pass
-
     @staticmethod
     def out(text):
         u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
@@ -254,6 +263,49 @@ class CursesMAGiE(MAGiEDisplay):
             self.display_width,
             auto_clear=True
         )
+
+    def select_category(self, menu: Menu) -> Category:
+        self.reset()
+        self.title.write(['CHOOSOS', 'CATEGORY'])
+
+        for index, category in enumerate(menu.categories):
+            self.main.write(category.name, f'{index}: ')
+
+        category_number = int(chr(self.getch()))
+        return menu.categories[category_number]
+
+    def select_level(self, category: Category) -> Level:
+        self.reset()
+        self.title.write(category.name)
+        self.main.write(['SELECTOS', 'LEVEL', SUBTITLE_LINE])
+
+        for index, level in enumerate(category.levels):
+            self.main.write(level.levelName, f'{index}: ')
+
+        level_number = int(self.getkey())
+        return category.levels[level_number]
+
+    def start_level(self, level: Level):
+        if not level.puzzles:
+            self.note.write('No puzzles!')
+            return
+        else:
+            self.title.write(level.levelName)
+
+        level.go_to_next_puzzle()
+
+    def finish_level(self, level: Level):
+        self.main.write([SUBTITLE_LINE, '', 'GOOD WORK!', 'YOU FINISHOS', 'LEVEL', ''] + level.levelName)
+
+    def start_puzzle(self, puzzle: Puzzle):
+        self.main.reset()
+        self.main.write(puzzle.clue)
+        self.main.write(SUBTITLE_LINE)
+
+        for c in puzzle.init:
+            char_bits = puzzle.encoding.encode_bit_string(c)
+            self.main.write_bits(char_bits, suffix=f' {c}')
+
 
     def reset(self):
         self.main.reset()
