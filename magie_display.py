@@ -1,5 +1,7 @@
 import curses
 
+from MagieModel import Menu, Category, Puzzle
+
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
 
@@ -38,6 +40,73 @@ class Reference:
 
         self.scr.addstr(self.y, bit_x + len(char_bits), suffix)
 
+
+class MAGiEDisplay:
+    def __init__(self):
+        self.puzzle = None
+
+    def boot_up(self):
+        pass
+
+    def select_category(self, menu: Menu):
+        pass
+
+    def select_level(self, category: Category):
+        pass
+
+    def start_puzzle(self, puzzle: Puzzle):
+        self.puzzle = puzzle
+        pass
+
+    def guess_bit(self, bit):
+        pass
+
+    def guess_char(self, char):
+        pass
+
+    def guess_text(self, text):
+        pass
+
+    def reset(self):
+        pass
+
+
+class ConsoleMAGiE(MAGiEDisplay):
+    pass
+
+    @staticmethod
+    def out(text):
+        u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
+        print(text.upper())
+
+    def boot_up(self):
+        self.out('welcome to MAGiE')
+
+    def select_category(self, menu: Menu):
+        for i, category in enumerate(menu.categories):
+            pre = f'{i:>02} '
+            for line in category.name:
+                self.out(pre + line)
+                pre = ' ' * len(pre)
+
+    def select_level(self, category: Category):
+        pass
+
+    def start_puzzle(self, puzzle: Puzzle):
+        self.puzzle = puzzle
+        pass
+
+    def guess_bit(self, bit):
+        pass
+
+    def guess_char(self, char):
+        pass
+
+    def guess_text(self, text):
+        pass
+
+    def reset(self):
+        pass
 
 class ColorScheme:
     default = None
@@ -149,8 +218,7 @@ class MagieWindow:
     def describe_state(self):
         return f"{self.y=}, {self.height=}, {self.x=}, {self.width=}"
 
-
-class MagieDisplay:
+class CursesMAGiE(MAGiEDisplay):
     def __init__(self,
                  scr: curses.window,
                  colors: ColorScheme,
@@ -158,6 +226,7 @@ class MagieDisplay:
                  title_height=4,
                  note_height=4,
                  display_width=None):
+        super().__init__()
         self.full_screen = scr
         self.default_bit = default_bit
         self.colors = colors

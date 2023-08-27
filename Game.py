@@ -2,7 +2,7 @@ import curses
 import time
 
 from MagieModel import Menu
-from magie_display import MagieDisplay, ColorScheme
+from magie_display import MAGiEDisplay, ColorScheme
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
@@ -13,7 +13,7 @@ MENU_PAUSE = 0.4
 
 
 class Game:
-    def __init__(self, menu: Menu, magie: MagieDisplay):
+    def __init__(self, menu: Menu, magie: MAGiEDisplay):
         self.menu = menu
         self.magie = magie
         self.category = None
@@ -113,9 +113,11 @@ class Game:
         guess_char_index = len(puzzle.init)
 
         while guess_text != puzzle.winText:
+            self.magie.note.write(['guess text loop', f'f{puzzle.winText=}', f'{guess_text=}'])
             guess_char_bits = []
 
             while len(guess_char_bits) < puzzle.encoding.width:
+                self.magie.note.write([f'guess bit loop', f'{puzzle.winText=}', f'{guess_text=} {guess_char_bits=}'])
                 key_code = self.magie.getch()
                 if key_code in self.backspace_keys:
                     self.magie.note.write(f'key code of type "{type(key_code)}": {key_code}')
@@ -138,7 +140,7 @@ class Game:
 
                 bit_colors = [self.magie.colors.unknown] * len(guess_char_bits)
 
-                if len(guess_text) <= len(puzzle.winText):
+                if guess_char_index < len(puzzle.winText):
                     win_char = puzzle.winText[guess_char_index]
                     win_char_bits = list(puzzle.encoding.encode_bit_string(win_char))
 
@@ -159,7 +161,6 @@ class Game:
                             guess_text[guess_char_index] = guess_char
                         self.magie.main.advance_guess_char()
                         guess_char_index += 1
-
 
         self.magie.main.write(puzzle.winMessage)
         self.magie.getch()
