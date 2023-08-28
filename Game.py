@@ -37,8 +37,11 @@ class Game:
 
                 self.magie.start_level(self.level)
 
+                time.sleep(LEVEL_START_PAUSE)
+
                 while not self.level.is_finished():
-                    self.magie.start_puzzle(self.level.get_current_puzzle())
+                    self.start_puzzle()
+
                     self.level.go_to_next_puzzle()
 
                 self.magie.finish_level(self.level)
@@ -60,22 +63,12 @@ class Game:
             self.magie.title.write(self.level.levelName)
             self.magie.main.write('LEVEL FINISHED!')
 
-        time.sleep(LEVEL_START_PAUSE)
 
         self.level.go_to_next_puzzle()
 
     def start_puzzle(self):
-        self.magie.reset()
-        self.magie.title.write(self.level.levelName)
-
         puzzle = self.level.get_current_puzzle()
-
-        self.magie.main.write(puzzle.clue)
-        self.magie.main.write(SUBTITLE_LINE)
-
-        for c in puzzle.init:
-            char_bits = puzzle.encoding.encode_bit_string(c)
-            self.magie.main.write_bits(char_bits, suffix=f' {c}')
+        self.magie.start_puzzle(puzzle)
 
         guess_text = list(puzzle.init)
         guess_char_index = len(puzzle.init)
