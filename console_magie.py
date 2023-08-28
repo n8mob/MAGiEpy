@@ -4,9 +4,16 @@ from magie_display import MAGiEDisplay, TITLE_LINE
 
 
 class ConsoleMAGiE(MAGiEDisplay):
-    @staticmethod
-    def out(text=''):
-        print(ConsoleMAGiE.prep(text))
+    def out(self, text=''):
+        print(self.prep(text))
+
+    def read(self, prompt='', include_prompt=False):
+        prompt = self.prep(prompt)
+        _input = self.prep(input(prompt))
+        if include_prompt:
+            return prompt + _input
+        else:
+            return _input
 
     @staticmethod
     def prep(text):
@@ -60,16 +67,17 @@ class ConsoleMAGiE(MAGiEDisplay):
         return input()
 
     def guess_text(self, init, win_text):
-        guess_text = input(init)
+        win_text = self.prep(win_text)
+        guess_text = self.read(init, include_prompt=True)
         max_check = min(len(guess_text), len(win_text))
         correct_guesses = ''
         for i in range(max_check):
             if guess_text[i] == win_text[i]:
                 correct_guesses += win_text[i]
             else:
-                correct_guesses += ' '
+                break
         self.out(correct_guesses)
-        return correct_guesses.rstrip()
+        return correct_guesses.rstrip().upper()
 
     def reset(self):
         pass
