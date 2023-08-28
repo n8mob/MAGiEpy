@@ -66,13 +66,16 @@ class MAGiEDisplay:
     def start_puzzle(self, puzzle: Puzzle):
         pass
 
-    def guess_bit(self, bit):
+    def win_puzzle(self, puzzle: Puzzle):
         pass
 
-    def guess_char(self, char):
+    def guess_bit(self):
         pass
 
-    def guess_text(self, text):
+    def guess_char(self):
+        pass
+
+    def guess_text(self, init):
         pass
 
     def show_error(self, error):
@@ -81,41 +84,6 @@ class MAGiEDisplay:
     def reset(self):
         pass
 
-
-class ConsoleMAGiE(MAGiEDisplay):
-    @staticmethod
-    def out(text):
-        u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
-        print(text.upper())
-
-    def boot_up(self):
-        self.out('welcome to MAGiE')
-
-    def select_category(self, menu: Menu):
-        for i, category in enumerate(menu.categories):
-            pre = f'{i:>02} '
-            for line in category.name:
-                self.out(pre + line)
-                pre = ' ' * len(pre)
-
-    def select_level(self, category: Category):
-        pass
-
-    def start_puzzle(self, puzzle: Puzzle):
-        self.puzzle = puzzle
-        pass
-
-    def guess_bit(self, bit):
-        pass
-
-    def guess_char(self, char):
-        pass
-
-    def guess_text(self, text):
-        pass
-
-    def reset(self):
-        pass
 
 class ColorScheme:
     default = None

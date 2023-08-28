@@ -22,7 +22,7 @@ class Menu:
             if encoding['type'] == 'fixed':
                 self.encodings[encoding_id] = FixedWidthEncoding(encoding['width'], encoding['encoding'])
             else:
-                self.encodings[encoding_id] = BinaryEncoding(encoding)
+                self.encodings[encoding_id] = FixedWidthEncoding(5, encoding['encoding'])
 
         self.categories_by_name = {}
         self.categories = []
@@ -71,7 +71,7 @@ class Puzzle:
         if not self.winText:
             self.winText = ''
         self.winMessage = deserialized.get('winMessage', [])
-        self.isSolved = False
+
         self.type = deserialized.get('type', DEFAULT_PUZZLE_TYPE)
         self.encoding_id = deserialized.get('encoding', DEFAULT_ENCODING)
         if not menu or not menu.encodings or self.encoding_id not in menu.encodings:
@@ -94,16 +94,13 @@ class Level:
             self.puzzles.append(Puzzle(puzzle, menu))
 
     def go_to_next_puzzle(self):
-        for index, puzzle in enumerate(self.puzzles):
-            if not puzzle.isSolved:
-                self.current_puzzle_index = index
-                return
+        self.current_puzzle_index += 1
+        if self.current_puzzle_index >= len(self.puzzles):
+            self.current_puzzle_index = -1
+        return
 
     def is_finished(self):
-        for puzzle in self.puzzles:
-            if not puzzle.isSolved:
-                return False
-        return True
+        return self.current_puzzle_index < 0
 
     def get_current_puzzle(self) -> Puzzle:
         """The puzzle currently being played for this level"""

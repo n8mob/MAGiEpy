@@ -1,11 +1,69 @@
-import sys
-import time
+from MagieModel import Menu, Category, Puzzle, Level
+from Game import Game
+from magie_display import MAGiEDisplay, TITLE_LINE
 
-import requests
 
-from MagieModel import Menu
-from Game import Game, SUBTITLE_LINE, TITLE_LINE
-from magie_display import ColorScheme, ConsoleMAGiE
+class ConsoleMAGiE(MAGiEDisplay):
+    @staticmethod
+    def out(text=''):
+        print(ConsoleMAGiE.prep(text))
+
+    @staticmethod
+    def prep(text):
+        u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
+        return u
+
+    def boot_up(self):
+        self.out('welcome to MAGiE')
+        self.out(TITLE_LINE)
+        self.out()
+
+    def show_error(self, error):
+        self.out(error)
+
+    def select_category(self, menu: Menu):
+        for i, category in enumerate(menu.categories):
+            self.out(f'{i:>2} {category.name}')
+
+        category_number = int(input('select category: '))
+
+        return menu.categories[category_number]
+
+    def select_level(self, category: Category):
+        for i, level in enumerate(category.levels):
+            pre = f'{i:>2}'
+            for line in level.levelName:
+                self.out(f'{pre} {line}')
+                pre = ' ' * len(pre)
+
+        level_number = int(input('select level: '))
+
+        return category.levels[level_number]
+
+    def start_level(self, level: Level):
+        level.current_puzzle_index = 0
+
+    def start_puzzle(self, puzzle: Puzzle):
+        for line in puzzle.clue:
+            self.out(line)
+
+        self.out(puzzle.init)
+
+    def win_puzzle(self, puzzle: Puzzle):
+        for line in puzzle.winMessage:
+            self.out(line)
+
+    def guess_bit(self):
+        return input()
+
+    def guess_char(self):
+        return input()
+
+    def guess_text(self, init):
+        return input(init)
+
+    def reset(self):
+        pass
 
 
 def start_game(json_path):
