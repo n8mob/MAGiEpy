@@ -59,8 +59,17 @@ class ConsoleMAGiE(MAGiEDisplay):
     def guess_char(self):
         return input()
 
-    def guess_text(self, init):
-        return input(init)
+    def guess_text(self, init, win_text):
+        guess_text = input(init)
+        max_check = min(len(guess_text), len(win_text))
+        correct_guesses = ''
+        for i in range(max_check):
+            if guess_text[i] == win_text[i]:
+                correct_guesses += win_text[i]
+            else:
+                correct_guesses += ' '
+        self.out(correct_guesses)
+        return correct_guesses.rstrip()
 
     def reset(self):
         pass

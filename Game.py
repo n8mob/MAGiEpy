@@ -1,7 +1,7 @@
 import curses
 import time
 
-from MagieModel import Menu
+from MagieModel import Menu, Correctness
 from magie_display import MAGiEDisplay, ColorScheme
 
 TITLE_LINE = '============='
@@ -74,7 +74,10 @@ class Game:
 
         while guess_text != puzzle.winText:
             if not BIT_MODE:
-                guess_text = self.magie.guess_text(puzzle.init)
+                if guess_text:
+                    guess_text = self.magie.guess_text(guess_text, puzzle.winText)
+                else:
+                    guess_text = self.magie.guess_text(puzzle.init, puzzle.winText)
             else:
                 guess_char_bits = []
 

@@ -75,7 +75,7 @@ class MAGiEDisplay:
     def guess_char(self):
         pass
 
-    def guess_text(self, init):
+    def guess_text(self, init, win_text):
         pass
 
     def show_error(self, error):

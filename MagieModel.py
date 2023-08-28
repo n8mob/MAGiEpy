@@ -1,5 +1,6 @@
 import curses
 import json
+from enum import Enum
 
 from Encodings import FixedWidthEncoding, BinaryEncoding
 
@@ -105,3 +106,9 @@ class Level:
     def get_current_puzzle(self) -> Puzzle:
         """The puzzle currently being played for this level"""
         return self.puzzles[self.current_puzzle_index]
+
+
+class Correctness(Enum):
+    INCORRECT = 0
+    CORRECT = 1
+    UNKNOWN = 2
