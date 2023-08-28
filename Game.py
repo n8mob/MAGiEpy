@@ -10,7 +10,7 @@ LEVEL_START_PAUSE = 0.2
 DEBUG = True
 SYSTEM_WINDOW_HEIGHT = 4
 MENU_PAUSE = 0.4
-BIT_MODE = False
+BIT_MODE = True
 
 
 class Game:
@@ -79,7 +79,7 @@ class Game:
                 else:
                     guess_text = self.magie.guess_text(puzzle.init, puzzle.winText)
             else:
-                guess_char_bits = []
+                guess_char_bits = self.magie.guess_bits(puzzle)
 
                 while len(guess_char_bits) < puzzle.encoding.width:
                     guess_bit = self.magie.guess_bit()

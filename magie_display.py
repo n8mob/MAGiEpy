@@ -69,10 +69,13 @@ class MAGiEDisplay:
     def win_puzzle(self, puzzle: Puzzle):
         pass
 
-    def guess_bit(self):
+    def guess_1_bit(self):
         pass
 
-    def guess_char(self):
+    def guess_bits(self, puzzle):
+        pass
+
+    def guess_1_char(self):
         pass
 
     def guess_text(self, init, win_text):

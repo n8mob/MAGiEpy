@@ -1,6 +1,7 @@
 import curses
 import json
 from enum import Enum
+from typing import Dict, Any
 
 from Encodings import FixedWidthEncoding, BinaryEncoding
 
@@ -10,6 +11,8 @@ DEFAULT_PUZZLE_TYPE = 'Decode'
 
 
 class Menu:
+    encodings: dict[Any, FixedWidthEncoding]
+
     def __init__(self, serialized='', file=None):
         if serialized:
             deserialized = json.loads(serialized)

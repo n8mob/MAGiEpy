@@ -1,9 +1,23 @@
-from MagieModel import Menu, Category, Puzzle, Level
+from MagieModel import Menu, Category, Puzzle, Level, Correctness
 from Game import Game
 from magie_display import MAGiEDisplay, TITLE_LINE
 
 
 class ConsoleMAGiE(MAGiEDisplay):
+    def __init__(self):
+        super().__init__()
+        self.on_bits = ['1']
+        self.off_bits = ['0']
+        self.bit_symbols = {
+            Correctness.CORRECT: '🟢',
+            Correctness.INCORRECT: '🔴',
+            Correctness.UNKNOWN: '🟡'
+        }
+
+        self.decode_bits = ['0', '1', '?']
+        self.display_bits = ['○', '●', '◌']
+        self.alternate_display_bits = ['○', '⦿', '◌']
+
     def out(self, text=''):
         print(self.prep(text))
 
@@ -19,6 +33,11 @@ class ConsoleMAGiE(MAGiEDisplay):
     def prep(text):
         u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
         return u
+
+    def judge(self, guess, win):
+        if guess == win:
+            return self.bit_symbols[Correctness.CORRECT]
+        return self.bit_symbols[Correctness.INCORRECT]
 
     def boot_up(self):
         self.out('welcome to MAGiE')
@@ -60,10 +79,42 @@ class ConsoleMAGiE(MAGiEDisplay):
         for line in puzzle.winMessage:
             self.out(line)
 
-    def guess_bit(self):
+    def guess_1_bit(self):
         return input()
 
-    def guess_char(self):
+    def guess_bits(self, puzzle):
+        _input = input(puzzle.init)
+        guess_bits = []
+        for b in _input:
+            if b in self.on_bits:
+                guess_bits.append(self.decode_bits[1])
+            elif b in self.off_bits:
+                guess_bits.append(self.decode_bits[0])
+            # else ignore
+
+        win_bits = puzzle.encoding.encode_bit_string(puzzle.winText)
+        length_of_guess = len(guess_bits)
+        length_of_win = len(win_bits)
+
+        if length_of_guess > length_of_win:
+            self.out(f'your guess is too long by {length_of_guess - length_of_win}')
+
+        if puzzle.encoding.width:
+            char_width = puzzle.encoding.width
+
+            for char_start in range(0, length_of_guess, char_width):
+                c = puzzle.encoding.decode(''.join(guess_bits[char_start:char_start+char_width]))
+                for i in range(char_start, char_start + puzzle.encoding.width):
+                    self.out(f' {[self.judge(guess_bits[i], win_bits[i])]} {c}')
+        else:
+            i = 0
+            for i in range(length_of_guess):
+                if guess_bits[i] != win_bits[i]:
+                    break
+                    # now i should be the index _after_ the last matching character :thumbsup:
+            self.out(''.join(guess_bits[:i]))
+
+    def guess_1_char(self):
         return input()
 
     def guess_text(self, init, win_text):
