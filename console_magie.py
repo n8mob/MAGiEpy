@@ -1,7 +1,6 @@
-from MagieModel import Menu, Category, Puzzle, Level, Correctness
+from MagieModel import Menu, Category, Puzzle, Level, Correctness, GuessMode
 from Game import Game
 from magie_display import MAGiEDisplay, TITLE_LINE
-
 
 class ConsoleMAGiE(MAGiEDisplay):
     def __init__(self):
@@ -17,6 +16,9 @@ class ConsoleMAGiE(MAGiEDisplay):
         self.decode_bits = ['0', '1', '?']
         self.display_bits = ['○', '●', '◌']
         self.alternate_display_bits = ['○', '⦿', '◌']
+
+    def preferred_guess_mode(self) -> GuessMode:
+        return GuessMode.MULTI_BIT
 
     def out(self, text=''):
         print(self.prep(text))
@@ -79,40 +81,60 @@ class ConsoleMAGiE(MAGiEDisplay):
         for line in puzzle.winMessage:
             self.out(line)
 
+    def check_bit(self, i, guess_bits, win_bits):
+        if len(guess_bits) <= i:
+            # wat
+            return self.bit_symbols[Correctness.UNKNOWN]
+        elif len(win_bits) <= i:
+            return self.bit_symbols[Correctness.INCORRECT]
+        elif guess_bits[i] == win_bits[i]:
+                return self.bit_symbols[Correctness.CORRECT]
+
+        return self.bit_symbols[Correctness.UNKNOWN]
+
+
     def guess_1_bit(self):
         return input()
 
     def guess_bits(self, puzzle):
         _input = input(puzzle.init)
         guess_bits = []
-        for b in _input:
-            if b in self.on_bits:
-                guess_bits.append(self.decode_bits[1])
-            elif b in self.off_bits:
-                guess_bits.append(self.decode_bits[0])
-            # else ignore
 
-        win_bits = puzzle.encoding.encode_bit_string(puzzle.winText)
+        if puzzle.encoding.width:
+            guess_char_bits = []
+            for b in _input:
+                if b in self.off_bits:
+                    guess_char_bits.append(self.decode_bits[0])
+                elif b in self.on_bits:
+                    guess_char_bits.append(self.decode_bits[1])
+                # else ignore
+                if len(guess_char_bits) >= puzzle.encoding.width:
+                    guess_bits.append(guess_char_bits)
+
+            win_bits = [puzzle.encoding.encode_bit_string(wc) for wc in puzzle.winText]
+        else:
+            for b in _input:
+                if b in self.off_bits:
+                    guess_bits.append(self.decode_bits[0])
+                elif b in self.on_bits:
+                    guess_bits.append(self.decode_bits[1])
+
+            win_bits = ''.join(''.join(puzzle.encoding.encode_bit_string(wc) for wc in puzzle.winText))
+
+
         length_of_guess = len(guess_bits)
         length_of_win = len(win_bits)
 
-        if length_of_guess > length_of_win:
-            self.out(f'your guess is too long by {length_of_guess - length_of_win}')
+        i = 0
 
-        if puzzle.encoding.width:
-            char_width = puzzle.encoding.width
+        correctnesses = []
 
-            for char_start in range(0, length_of_guess, char_width):
-                c = puzzle.encoding.decode(''.join(guess_bits[char_start:char_start+char_width]))
-                for i in range(char_start, char_start + puzzle.encoding.width):
-                    self.out(f' {[self.judge(guess_bits[i], win_bits[i])]} {c}')
-        else:
-            i = 0
-            for i in range(length_of_guess):
-                if guess_bits[i] != win_bits[i]:
-                    break
-                    # now i should be the index _after_ the last matching character :thumbsup:
-            self.out(''.join(guess_bits[:i]))
+        while i < min(length_of_guess, length_of_win):
+            correctnesses.insert(i, self.check_bit(i, guess_bits, win_bits))
+            i += 1
+
+        self.out(''.join(correctnesses))
+        return guess_bits
 
     def guess_1_char(self):
         return input()

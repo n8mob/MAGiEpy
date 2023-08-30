@@ -1,7 +1,7 @@
 import curses
 import time
 
-from MagieModel import Menu, Correctness
+from MagieModel import Menu, Correctness, GuessMode
 from magie_display import MAGiEDisplay, ColorScheme
 
 TITLE_LINE = '============='
@@ -10,16 +10,16 @@ LEVEL_START_PAUSE = 0.2
 DEBUG = True
 SYSTEM_WINDOW_HEIGHT = 4
 MENU_PAUSE = 0.4
-BIT_MODE = True
 
 
 class Game:
-    def __init__(self, menu: Menu, magie: MAGiEDisplay):
+    def __init__(self, menu: Menu, magie: MAGiEDisplay, guess_mode: GuessMode=None):
         self.menu = menu
         self.magie = magie
         self.category = None
         self.level = None
         self.puzzle = None
+        self.guess_mode = guess_mode or magie.preferred_guess_mode()
         self.on_bit_keys = ['1']
         self.off_bit_keys = ['0']
         self.backspace_keys = [curses.KEY_BACKSPACE, 127, 0x7f]
@@ -71,18 +71,17 @@ class Game:
         self.magie.start_puzzle(puzzle)
 
         guess_text = puzzle.init
+        guess_char_index = 0
 
         while guess_text != puzzle.winText:
-            if not BIT_MODE:
-                if guess_text:
-                    guess_text = self.magie.guess_text(guess_text, puzzle.winText)
-                else:
-                    guess_text = self.magie.guess_text(puzzle.init, puzzle.winText)
-            else:
-                guess_char_bits = self.magie.guess_bits(puzzle)
+            if self.guess_mode == GuessMode.MULTI_BIT:
+                guess_bits = self.magie.guess_bits(puzzle)
+                guess_text = puzzle.encoding.decode_bit_string(guess_bits)
 
+            elif self.guess_mode == GuessMode.SINGLE_BIT:
+                guess_char_bits = []
                 while len(guess_char_bits) < puzzle.encoding.width:
-                    guess_bit = self.magie.guess_bit()
+                    guess_bit = self.magie.guess_1_bit()
                     if guess_bit in self.on_bit_keys:
                         guess_bit = '1'
                     elif guess_bit in self.off_bit_keys:
@@ -111,5 +110,10 @@ class Game:
                             else:
                                 guess_text[guess_char_index] = guess_char
                             guess_char_index += 1
+            elif self.guess_mode == GuessMode.TEXT:
+                if guess_text:
+                    guess_text = self.magie.guess_text(guess_text, puzzle.winText)
+                else:
+                    guess_text = self.magie.guess_text(puzzle.init, puzzle.winText)
 
         self.magie.win_puzzle(puzzle)

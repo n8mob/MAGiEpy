@@ -111,6 +111,13 @@ class Level:
         return self.puzzles[self.current_puzzle_index]
 
 
+class GuessMode(Enum):
+    SINGLE_BIT = 0
+    SINGLE_LETTER = 1
+    MULTI_BIT = 2
+    TEXT = 3
+
+
 class Correctness(Enum):
     INCORRECT = 0
     CORRECT = 1

@@ -1,6 +1,6 @@
 import curses
 
-from MagieModel import Menu, Category, Puzzle, Level
+from MagieModel import Menu, Category, Puzzle, Level, GuessMode
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
@@ -44,6 +44,9 @@ class Reference:
 class MAGiEDisplay:
     def __init__(self):
         self.puzzle = None
+
+    def preferred_guess_mode(self) -> GuessMode:
+        pass
 
     def boot_up(self):
         pass
