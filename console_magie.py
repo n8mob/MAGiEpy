@@ -100,11 +100,19 @@ class ConsoleMAGiE(MAGiEDisplay):
         _input = input(puzzle.init)
         guess_bits = []
 
-        for b in _input:
-            if b in self.off_bits:
-                guess_bits.append(self.decode_bits[0])
-            elif b in self.on_bits:
-                guess_bits.append(self.decode_bits[1])
+        if puzzle.encoding.width:
+            guess_char_bits = []
+            for b in _input:
+                if b in self.off_bits:
+                    guess_char_bits.append(self.decode_bits[0])
+                elif b in self.on_bits:
+                    guess_char_bits.append(self.decode_bits[1])
+
+                if len(guess_char_bits) >= puzzle.encoding.width:
+                    guess_bits.append(''.join(guess_char_bits))
+                    guess_char_bits.clear()
+        else:
+            guess_bits.append(_input)
 
         win_bits = ''.join(''.join(puzzle.encoding.encode_bit_string(wc) for wc in puzzle.winText))
 
