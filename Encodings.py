@@ -41,7 +41,9 @@ class FixedWidthEncoding(BinaryEncoding):
 
     def decode_bit_string(self, b):
         if b:
-            enc = int(''.join(b[-self.width:]), 2)
+            if isinstance(b, list):
+                b = ''.join(b)
+            enc = int(b[-self.width:], 2)
         else:
             enc = self.default_encoded
         return self.decode(enc)
