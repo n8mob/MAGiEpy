@@ -100,27 +100,13 @@ class ConsoleMAGiE(MAGiEDisplay):
         _input = input(puzzle.init)
         guess_bits = []
 
-        if puzzle.encoding.width:
-            guess_char_bits = []
-            for b in _input:
-                if b in self.off_bits:
-                    guess_char_bits.append(self.decode_bits[0])
-                elif b in self.on_bits:
-                    guess_char_bits.append(self.decode_bits[1])
-                # else ignore
-                if len(guess_char_bits) >= puzzle.encoding.width:
-                    guess_bits.append(guess_char_bits)
+        for b in _input:
+            if b in self.off_bits:
+                guess_bits.append(self.decode_bits[0])
+            elif b in self.on_bits:
+                guess_bits.append(self.decode_bits[1])
 
-            win_bits = [puzzle.encoding.encode_bit_string(wc) for wc in puzzle.winText]
-        else:
-            for b in _input:
-                if b in self.off_bits:
-                    guess_bits.append(self.decode_bits[0])
-                elif b in self.on_bits:
-                    guess_bits.append(self.decode_bits[1])
-
-            win_bits = ''.join(''.join(puzzle.encoding.encode_bit_string(wc) for wc in puzzle.winText))
-
+        win_bits = ''.join(''.join(puzzle.encoding.encode_bit_string(wc) for wc in puzzle.winText))
 
         length_of_guess = len(guess_bits)
         length_of_win = len(win_bits)
