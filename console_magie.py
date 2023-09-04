@@ -36,7 +36,7 @@ class ConsoleMAGiE(MAGiEDisplay):
 
     def judge_bitstring(self, guess, win):
         max_possible = min(len(guess), len(win))
-        is_correct = True
+        is_correct = max_possible > 0
         judged = ''
 
         for i in range(max_possible):
@@ -121,12 +121,18 @@ class ConsoleMAGiE(MAGiEDisplay):
 
                 if len(decode_char_bits) >= puzzle.encoding.width:
                     guess_char_bit_string = ''.join(decode_char_bits)
-                    decoded = puzzle.encoding.decode_bit_string(guess_char_bit_string)
                     is_correct, judged_bits = self.judge_bitstring(guess_char_bit_string, win_bits.pop(0))
                     if is_correct:
                         guess_bits.append(guess_char_bit_string)
-                    self.out(judged_bits + ' ' + decoded)
+                    self.out(judged_bits + ' ' + puzzle.encoding.decode_bit_string(guess_char_bit_string))
                     decode_char_bits.clear()
+            self.out(puzzle.encoding.decode_bit_string(guess_bits))
+
+            if decode_char_bits:
+                """leftover from unfinished letter"""
+                ignore_known_incorrect, judged_bits = self.judge_bitstring(decode_char_bits, win_bits[0] if win_bits else '')
+                self.out(judged_bits + ' ' + puzzle.encoding.decode_bit_string(''.join(decode_char_bits)))
+                decode_char_bits.clear()
         else:
             guess_bits.append(_input)
             is_correct, judged_bits = self.judge_bitstring(_input, ''.join(win_bits))
