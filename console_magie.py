@@ -36,15 +36,17 @@ class ConsoleMAGiE(MAGiEDisplay):
 
     def judge_bitstring(self, guess, win):
         max_possible = min(len(guess), len(win))
+        is_correct = True
         judged = ''
 
         for i in range(max_possible):
+            is_correct = is_correct and guess[i] == win[i]
             if guess[i] == win[i]:
                 judged += self.correct_bits[guess[i]]
             else:
                 judged += self.incorrect_bits[guess[i]]
 
-        return judged
+        return is_correct, judged
 
     def boot_up(self):
         self.out('welcome to MAGiE')
@@ -119,10 +121,11 @@ class ConsoleMAGiE(MAGiEDisplay):
 
                 if len(decode_char_bits) >= puzzle.encoding.width:
                     guess_char_bit_string = ''.join(decode_char_bits)
-                    guess_bits.append(guess_char_bit_string)
                     decoded = puzzle.encoding.decode_bit_string(guess_char_bit_string)
-                    correctness = self.judge_bitstring(guess_char_bit_string, win_bits.pop(0))
-                    self.out(correctness + ' ' + decoded)
+                    is_correct, judged_bits = self.judge_bitstring(guess_char_bit_string, win_bits.pop(0))
+                    if is_correct:
+                        guess_bits.append(guess_char_bit_string)
+                    self.out(judged_bits + ' ' + decoded)
                     decode_char_bits.clear()
         else:
             guess_bits.append(_input)
