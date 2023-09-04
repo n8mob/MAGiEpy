@@ -129,10 +129,10 @@ class ConsoleMAGiE(MAGiEDisplay):
                     decode_char_bits.clear()
         else:
             guess_bits.append(_input)
-            correctness = self.judge_bitstring(_input, ''.join(win_bits))
+            is_correct, judged_bits = self.judge_bitstring(_input, ''.join(win_bits))
             decoded = puzzle.encoding.decode_bit_string(_input)
 
-            self.out(correctness)
+            self.out(judged_bits)
             self.out(decoded)
 
         return guess_bits
