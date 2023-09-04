@@ -75,7 +75,7 @@ class MAGiEDisplay:
     def guess_1_bit(self):
         pass
 
-    def guess_bits(self, puzzle):
+    def guess_bits(self, puzzle, guess_bits):
         pass
 
     def guess_1_char(self):

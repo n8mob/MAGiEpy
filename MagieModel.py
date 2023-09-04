@@ -3,7 +3,7 @@ import json
 from enum import Enum
 from typing import Dict, Any
 
-from Encodings import FixedWidthEncoding, BinaryEncoding
+from Encodings import FixedWidthEncoding, BinaryEncoding, Encoding
 
 DEFAULT_ENCODING = '5bA1'
 
@@ -81,7 +81,7 @@ class Puzzle:
         if not menu or not menu.encodings or self.encoding_id not in menu.encodings:
             raise ValueError(f'Cannot find encoding {self.encoding_id} in menu.encodings')
 
-        self.encoding = menu.encodings[self.encoding_id]
+        self.encoding: Encoding = menu.encodings[self.encoding_id]
 
 
 class Level:

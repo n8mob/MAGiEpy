@@ -75,7 +75,8 @@ class Game:
 
         while guess_text != puzzle.winText:
             if self.guess_mode == GuessMode.MULTI_BIT:
-                guess_bits = self.magie.guess_bits(puzzle)
+                guess_bits = puzzle.encoding.encode_bit_string(guess_text)
+                guess_bits = self.magie.guess_bits(puzzle, guess_bits)
                 guess_text = puzzle.encoding.decode_bit_string(guess_bits)
 
             elif self.guess_mode == GuessMode.SINGLE_BIT:

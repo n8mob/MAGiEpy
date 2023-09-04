@@ -43,16 +43,20 @@ class FixedWidthEncoding(BinaryEncoding):
         dec = ''
         if bit_string:
             if isinstance(bit_string, list):
-                bit_string = ''.join(bit_string)
-
-            for char_index in range(0, len(bit_string), self.width):
-                enc = int(bit_string[char_index:char_index + self.width], 2)
-                dec += self.decode(enc)
+                for char_string in bit_string:
+                    enc = int(char_string, 2)
+                    dec += self.decode(enc)
+            else:
+                for char_index in range(0, len(bit_string), self.width):
+                    enc = int(bit_string[char_index:char_index + self.width], 2)
+                    dec += self.decode(enc)
         else:
             dec = self.decode(self.default_encoded)
         return dec
 
-    def encode_bit_string(self, c):
-        b = self.encode(c)
+    def encode_bit_string(self, s):
+        b = []
+        for c in s:
+            b.append(f'{self.encode(c) :0{self.width}b}')
 
-        return f'{self.encode(c) :0{self.width}b}'
+        return b

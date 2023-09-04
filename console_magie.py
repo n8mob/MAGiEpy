@@ -7,15 +7,13 @@ class ConsoleMAGiE(MAGiEDisplay):
         super().__init__()
         self.on_bits = ['1']
         self.off_bits = ['0']
-        self.bit_symbols = {
-            Correctness.CORRECT: '🟢',
-            Correctness.INCORRECT: '🔴',
-            Correctness.UNKNOWN: '🟡'
-        }
+
+        various_circles = '•⦿◦⦾⊙⊚⊛◯❍⊕⊖⨷◎⊘❂☢⧃⧂✆⊘⦸⛔⭕🚫⬤⚫🔴🔘'
+        various_diamonds = '⌑◊♢♦⟠⧫⬧⬨⬪⬫◆◇✦✧❖'
 
         self.decode_bits = ['0', '1', '?']
-        self.display_bits = ['○', '●', '◌']
-        self.alternate_display_bits = ['○', '⦿', '◌']
+        self.incorrect_bits = {'0': '⓿', '1': '➊'}
+        self.correct_bits = {'0': '⓪', '1': '➀'}
 
     def preferred_guess_mode(self) -> GuessMode:
         return GuessMode.MULTI_BIT
@@ -36,10 +34,17 @@ class ConsoleMAGiE(MAGiEDisplay):
         u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
         return u
 
-    def judge(self, guess, win):
-        if guess == win:
-            return self.bit_symbols[Correctness.CORRECT]
-        return self.bit_symbols[Correctness.INCORRECT]
+    def judge_bitstring(self, guess, win):
+        max_possible = min(len(guess), len(win))
+        judged = ''
+
+        for i in range(max_possible):
+            if guess[i] == win[i]:
+                judged += self.correct_bits[guess[i]]
+            else:
+                judged += self.incorrect_bits[guess[i]]
+
+        return judged
 
     def boot_up(self):
         self.out('welcome to MAGiE')
@@ -96,38 +101,37 @@ class ConsoleMAGiE(MAGiEDisplay):
     def guess_1_bit(self):
         return input()
 
-    def guess_bits(self, puzzle):
-        _input = input(puzzle.init)
-        guess_bits = []
+    def guess_bits(self, puzzle, guess_bits, win_bits=None):
+        if not guess_bits:
+            guess_bits = puzzle.encoding.encode_bit_string(puzzle.init)
 
+        if not win_bits:
+            win_bits = puzzle.encoding.encode_bit_string(puzzle.winText)[len(guess_bits):]
+
+        _input = input(puzzle.init)
         if puzzle.encoding.width:
-            guess_char_bits = []
+            decode_char_bits = []
             for b in _input:
                 if b in self.off_bits:
-                    guess_char_bits.append(self.decode_bits[0])
+                    decode_char_bits.append(self.decode_bits[0])
                 elif b in self.on_bits:
-                    guess_char_bits.append(self.decode_bits[1])
+                    decode_char_bits.append(self.decode_bits[1])
 
-                if len(guess_char_bits) >= puzzle.encoding.width:
-                    guess_bits.append(''.join(guess_char_bits))
-                    guess_char_bits.clear()
+                if len(decode_char_bits) >= puzzle.encoding.width:
+                    guess_char_bit_string = ''.join(decode_char_bits)
+                    guess_bits.append(guess_char_bit_string)
+                    decoded = puzzle.encoding.decode_bit_string(guess_char_bit_string)
+                    correctness = self.judge_bitstring(guess_char_bit_string, win_bits.pop(0))
+                    self.out(correctness + ' ' + decoded)
+                    decode_char_bits.clear()
         else:
             guess_bits.append(_input)
+            correctness = self.judge_bitstring(_input, ''.join(win_bits))
+            decoded = puzzle.encoding.decode_bit_string(_input)
 
-        win_bits = ''.join(''.join(puzzle.encoding.encode_bit_string(wc) for wc in puzzle.winText))
+            self.out(correctness)
+            self.out(decoded)
 
-        length_of_guess = len(guess_bits)
-        length_of_win = len(win_bits)
-
-        i = 0
-
-        correctnesses = []
-
-        while i < min(length_of_guess, length_of_win):
-            correctnesses.insert(i, self.check_bit(i, guess_bits, win_bits))
-            i += 1
-
-        self.out(''.join(correctnesses))
         return guess_bits
 
     def guess_1_char(self):
