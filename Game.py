@@ -6,10 +6,12 @@ from magie_display import MAGiEDisplay, ColorScheme
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
-LEVEL_START_PAUSE = 0.2
 DEBUG = True
 SYSTEM_WINDOW_HEIGHT = 4
+
 MENU_PAUSE = 0.4
+LEVEL_START_PAUSE = 0.2
+WIN_PAUSE = 0.6
 
 
 class Game:
@@ -118,3 +120,4 @@ class Game:
                     guess_text = self.magie.guess_text(puzzle.init, puzzle.winText)
 
         self.magie.win_puzzle(puzzle)
+        time.sleep(WIN_PAUSE)

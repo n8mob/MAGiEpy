@@ -2,6 +2,7 @@ from MagieModel import Menu, Category, Puzzle, Level, Correctness, GuessMode
 from Game import Game
 from magie_display import MAGiEDisplay, TITLE_LINE
 
+
 class ConsoleMAGiE(MAGiEDisplay):
     def __init__(self):
         super().__init__()
@@ -85,20 +86,10 @@ class ConsoleMAGiE(MAGiEDisplay):
         self.out(puzzle.init)
 
     def win_puzzle(self, puzzle: Puzzle):
+        self.out(TITLE_LINE)
         for line in puzzle.winMessage:
             self.out(line)
-
-    def check_bit(self, i, guess_bits, win_bits):
-        if len(guess_bits) <= i:
-            # wat
-            return self.bit_symbols[Correctness.UNKNOWN]
-        elif len(win_bits) <= i:
-            return self.bit_symbols[Correctness.INCORRECT]
-        elif guess_bits[i] == win_bits[i]:
-                return self.bit_symbols[Correctness.CORRECT]
-
-        return self.bit_symbols[Correctness.UNKNOWN]
-
+        self.out(TITLE_LINE)
 
     def guess_1_bit(self):
         return input()
