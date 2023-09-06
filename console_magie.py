@@ -109,6 +109,8 @@ class ConsoleMAGiE(MAGiEDisplay):
                     decode_char_bits.append(self.decode_bits[0])
                 elif b in self.on_bits:
                     decode_char_bits.append(self.decode_bits[1])
+                else:  # skip invalid input
+                    continue
 
                 if len(decode_char_bits) >= puzzle.encoding.width:
                     guess_char_bit_string = ''.join(decode_char_bits)
@@ -121,7 +123,7 @@ class ConsoleMAGiE(MAGiEDisplay):
 
             if decode_char_bits:
                 """leftover from unfinished letter"""
-                ignore_known_incorrect, judged_bits = self.judge_bitstring(decode_char_bits, win_bits[0] if win_bits else '')
+                _, judged_bits = self.judge_bitstring(decode_char_bits, win_bits[0] if win_bits else '')
                 self.out(judged_bits + ' ' + puzzle.encoding.decode_bit_string(''.join(decode_char_bits)))
                 decode_char_bits.clear()
         else:
