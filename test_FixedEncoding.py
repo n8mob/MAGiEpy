@@ -1,6 +1,6 @@
 import unittest
 
-from Encodings import FixedWidthEncoding
+from fixed_width import FixedWidthEncoding
 
 hexadecimal = {
     '0': 0,

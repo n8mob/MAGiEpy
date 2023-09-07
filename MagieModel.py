@@ -3,7 +3,8 @@ import json
 from enum import Enum
 from typing import Dict, Any
 
-from Encodings import FixedWidthEncoding, BinaryEncoding, Encoding
+from fixed_width import FixedWidthEncoding, Encoding
+from binary_encoding import BinaryEncoding
 
 DEFAULT_ENCODING = '5bA1'
 
