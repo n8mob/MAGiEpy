@@ -3,8 +3,9 @@ import json
 from enum import Enum
 from typing import Dict, Any
 
-from fixed_width import FixedWidthEncoding, Encoding
 from binary_encoding import BinaryEncoding
+from fixed_width import FixedWidthEncoding
+from variable_width import VariableWidthEncoding
 
 DEFAULT_ENCODING = '5bA1'
 
@@ -12,7 +13,7 @@ DEFAULT_PUZZLE_TYPE = 'Decode'
 
 
 class Menu:
-    encodings: dict[Any, FixedWidthEncoding]
+    encodings: dict[Any, BinaryEncoding]
 
     def __init__(self, serialized='', file=None):
         if serialized:
@@ -27,7 +28,7 @@ class Menu:
             if encoding['type'] == 'fixed':
                 self.encodings[encoding_id] = FixedWidthEncoding(encoding['width'], encoding['encoding'])
             else:
-                self.encodings[encoding_id] = FixedWidthEncoding(5, encoding['encoding'])
+                self.encodings[encoding_id] = VariableWidthEncoding(encoding['encoding'])
 
         self.categories_by_name = {}
         self.categories = []

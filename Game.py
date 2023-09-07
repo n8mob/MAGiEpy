@@ -1,7 +1,7 @@
 import curses
 import time
 
-from MagieModel import Menu, Correctness, GuessMode
+from magie_model import Menu, Correctness, GuessMode
 from magie_display import MAGiEDisplay, ColorScheme
 
 TITLE_LINE = '============='

@@ -1,6 +1,6 @@
 import curses
 
-from MagieModel import Menu, Category, Puzzle, Level, GuessMode
+from magie_model import Menu, Category, Puzzle, Level, GuessMode
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'

@@ -4,7 +4,7 @@ from binary_encoding import BinaryEncoding
 class FixedWidthEncoding(BinaryEncoding):
     def __init__(self, width, encoding: dict, decoding: dict = None, default_encoded=0, default_decoded='?'):
         self.encoding = encoding
-        self.decoding = decoding or {v: k for k, v in self.encoding.items()},
+        self.decoding = decoding or {v: k for k, v in self.encoding.items()}
         self.default_encoded = default_encoded
         self.default_decoded = default_decoded
         self.width = width

@@ -4,7 +4,7 @@ import time
 
 import requests
 
-from MagieModel import Menu
+from magie_model import Menu
 from Game import Game, SUBTITLE_LINE, TITLE_LINE
 from magie_display import MAGiEDisplay, ColorScheme, CursesMAGiE
 

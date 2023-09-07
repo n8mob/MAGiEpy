@@ -1,4 +1,4 @@
-from MagieModel import Menu, Category, Puzzle, Level, Correctness, GuessMode
+from magie_model import Menu, Category, Puzzle, Level, Correctness, GuessMode
 from Game import Game
 from magie_display import MAGiEDisplay, TITLE_LINE
 

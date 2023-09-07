@@ -2,13 +2,10 @@ import json
 import unittest
 from unittest.mock import Mock
 
-from magiegame.MagieModel import Level, Menu, Puzzle
+from magie_model import Level, Menu, Puzzle
 
 
 class MenuTest(unittest.TestCase):
-    def setUp(self) -> None:
-        self.screen = Mock()
-
     def test_BasicJson(self):
         with open('TestMenus/MinimalMenu.json') as minimal_file:
             serialized = minimal_file.read()
@@ -21,7 +18,7 @@ class MenuTest(unittest.TestCase):
         self.assertEqual(plain_json['menuVersion'], 1)
         self.assertIsNotNone(plain_json['categories'])
 
-        actual_menu = Menu(self.screen, serialized)
+        actual_menu = Menu(serialized)
 
         self.assertIsNotNone(actual_menu)
         self.assertIsNotNone(actual_menu.categories)
@@ -55,7 +52,7 @@ class MenuTest(unittest.TestCase):
 
     def test_fullMenu(self):
         with open('TestMenus/FullMenu.json') as full_file:
-            full_menu = Menu(self.screen, file=full_file)
+            full_menu = Menu(file=full_file)
 
         self.assertIsNotNone(full_menu)
         self.assertEqual(5, len(full_menu.categories))
