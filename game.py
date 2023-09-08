@@ -51,24 +51,6 @@ class Game:
 
                 quitos_level = True
 
-    def start_level(self):
-        self.magie.reset()
-
-        if not self.level.puzzles:
-            self.magie.show_error('No puzzles!')
-            return
-
-        self.puzzle = self.level.go_to_next_puzzle()
-        self.magie.start_puzzle(self.puzzle)
-
-        if self.level.is_finished():
-            self.magie.reset()
-            self.magie.title.write(self.level.levelName)
-            self.magie.main.write('LEVEL FINISHED!')
-
-
-        self.level.go_to_next_puzzle()
-
     def start_puzzle(self, puzzle):
         self.magie.start_puzzle(puzzle)
 

@@ -11,6 +11,7 @@ class VariableWidthEncoding(BinaryEncoding):
             character_separator='0',
             word_separator='00'
             ):
+        super().__init__('variable')
         self.encoding = encoding
         self.decoding = decoding or {
             bit: {v: k for k, v in self.encoding[bit].items()}

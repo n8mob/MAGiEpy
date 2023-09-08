@@ -1,5 +1,5 @@
 from magie_model import Menu, Category, Puzzle, Level, Correctness, GuessMode
-from Game import Game
+from game import Game
 from magie_display import MAGiEDisplay, TITLE_LINE
 
 
@@ -102,7 +102,7 @@ class ConsoleMAGiE(MAGiEDisplay):
             win_bits = puzzle.encoding.encode_bit_string(puzzle.winText)[len(guess_bits):]
 
         _input = input(puzzle.init)
-        if puzzle.encoding.width:
+        if puzzle.encoding.encoding_type == 'fixed':
             decode_char_bits = []
             for b in _input:
                 if b in self.off_bits:
@@ -127,9 +127,9 @@ class ConsoleMAGiE(MAGiEDisplay):
                 self.out(judged_bits + ' ' + puzzle.encoding.decode_bit_string(''.join(decode_char_bits)))
                 decode_char_bits.clear()
         else:
-            guess_bits.append(_input)
-            is_correct, judged_bits = self.judge_bitstring(_input, ''.join(win_bits))
-            decoded = puzzle.encoding.decode_bit_string(_input)
+            guess_bits += _input
+            is_correct, judged_bits = self.judge_bitstring(guess_bits, ''.join(win_bits))
+            decoded = puzzle.encoding.decode_bit_string(guess_bits)
 
             self.out(judged_bits)
             self.out(decoded)

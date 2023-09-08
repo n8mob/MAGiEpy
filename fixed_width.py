@@ -3,6 +3,7 @@ from binary_encoding import BinaryEncoding
 
 class FixedWidthEncoding(BinaryEncoding):
     def __init__(self, width, encoding: dict, decoding: dict = None, default_encoded=0, default_decoded='?'):
+        super().__init__('fixed')
         self.encoding = encoding
         self.decoding = decoding or {v: k for k, v in self.encoding.items()}
         self.default_encoded = default_encoded
@@ -31,8 +32,8 @@ class FixedWidthEncoding(BinaryEncoding):
         return dec
 
     def encode_bit_string(self, s):
-        b = []
+        b = ''
         for c in s:
-            b.append(f'{self.encode(c) :0{self.width}b}')
+            b += f'{self.encode(c) :0{self.width}b}'
 
         return b

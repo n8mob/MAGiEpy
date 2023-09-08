@@ -1,4 +1,7 @@
 class BinaryEncoding:
+    def __init__(self, encoding_type):
+        self.encoding_type = encoding_type
+
     def decode(self, enc):
         pass
 

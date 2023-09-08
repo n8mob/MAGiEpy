@@ -35,13 +35,13 @@ class TestFixedEncoding(unittest.TestCase):
         self.assertEqual('1', self.encoding_under_test.decoding[1])
 
     def test_make_bit_string_A(self):
-        self.assertEqual(['1010'], self.encoding_under_test.encode_bit_string('A'))
+        self.assertEqual('1010', self.encoding_under_test.encode_bit_string('A'))
 
     def test_make_bit_string_B(self):
-        self.assertEqual(['1011'], self.encoding_under_test.encode_bit_string('B'))
+        self.assertEqual('1011', self.encoding_under_test.encode_bit_string('B'))
 
     def test_make_bit_string_AB(self):
-        self.assertEqual(['1010', '1011'], self.encoding_under_test.encode_bit_string('AB'))
+        self.assertEqual('10101011', self.encoding_under_test.encode_bit_string('AB'))
 
     def test_encode_A(self):
         self.assertEqual(1, self.encoding_under_test.encode('1'))
@@ -63,7 +63,7 @@ class TestFixedEncoding(unittest.TestCase):
 
     def test_encode_B_width_8(self):
         self.encoding_under_test = FixedWidthEncoding(8, hexadecimal)
-        self.assertEqual(['00000010'], self.encoding_under_test.encode_bit_string('2'))
+        self.assertEqual('00000010', self.encoding_under_test.encode_bit_string('2'))
 
     def test_decode_bit_string_1(self):
         self.assertEqual('1', self.encoding_under_test.decode_bit_string('1'))
@@ -74,8 +74,11 @@ class TestFixedEncoding(unittest.TestCase):
     def test_decode_bit_string_0(self):
         self.assertEqual('0', self.encoding_under_test.decode_bit_string('0'))
 
-    def test_decode_too_long_bitstring_0s(self):
+    def test_decode_too_long_bitstring_1(self):
         self.assertEqual('0F1', self.encoding_under_test.decode_bit_string('000011111'))
+
+    def test_decode_too_many_bits_2(self):
+        self.assertEqual('123', self.encoding_under_test.decode_bit_string('000100100011'))
 
     def test_decode_too_long_bitstring_1s(self):
         self.assertEqual('7', self.encoding_under_test.decode_bit_string('111'))

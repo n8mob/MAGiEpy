@@ -46,6 +46,11 @@ class TestVariableEncoding(unittest.TestCase):
         expected = ['1', '00', '111', '0', '1', '0', '11', '000']
         self.assertEqual(expected, self.unit_under_test.split_by_switch(encoded))
 
+    def test_split_all_same(self):
+        encoded = '111111111111111111111111'  # 'X'
+        expected = [encoded]
+        self.assertEqual(expected, self.unit_under_test.split_by_switch(encoded))
+
     def test_decode_sentence(self):
         sentence = '10011101011000'
         self.assertEqual('A CAB.', self.unit_under_test.decode_bit_string(sentence))
