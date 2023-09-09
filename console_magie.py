@@ -1,6 +1,6 @@
-from magie_model import Menu, Category, Puzzle, Level, Correctness, GuessMode
 from game import Game
 from magie_display import MAGiEDisplay, TITLE_LINE
+from magie_model import Menu, Category, Puzzle, Level, GuessMode
 
 
 class ConsoleMAGiE(MAGiEDisplay):
@@ -9,8 +9,6 @@ class ConsoleMAGiE(MAGiEDisplay):
         self.on_bits = ['1']
         self.off_bits = ['0']
 
-        various_circles = '•⦿◦⦾⊙⊚⊛◯❍⊕⊖⨷◎⊘❂☢⧃⧂✆⊘⦸⛔⭕🚫⬤⚫🔴🔘'
-        various_diamonds = '⌑◊♢♦⟠⧫⬧⬨⬪⬫◆◇✦✧❖'
 
         self.decode_bits = ['0', '1', '?']
         self.incorrect_bits = {'0': '⓿', '1': '➊'}
