@@ -10,7 +10,6 @@ class ConsoleMAGiE(MAGiEDisplay):
         self.off_bits = ['0']
         self.ignore = [' ', ',', '_']
 
-
         self.decode_bits = ['0', '1', '?']
         self.incorrect_bits = {'0': '⓿', '1': '➊'}
         self.correct_bits = {'0': '⓪', '1': '➀'}
@@ -47,6 +46,18 @@ class ConsoleMAGiE(MAGiEDisplay):
                 judged += self.incorrect_bits[guess[i]]
 
         return is_correct, judged
+
+    def get_judgement_display(self, guess_bits, judgment):
+        max_possible = min(len(guess_bits), len(judgment))
+        judged = ''
+
+        for i in range(max_possible):
+            if judgment[i] in self.on_bits:
+                judged += self.correct_bits[guess_bits[i]]
+            else:
+                judged += self.incorrect_bits[guess_bits[i]]
+
+        return judged
 
     def boot_up(self):
         self.out('welcome to MAGiE')
@@ -85,6 +96,7 @@ class ConsoleMAGiE(MAGiEDisplay):
         self.out(puzzle.init)
 
     def win_puzzle(self, puzzle: Puzzle):
+        self.out(puzzle.win_text)
         self.out(TITLE_LINE)
         for line in puzzle.winMessage:
             self.out(line)
@@ -93,46 +105,37 @@ class ConsoleMAGiE(MAGiEDisplay):
     def guess_1_bit(self):
         return input()
 
-    def guess_bits(self, puzzle, guess_bits, win_bits=None):
+    def guess_bits(self, puzzle, guess_bits):
         if not guess_bits:
             guess_bits = puzzle.encoding.encode_bit_string(puzzle.init)
 
-        if not win_bits:
-            win_bits = puzzle.encoding.encode_bit_string(puzzle.winText)
+        _input = input(guess_bits)
 
-        _input = input(puzzle.init)
+        for b in _input:
+            if b in self.on_bits:
+                guess_bits += '1'
+            elif b in self.off_bits:
+                guess_bits += '0'
+            else:
+                continue  # skip invalid bits
+                # we could skip self.ignore and throw on others, if we want
+
+        all_correct, judgement = puzzle.judge(guess_bits)
+
         if puzzle.encoding.encoding_type == 'fixed':
-            decode_char_bits = []
-            for b in _input:
-                if b in self.off_bits:
-                    decode_char_bits.append(self.decode_bits[0])
-                elif b in self.on_bits:
-                    decode_char_bits.append(self.decode_bits[1])
-                else:  # skip invalid input
-                    continue
-
-                if len(decode_char_bits) >= puzzle.encoding.width:
-                    guess_char_bit_string = ''.join(decode_char_bits)
-
-                    is_correct, judged_bits = self.judge_bitstring(guess_char_bit_string, win_bits.pop(0))
-                    if is_correct:
-                        guess_bits.append(guess_char_bit_string)
-                    self.out(judged_bits + ' ' + puzzle.encoding.decode_bit_string(guess_char_bit_string))
-                    decode_char_bits.clear()
-            self.out(puzzle.encoding.decode_bit_string(guess_bits))
-
-            if decode_char_bits:
-                """leftover from unfinished letter"""
-                _, judged_bits = self.judge_bitstring(decode_char_bits, win_bits[0] if win_bits else '')
-                self.out(judged_bits + ' ' + puzzle.encoding.decode_bit_string(''.join(decode_char_bits)))
-                decode_char_bits.clear()
+            for char_index, char_judgement in enumerate(judgement):
+                char_start = char_index * puzzle.encoding.width
+                char_end = char_start + puzzle.encoding.width
+                char_bits = guess_bits[char_start:char_end]
+                self.out(char_bits + ' ' + puzzle.encoding.decode_bit_string(char_bits))
+                judged_bits = self.get_judgement_display(guess_bits, judgement)
+                self.out(judged_bits)
         else:
-            guess_bits += _input
-            is_correct, judged_bits = self.judge_bitstring(guess_bits, ''.join(win_bits))
+            judged_bits = self.get_judgement_display(guess_bits, judgement)
             decoded = puzzle.encoding.decode_bit_string(guess_bits)
 
-            self.out(judged_bits)
             self.out(decoded)
+            self.out(judged_bits)
 
         return guess_bits
 

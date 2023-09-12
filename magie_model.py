@@ -73,9 +73,9 @@ class Puzzle:
         if not self.init:
             self.init = ''
 
-        self.winText = deserialized.get('winText', '')
-        if not self.winText:
-            self.winText = ''
+        self.win_text = deserialized.get('winText', '')
+        if not self.win_text:
+            self.win_text = ''
         self.winMessage = deserialized.get('winMessage', [])
 
         self.type = deserialized.get('type', DEFAULT_PUZZLE_TYPE)
@@ -83,7 +83,11 @@ class Puzzle:
         if not menu or not menu.encodings or self.encoding_id not in menu.encodings:
             raise ValueError(f'Cannot find encoding {self.encoding_id} in menu.encodings')
 
-        self.encoding: Encoding = menu.encodings[self.encoding_id]
+        self.encoding: BinaryEncoding = menu.encodings[self.encoding_id]
+        self.win_bits = self.encoding.encode_bit_string(self.win_text)
+
+    def judge(self, guess_bits):
+        return self.encoding.judge_bits(guess_bits, self.win_bits)
 
 
 class Level:

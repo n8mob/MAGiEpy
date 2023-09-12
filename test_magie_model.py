@@ -46,7 +46,7 @@ class MenuTest(unittest.TestCase):
         self.assertIsNotNone(actual_puzzle)
         self.assertEqual(actual_puzzle.puzzleName, 'Initial')
         self.assertEqual(actual_puzzle.init, '_ABCD')
-        self.assertEqual(actual_puzzle.winText, '_ABCDEFG')
+        self.assertEqual(actual_puzzle.win_text, '_ABCDEFG')
         self.assertEqual(actual_puzzle.clue, ['CONTINUE', 'THE PATTERN'])
         self.assertEqual(actual_puzzle.winMessage, ['THAT IS', 'CORRECT!'])
 

@@ -37,3 +37,19 @@ class FixedWidthEncoding(BinaryEncoding):
             b += f'{self.encode(c) :0{self.width}b}'
 
         return b
+
+    def judge_bits(self, guess_bits, win_bits):
+        all_correct = True
+        judgement = []
+        for char_index in range(0, min(len(guess_bits), len(win_bits)), self.width):
+            char_judgement = ''
+            for bit_index in range(char_index, char_index + self.width):
+                if guess_bits[bit_index] == win_bits[bit_index]:
+                    char_judgement += '1'
+                else:
+                    char_judgement += '0'
+                    all_correct = False
+
+            judgement.append(char_judgement)
+
+        return all_correct, judgement

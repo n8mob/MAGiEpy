@@ -57,7 +57,7 @@ class Game:
         guess_text = puzzle.init
         guess_char_index = 0
 
-        while guess_text != puzzle.winText:
+        while guess_text != puzzle.win_text:
             if self.guess_mode == GuessMode.MULTI_BIT:
                 guess_bits = puzzle.encoding.encode_bit_string(guess_text)
                 guess_bits = self.magie.guess_bits(puzzle, guess_bits)
@@ -77,8 +77,8 @@ class Game:
 
                     bit_correctnesses = ['?' for bit in guess_char_bits]
 
-                    if guess_char_index < len(puzzle.winText):
-                        win_char = puzzle.winText[guess_char_index]
+                    if guess_char_index < len(puzzle.win_text):
+                        win_char = puzzle.win_text[guess_char_index]
                         win_char_bits = list(puzzle.encoding.encode_bit_string(win_char))
 
                         for i in range(min(len(guess_char_bits), len(win_char_bits))):
@@ -97,9 +97,9 @@ class Game:
                             guess_char_index += 1
             elif self.guess_mode == GuessMode.TEXT:
                 if guess_text:
-                    guess_text = self.magie.guess_text(guess_text, puzzle.winText)
+                    guess_text = self.magie.guess_text(guess_text, puzzle.win_text)
                 else:
-                    guess_text = self.magie.guess_text(puzzle.init, puzzle.winText)
+                    guess_text = self.magie.guess_text(puzzle.init, puzzle.win_text)
 
         self.magie.win_puzzle(puzzle)
         time.sleep(WIN_PAUSE)
