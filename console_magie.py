@@ -8,6 +8,7 @@ class ConsoleMAGiE(MAGiEDisplay):
         super().__init__()
         self.on_bits = ['1']
         self.off_bits = ['0']
+        self.ignore = [' ', ',', '_']
 
 
         self.decode_bits = ['0', '1', '?']
@@ -97,7 +98,7 @@ class ConsoleMAGiE(MAGiEDisplay):
             guess_bits = puzzle.encoding.encode_bit_string(puzzle.init)
 
         if not win_bits:
-            win_bits = puzzle.encoding.encode_bit_string(puzzle.winText)[len(guess_bits):]
+            win_bits = puzzle.encoding.encode_bit_string(puzzle.winText)
 
         _input = input(puzzle.init)
         if puzzle.encoding.encoding_type == 'fixed':
@@ -112,6 +113,7 @@ class ConsoleMAGiE(MAGiEDisplay):
 
                 if len(decode_char_bits) >= puzzle.encoding.width:
                     guess_char_bit_string = ''.join(decode_char_bits)
+
                     is_correct, judged_bits = self.judge_bitstring(guess_char_bit_string, win_bits.pop(0))
                     if is_correct:
                         guess_bits.append(guess_char_bit_string)
