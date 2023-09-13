@@ -63,3 +63,41 @@ class VariableWidthEncoding(BinaryEncoding):
         split_encoded.append(bit_string[switch_indexes[-1]:])
 
         return split_encoded
+
+    def judge_bits(self, guess_bits, win_bits):
+        all_correct = True
+        full_judgement = []
+
+        guess_chars = self.split_by_switch(guess_bits)
+        win_chars = self.split_by_switch(win_bits)
+
+        if len(guess_chars) > len(win_chars):
+            all_correct = False
+            char_len = len(win_chars)
+        else:
+            char_len = len(guess_chars)
+
+        for char_index in range(char_len):
+            guess_char = guess_chars[char_index]
+            win_char = win_chars[char_index]
+            char_judgement = ''
+
+            if len(guess_char) > len(win_char):
+                char_correct = False
+                bit_len = len(win_char)
+            else:
+                char_correct = True
+                bit_len = len(guess_char)
+
+            for bit_index in range(bit_len):
+                if guess_bits[bit_index] == win_bits[bit_index]:
+                    char_judgement += '1'
+                else:
+                    char_judgement += '0'
+                    char_correct = False
+
+            all_correct = all_correct and char_correct
+
+            full_judgement.append((char_correct, char_judgement))
+
+        return all_correct, full_judgement

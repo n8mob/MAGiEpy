@@ -83,6 +83,18 @@ class TestFixedEncoding(unittest.TestCase):
     def test_decode_too_long_bitstring_1s(self):
         self.assertEqual('7', self.encoding_under_test.decode_bit_string('111'))
 
+    def test_judge_bits_by_character(self):
+        guess = '0111011001010100'
+        win = '0011010001010110'
+        expected = [(False, '1011'), (False, '1101'), (True, '1111'), (False, '1101')]
+        all_correct, characters = self.encoding_under_test.judge_bits(guess, win)
+
+        self.assertFalse(all_correct)
+        self.assertEqual(4, len(characters))
+        self.assertFalse(characters[0][0])
+        for i in range(len(expected)):
+            self.assertEqual(expected[i][1], characters[i][1], f'character index {i}')
+
 
 if __name__ == '__main__':
     unittest.main()

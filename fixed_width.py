@@ -50,6 +50,6 @@ class FixedWidthEncoding(BinaryEncoding):
                     char_judgement += '0'
                     all_correct = False
 
-            judgement.append(char_judgement)
+            judgement.append((all_correct, char_judgement))
 
         return all_correct, judgement
