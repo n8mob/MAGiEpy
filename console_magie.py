@@ -47,15 +47,15 @@ class ConsoleMAGiE(MAGiEDisplay):
 
         return is_correct, judged
 
-    def get_judgement_display(self, guess_bits, judgment):
-        max_possible = min(len(guess_bits), len(judgment))
+    def get_judgement_display(self, judgment):
+        """Return a string of bits, decorated according to their correctness, ready to display"""
         judged = ''
 
-        for i in range(max_possible):
+        for i in range(len(judgment)):
             if judgment[i] in self.on_bits:
-                judged += self.correct_bits[guess_bits[i]]
+                judged += self.correct_bits[judgment[i]]
             else:
-                judged += self.incorrect_bits[guess_bits[i]]
+                judged += self.incorrect_bits[judgment[i]]
 
         return judged
 
@@ -120,21 +120,11 @@ class ConsoleMAGiE(MAGiEDisplay):
                 continue  # skip invalid bits
                 # we could skip self.ignore and throw on others, if we want
 
-        all_correct, judgement = puzzle.judge(guess_bits)
+        all_correct, guess_chars, judgements = puzzle.judge(guess_bits)
 
-        if puzzle.encoding.encoding_type == 'fixed':
-            for char_index, char_judgement in enumerate(judgement):
-                char_start = char_index * puzzle.encoding.width
-                char_end = char_start + puzzle.encoding.width
-                char_bits = guess_bits[char_start:char_end]
-                self.out(char_bits + ' ' + puzzle.encoding.decode_bit_string(char_bits))
-                judged_bits = self.get_judgement_display(guess_bits, judgement)
-                self.out(judged_bits)
-        else:
-            judged_bits = self.get_judgement_display(guess_bits, judgement)
-            decoded = puzzle.encoding.decode_bit_string(guess_bits)
-
-            self.out(decoded)
+        for i, char_judgement in enumerate(judgements):
+            self.out(guess_chars[i] + ' ' + puzzle.encoding.decode_bit_string(guess_chars[i]))
+            judged_bits = self.get_judgement_display(char_judgement[1])
             self.out(judged_bits)
 
         return guess_bits

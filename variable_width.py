@@ -98,6 +98,6 @@ class VariableWidthEncoding(BinaryEncoding):
 
             all_correct = all_correct and char_correct
 
-            full_judgement.append((char_correct, char_judgement))
+            full_judgement.append((char_correct, guess_char, char_judgement))
 
-        return all_correct, full_judgement
+        return all_correct, guess_chars, full_judgement
