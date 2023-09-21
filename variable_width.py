@@ -51,16 +51,21 @@ class VariableWidthEncoding(BinaryEncoding):
         decoded_symbols = [self.decode(symbol) for symbol in split_encoded]
         return ''.join(decoded_symbols)
 
-    @staticmethod
-    def split_by_switch(bit_string):
+
+    def split_by_switch(self, bit_string):
         split_encoded = []
         switch_indexes = [0]
         for i in range(1, len(bit_string)):
             if bit_string[i - 1] != bit_string[i]:
                 switch_indexes.append(i)
-                split_encoded.append(bit_string[switch_indexes[-2]:switch_indexes[-1]])
+                next_char = bit_string[switch_indexes[-2]:switch_indexes[-1]]
+                if next_char != self.character_separator:
+                    split_encoded.append(next_char)
 
-        split_encoded.append(bit_string[switch_indexes[-1]:])
+        last_char = bit_string[switch_indexes[-1]:]
+
+        if last_char != self.character_separator:
+            split_encoded.append(last_char)
 
         return split_encoded
 
@@ -77,20 +82,25 @@ class VariableWidthEncoding(BinaryEncoding):
         else:
             char_len = len(guess_chars)
 
+        previous_character_correct = True
+        last_correct_character_index = -1
+
         for char_index in range(char_len):
             guess_char = guess_chars[char_index]
             win_char = win_chars[char_index]
             char_judgement = ''
 
             if len(guess_char) > len(win_char):
-                char_correct = False
-                bit_len = len(win_char)
+                shorter = win_char
+                longer = guess_char
             else:
-                char_correct = True
-                bit_len = len(guess_char)
+                shorter = guess_char
+                longer = win_char
 
-            for bit_index in range(bit_len):
-                if guess_bits[bit_index] == win_bits[bit_index]:
+            char_correct = True
+
+            for bit_index in range(len(longer)):
+                if bit_index < len(shorter) and shorter[bit_index] == longer[bit_index]:
                     char_judgement += '1'
                 else:
                     char_judgement += '0'
@@ -98,6 +108,16 @@ class VariableWidthEncoding(BinaryEncoding):
 
             all_correct = all_correct and char_correct
 
+            if all_correct and previous_character_correct and char_correct:
+                last_correct_character_index = char_index
+
+            previous_character_correct = char_correct
+
             full_judgement.append((char_correct, guess_char, char_judgement))
 
-        return all_correct, guess_chars, full_judgement
+        if 0 <= last_correct_character_index < len(guess_chars):
+            correct_guess_chars = guess_chars[:last_correct_character_index + 1]
+        else:
+            correct_guess_chars = []
+
+        return all_correct, correct_guess_chars, full_judgement

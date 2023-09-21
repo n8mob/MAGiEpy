@@ -43,12 +43,12 @@ class TestVariableEncoding(unittest.TestCase):
 
     def test_split_by_switch_1(self):
         encoded = '10011101011000'  # 'A CAB.'
-        expected = ['1', '00', '111', '0', '1', '0', '11', '000']
+        expected = ['1', '00', '111', '1', '11', '000']
         self.assertEqual(expected, self.encoding_under_test.split_by_switch(encoded))
 
     def test_split_by_switch_2(self):
         encoded = '101011101111'
-        expected = ['1', '0', '1', '0', '111', '0', '1111']
+        expected = ['1', '1', '111', '1111']
         self.assertEqual(expected, self.encoding_under_test.split_by_switch(encoded))
 
     def test_split_all_same(self):
@@ -60,19 +60,61 @@ class TestVariableEncoding(unittest.TestCase):
         sentence = '10011101011000'
         self.assertEqual('A CAB.', self.encoding_under_test.decode_bit_string(sentence))
 
+    def test_judge_single_correct_character(self):
+        guess = '1111'
+        win = '1111'
+        expected = (True, '1111', '1111')
+        all_correct, _, full_judgement = self.encoding_under_test.judge_bits(guess, win)
+
+        self.assertEqual(1, len(full_judgement))
+        actual = full_judgement[0]
+
+        self.assertTrue(all_correct)
+        self.assertTrue(actual[0])
+        self.assertEqual(guess, actual[1])
+        self.assertEqual('1111', actual[2])
+
+
+    def test_judge_single_incorrect(self):
+        guess = '111'
+        win = '1111'
+
+        _, _, full_judgment = self.encoding_under_test.judge_bits(guess, win)
+        actual = full_judgment[0]
+
+        self.assertFalse(actual[0])
+        self.assertEqual(guess, actual[1])
+        self.assertEqual('1110', actual[2])
+
+
     def test_judge_bits_by_character(self):
         guess = '101011101111'
         win = '1011011101111'
-        expected_guess_split = ['1', '0', '0', '111', '0', '1111']
-        expected_win_split = ['1', '0', '11', '0', '111', '0', '1111']
-        expected = [(True, '1'), (True, '1'), (False, '0'), (True, '1'), (True, '111'), (False, '0'), (False, '0000')]
-        all_correct, splits = self.encoding_under_test.judge_bits(guess, win)
+        expected = [(True, '1', '1'), (False, '1', '10'), (True, '111', '111'), (True, '1111', '1111')]
+        all_correct, guess_chars, full_judgement = self.encoding_under_test.judge_bits(guess, win)
 
         self.assertFalse(all_correct)
-        self.assertEqual(7, len(splits))
+        self.assertEqual(4, len(full_judgement))
         for i in range(len(expected)):
-            self.assertEqual(expected[i][0], splits[i][0], f'split correct at {i}')
-            self.assertEqual(expected[i][1], splits[i][1], f'split judgment at {i}')
+            self.assertEqual(expected[i][0], full_judgement[i][0], f'char correct at {i}')
+            self.assertEqual(expected[i][1], full_judgement[i][1], f'guess char at {i}')
+            self.assertEqual(expected[i][2], full_judgement[i][2], f'char judgment at {i}')
+
+    def test_first_correct_guess_char_is_returned(self):
+        guess = '1010101'
+        win = '10110101'
+
+        all_correct, correct_guess_chars, _ = self.encoding_under_test.judge_bits(guess, win)
+        self.assertFalse(all_correct)
+        self.assertEqual(['1'], correct_guess_chars)
+
+    def test_only_correct_guess_chars_returned(self):
+        guess = '1010101'
+        win = '10101011'
+
+        all_correct, correct_guess_chars, _ = self.encoding_under_test.judge_bits(guess, win)
+        self.assertFalse(all_correct)
+        self.assertEqual(['1', '1', '1'], correct_guess_chars)
 
 
 if __name__ == '__main__':

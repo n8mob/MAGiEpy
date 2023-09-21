@@ -12,7 +12,7 @@ class ConsoleMAGiE(MAGiEDisplay):
 
         self.decode_bits = ['0', '1', '?']
         self.incorrect_bits = {'0': '⓿', '1': '➊'}
-        self.correct_bits = {'0': '⓪', '1': '➀'}
+        self.correct_bits = {'0': '0', '1': '1'}
 
     def preferred_guess_mode(self) -> GuessMode:
         return GuessMode.MULTI_BIT
@@ -120,12 +120,11 @@ class ConsoleMAGiE(MAGiEDisplay):
                 continue  # skip invalid bits
                 # we could skip self.ignore and throw on others, if we want
 
-        all_correct, guess_chars, judgements = puzzle.judge(guess_bits)
+        all_correct, correct_guess_chars, judgements = puzzle.judge(guess_bits)
 
         for i, char_judgement in enumerate(judgements):
-            self.out(guess_chars[i] + ' ' + puzzle.encoding.decode_bit_string(guess_chars[i]))
             judged_bits = self.get_judgement_display(char_judgement[1])
-            self.out(judged_bits)
+            self.out(puzzle.encoding.decode_bit_string(correct_guess_chars[i]) + ' ' + judged_bits)
 
         return guess_bits
 
