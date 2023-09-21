@@ -70,20 +70,19 @@ class VariableWidthEncoding(BinaryEncoding):
         return split_encoded
 
     def judge_bits(self, guess_bits, win_bits):
-        all_correct = True
         full_judgement = []
 
         guess_chars = self.split_by_switch(guess_bits)
         win_chars = self.split_by_switch(win_bits)
 
         if len(guess_chars) > len(win_chars):
-            all_correct = False
             char_len = len(win_chars)
         else:
             char_len = len(guess_chars)
 
-        previous_character_correct = True
-        last_correct_character_index = -1
+        correct_guess_chars = []
+        correct_so_far = True
+        all_correct = char_len == len(win_chars)
 
         for char_index in range(char_len):
             guess_char = guess_chars[char_index]
@@ -105,19 +104,27 @@ class VariableWidthEncoding(BinaryEncoding):
                 else:
                     char_judgement += '0'
                     char_correct = False
+                    correct_so_far = False
 
             all_correct = all_correct and char_correct
 
-            if all_correct and previous_character_correct and char_correct:
-                last_correct_character_index = char_index
-
-            previous_character_correct = char_correct
+            if correct_so_far and char_correct:
+                correct_guess_chars.append(guess_char)
 
             full_judgement.append((char_correct, guess_char, char_judgement))
 
-        if 0 <= last_correct_character_index < len(guess_chars):
-            correct_guess_chars = guess_chars[:last_correct_character_index + 1]
-        else:
-            correct_guess_chars = []
+        return all_correct, self.join(correct_guess_chars), full_judgement
 
-        return all_correct, correct_guess_chars, full_judgement
+    def join(self, chars):
+        if not chars:
+            return ''
+
+        joined = chars[0]
+        for char_index in range(1, len(chars)):
+            previous_char = chars[char_index - 1]
+            current_char = chars[char_index]
+            if current_char[0] != self.character_separator and previous_char[0] != self.character_separator:
+                joined += self.character_separator
+            joined += current_char
+
+        return joined

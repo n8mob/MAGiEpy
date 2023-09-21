@@ -124,9 +124,9 @@ class ConsoleMAGiE(MAGiEDisplay):
 
         for i, char_judgement in enumerate(judgements):
             judged_bits = self.get_judgement_display(char_judgement[1])
-            self.out(puzzle.encoding.decode_bit_string(correct_guess_chars[i]) + ' ' + judged_bits)
+            self.out(puzzle.encoding.decode_bit_string(char_judgement[1]) + ' ' + judged_bits)
 
-        return guess_bits
+        return correct_guess_chars
 
     def guess_1_char(self):
         return input()

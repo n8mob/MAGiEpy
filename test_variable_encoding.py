@@ -41,12 +41,12 @@ class TestVariableEncoding(unittest.TestCase):
         expected_encoding = '10011101011'
         self.assertEqual(expected_encoding, self.encoding_under_test.encode_bit_string(sentence))
 
-    def test_split_by_switch_1(self):
+    def test_split_by_switch_with_punk_at_end(self):
         encoded = '10011101011000'  # 'A CAB.'
         expected = ['1', '00', '111', '1', '11', '000']
         self.assertEqual(expected, self.encoding_under_test.split_by_switch(encoded))
 
-    def test_split_by_switch_2(self):
+    def test_split_by_switch_with_letter_at_end(self):
         encoded = '101011101111'
         expected = ['1', '1', '111', '1111']
         self.assertEqual(expected, self.encoding_under_test.split_by_switch(encoded))
@@ -106,7 +106,7 @@ class TestVariableEncoding(unittest.TestCase):
 
         all_correct, correct_guess_chars, _ = self.encoding_under_test.judge_bits(guess, win)
         self.assertFalse(all_correct)
-        self.assertEqual(['1'], correct_guess_chars)
+        self.assertEqual('1', correct_guess_chars)
 
     def test_only_correct_guess_chars_returned(self):
         guess = '1010101'
@@ -114,7 +114,16 @@ class TestVariableEncoding(unittest.TestCase):
 
         all_correct, correct_guess_chars, _ = self.encoding_under_test.judge_bits(guess, win)
         self.assertFalse(all_correct)
-        self.assertEqual(['1', '1', '1'], correct_guess_chars)
+        self.assertEqual('10101', correct_guess_chars)
+
+    def test_correct_guess_punctuation_join(self):
+        guess = '100110111'
+        win = '100110111000'  # 'A BC.'
+
+        expected_correct_guess_chars = '100110111'
+        all_correct, actual_correct_guess, _ = self.encoding_under_test.judge_bits(guess, win)
+        self.assertFalse(all_correct)
+        self.assertEqual(expected_correct_guess_chars, actual_correct_guess)
 
 
 if __name__ == '__main__':
