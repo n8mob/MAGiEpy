@@ -126,5 +126,22 @@ class TestVariableEncoding(unittest.TestCase):
         self.assertEqual(expected_correct_guess_chars, actual_correct_guess)
 
 
+    def test_only_period(self):
+        guess = '000'
+        win = '000'
+
+        expected_char_judgement = (True, '000', '111')
+
+        all_correct, returned_full_guess, actual_judgement = self.encoding_under_test.judge_bits(guess, win)
+
+        self.assertTrue(all_correct)
+        self.assertEqual(returned_full_guess, guess)
+        char_correct, returned_guess_char, char_judgement, = actual_judgement[0]
+        self.assertTrue(char_correct)
+        self.assertEqual(returned_guess_char, guess)
+        self.assertEqual(expected_char_judgement[2], char_judgement)
+
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -49,7 +49,12 @@ class VariableWidthEncoding(BinaryEncoding):
     def decode_bit_string(self, bit_string):
         split_encoded = self.split_by_switch(bit_string)
         decoded_symbols = [self.decode(symbol) for symbol in split_encoded]
-        return ''.join(decoded_symbols)
+
+        bit_string = ''
+        for decoded_symbol in decoded_symbols:
+            bit_string += decoded_symbol or ''
+
+        return bit_string
 
 
     def split_by_switch(self, bit_string):
