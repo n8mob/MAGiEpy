@@ -85,15 +85,18 @@ class TestFixedEncoding(unittest.TestCase):
 
     def test_judge_bits_by_character(self):
         guess = '0111011001010100'
-        win = '0011010001010110'
-        expected = [(False, '1011'), (False, '1101'), (True, '1111'), (False, '1101')]
-        all_correct, characters = self.encoding_under_test.judge_bits(guess, win)
+        win =   '0011010001010110'
+        expected_char_judgments = [(False, '0111', '1011'),
+                                   (False, '0110', '1101'),
+                                   (True,  '0101', '1111'),
+                                   (False, '0100', '1101')]
+        full_judgement = self.encoding_under_test.judge_bits(guess, win)
 
-        self.assertFalse(all_correct)
-        self.assertEqual(4, len(characters))
-        self.assertFalse(characters[0][0])
-        for i in range(len(expected)):
-            self.assertEqual(expected[i][1], characters[i][1], f'character index {i}')
+        self.assertFalse(full_judgement.correct)
+        self.assertEqual(4, len(full_judgement.char_judgments))
+        self.assertFalse(full_judgement.char_judgments[0].correct)
+        for i in range(len(expected_char_judgments)):
+            self.assertEqual(expected_char_judgments[i], full_judgement.char_judgments[i], f'character index {i}')
 
 
 if __name__ == '__main__':

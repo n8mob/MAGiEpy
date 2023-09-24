@@ -1,4 +1,5 @@
 from binary_encoding import BinaryEncoding
+from judgments import FullJudgment, CharJudgment
 
 
 class FixedWidthEncoding(BinaryEncoding):
@@ -38,18 +39,24 @@ class FixedWidthEncoding(BinaryEncoding):
 
         return b
 
-    def judge_bits(self, guess_bits, win_bits):
+    def judge_bits(self, guess_bits, win_bits) -> FullJudgment:
         all_correct = True
-        judgement = []
+        correct_full_guess = ''
+
+        char_judgements = []
         for char_index in range(0, min(len(guess_bits), len(win_bits)), self.width):
-            char_judgement = ''
+            char_judgment = ''
+            char_correct = True
             for bit_index in range(char_index, char_index + self.width):
                 if guess_bits[bit_index] == win_bits[bit_index]:
-                    char_judgement += '1'
+                    char_judgment += '1'
+                    if all_correct:
+                        correct_full_guess += guess_bits[bit_index]
                 else:
-                    char_judgement += '0'
+                    char_judgment += '0'
+                    char_correct = False
                     all_correct = False
 
-            judgement.append((all_correct, char_judgement))
+            char_judgements.append(CharJudgment(char_correct, guess_bits[char_index:char_index+self.width], char_judgment))
 
-        return all_correct, judgement
+        return FullJudgment(all_correct, correct_full_guess, char_judgements)

@@ -47,7 +47,7 @@ class ConsoleMAGiE(MAGiEDisplay):
 
         return is_correct, judged
 
-    def get_judgement_display(self, judgment):
+    def get_judgment_display(self, judgment):
         """Return a string of bits, decorated according to their correctness, ready to display"""
         judged = ''
 
@@ -120,11 +120,11 @@ class ConsoleMAGiE(MAGiEDisplay):
                 continue  # skip invalid bits
                 # we could skip self.ignore and throw on others, if we want
 
-        all_correct, correct_guess_chars, judgements = puzzle.judge(guess_bits)
+        all_correct, correct_guess_chars, judgments = puzzle.judge(guess_bits)
 
-        for i, char_judgement in enumerate(judgements):
-            judged_bits = self.get_judgement_display(char_judgement[1])
-            self.out(puzzle.encoding.decode_bit_string(char_judgement[1]) + ' ' + judged_bits)
+        for i, char_judgment in enumerate(judgments):
+            judged_bits = self.get_judgment_display(char_judgment[1])
+            self.out(puzzle.encoding.decode_bit_string(char_judgment[1]) + ' ' + judged_bits)
 
         return correct_guess_chars
 

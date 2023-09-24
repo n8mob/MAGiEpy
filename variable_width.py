@@ -1,4 +1,5 @@
 from binary_encoding import BinaryEncoding
+from judgments import CharJudgment, FullJudgment
 
 
 class VariableWidthEncoding(BinaryEncoding):
@@ -74,8 +75,8 @@ class VariableWidthEncoding(BinaryEncoding):
 
         return split_encoded
 
-    def judge_bits(self, guess_bits, win_bits):
-        full_judgement = []
+    def judge_bits(self, guess_bits, win_bits) -> FullJudgment:
+        char_judgments = []
 
         guess_chars = self.split_by_switch(guess_bits)
         win_chars = self.split_by_switch(win_bits)
@@ -92,7 +93,7 @@ class VariableWidthEncoding(BinaryEncoding):
         for char_index in range(char_len):
             guess_char = guess_chars[char_index]
             win_char = win_chars[char_index]
-            char_judgement = ''
+            char_judgment = ''
 
             if len(guess_char) > len(win_char):
                 shorter = win_char
@@ -102,23 +103,28 @@ class VariableWidthEncoding(BinaryEncoding):
                 longer = win_char
 
             char_correct = True
+            partial_correct = ''
 
             for bit_index in range(len(longer)):
                 if bit_index < len(shorter) and shorter[bit_index] == longer[bit_index]:
-                    char_judgement += '1'
+                    char_judgment += '1'
+                    partial_correct += shorter[bit_index]
                 else:
-                    char_judgement += '0'
+                    char_judgment += '0'
                     char_correct = False
                     correct_so_far = False
+                    correct_guess_chars.append(partial_correct)
+                    if bit_index >= len(shorter):
+                        break
 
             all_correct = all_correct and char_correct
 
             if correct_so_far and char_correct:
                 correct_guess_chars.append(guess_char)
 
-            full_judgement.append((char_correct, guess_char, char_judgement))
+            char_judgments.append(CharJudgment(char_correct, guess_char, char_judgment))
 
-        return all_correct, self.join(correct_guess_chars), full_judgement
+        return FullJudgment(all_correct, self.join(correct_guess_chars), char_judgments)
 
     def join(self, chars):
         if not chars:

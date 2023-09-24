@@ -1,5 +1,6 @@
 import unittest
 
+from judgments import FullJudgment
 from variable_width import VariableWidthEncoding
 
 variable_encoding = {
@@ -8,7 +9,7 @@ variable_encoding = {
         'B': '11',
         'C': '111',
         'D': '1111'
-        },
+    },
     '0': {
         '': '0',
         ' ': '00',
@@ -63,84 +64,111 @@ class TestVariableEncoding(unittest.TestCase):
     def test_judge_single_correct_character(self):
         guess = '1111'
         win = '1111'
-        expected = (True, '1111', '1111')
-        all_correct, _, full_judgement = self.encoding_under_test.judge_bits(guess, win)
+        expected_char_judgment = (True, '1111', '1111')
+        actual = self.encoding_under_test.judge_bits(guess, win)
 
-        self.assertEqual(1, len(full_judgement))
-        actual = full_judgement[0]
-
-        self.assertTrue(all_correct)
-        self.assertTrue(actual[0])
-        self.assertEqual(guess, actual[1])
-        self.assertEqual('1111', actual[2])
-
+        self.assertTrue(actual.correct)
+        self.assertEqual(guess, actual.guess)
+        self.assertEqual(1, len(actual.char_judgments))
+        self.assertEqual(expected_char_judgment, actual.char_judgments[0])
 
     def test_judge_single_incorrect(self):
         guess = '111'
         win = '1111'
 
-        _, _, full_judgment = self.encoding_under_test.judge_bits(guess, win)
-        actual = full_judgment[0]
+        actual = self.encoding_under_test.judge_bits(guess, win).char_judgments[0]
 
-        self.assertFalse(actual[0])
-        self.assertEqual(guess, actual[1])
-        self.assertEqual('1110', actual[2])
-
+        self.assertFalse(actual.correct)
+        self.assertEqual(guess, actual.guess)
+        self.assertEqual('1110', actual.judgment)
 
     def test_judge_bits_by_character(self):
         guess = '101011101111'
         win = '1011011101111'
-        expected = [(True, '1', '1'), (False, '1', '10'), (True, '111', '111'), (True, '1111', '1111')]
-        all_correct, guess_chars, full_judgement = self.encoding_under_test.judge_bits(guess, win)
+        expected = FullJudgment(False, '', [(True, '1', '1'),
+                                            (False, '1', '10'),
+                                            (True, '111', '111'),
+                                            (True, '1111', '1111')])
+        actual = self.encoding_under_test.judge_bits(guess, win)
 
-        self.assertFalse(all_correct)
-        self.assertEqual(4, len(full_judgement))
-        for i in range(len(expected)):
-            self.assertEqual(expected[i][0], full_judgement[i][0], f'char correct at {i}')
-            self.assertEqual(expected[i][1], full_judgement[i][1], f'guess char at {i}')
-            self.assertEqual(expected[i][2], full_judgement[i][2], f'char judgment at {i}')
+        self.assertFalse(actual.correct)
+        self.assertEqual(4, len(actual.char_judgments))
+        for i in range(len(expected.char_judgments)):
+            self.assertEqual(
+                expected.char_judgments[i].correct, actual.char_judgments[i].correct, f'char correct at {i}')
+            self.assertEqual(
+                expected.char_judgments[i].guess, actual.char_judgments[i].guess, f'guess char at {i}')
+            self.assertEqual(
+                expected.char_judgments[i].judgment, actual.char_judgments[i].judgment, f'char judgment at {i}')
 
-    def test_first_correct_guess_char_is_returned(self):
+    def test_partial_correct_guess_char_is_returned(self):
         guess = '1010101'
         win = '10110101'
 
         all_correct, correct_guess_chars, _ = self.encoding_under_test.judge_bits(guess, win)
         self.assertFalse(all_correct)
-        self.assertEqual('1', correct_guess_chars)
+        self.assertEqual('101', correct_guess_chars)
 
-    def test_only_correct_guess_chars_returned(self):
+    def test_partial_correct_guess_chars_returned(self):
         guess = '1010101'
-        win = '10101011'
+        win =   '10101011'
 
         all_correct, correct_guess_chars, _ = self.encoding_under_test.judge_bits(guess, win)
         self.assertFalse(all_correct)
-        self.assertEqual('10101', correct_guess_chars)
+        self.assertEqual('1010101', correct_guess_chars)
 
     def test_correct_guess_punctuation_join(self):
         guess = '100110111'
-        win = '100110111000'  # 'A BC.'
-
+        win   = '100110111000'  # 'A BC.'
         expected_correct_guess_chars = '100110111'
-        all_correct, actual_correct_guess, _ = self.encoding_under_test.judge_bits(guess, win)
+        full_judgment = self.encoding_under_test.judge_bits(guess, win)
+        all_correct = full_judgment.correct
+        actual_correct_guess = full_judgment.guess
         self.assertFalse(all_correct)
         self.assertEqual(expected_correct_guess_chars, actual_correct_guess)
-
 
     def test_only_period(self):
         guess = '000'
         win = '000'
 
-        expected_char_judgement = (True, '000', '111')
+        expected_char_judgment = (True, '000', '111')
 
-        all_correct, returned_full_guess, actual_judgement = self.encoding_under_test.judge_bits(guess, win)
+        full_judgment = self.encoding_under_test.judge_bits(guess, win)
 
-        self.assertTrue(all_correct)
-        self.assertEqual(returned_full_guess, guess)
-        char_correct, returned_guess_char, char_judgement, = actual_judgement[0]
-        self.assertTrue(char_correct)
-        self.assertEqual(returned_guess_char, guess)
-        self.assertEqual(expected_char_judgement[2], char_judgement)
+        self.assertTrue(full_judgment.correct)
+        self.assertEqual(full_judgment.guess, guess)
+        actual_char_judgment = full_judgment.char_judgments[0]
+        self.assertEqual(expected_char_judgment, actual_char_judgment)
 
+    def test_ones_guess_too_short(self):
+        guess = '1'
+        win = '111'
+
+        expected_char_judgment = '10'
+
+        actual = self.encoding_under_test.judge_bits(guess, win).char_judgments[0]
+        self.assertEqual(expected_char_judgment, actual.judgment)
+
+    def test_ones_guess_too_long(self):
+        guess = '111'
+        win = '1'
+
+        expected_char_judgment = '10'
+        actual = self.encoding_under_test.judge_bits(guess, win).char_judgments[0]
+
+        self.assertEqual(expected_char_judgment, actual.judgment)
+
+    def test_zeros_guess_too_short(self):
+        guess = '00'
+        win = '000'
+
+        expected_char_judgment = (False, '00', '110')
+
+        actual = self.encoding_under_test.judge_bits(guess, win)
+        self.assertFalse(actual.correct)
+        self.assertEqual(guess, actual.guess)
+        self.assertEqual(1, len(actual.char_judgments))
+        self.assertEqual(expected_char_judgment, actual.char_judgments[0])
 
 
 if __name__ == '__main__':

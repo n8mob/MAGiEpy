@@ -1,3 +1,6 @@
+from judgments import FullJudgment
+
+
 class BinaryEncoding:
     def __init__(self, encoding_type):
         self.encoding_type = encoding_type
@@ -22,5 +25,5 @@ class BinaryEncoding:
         """
         pass
 
-    def judge_bits(self, guess_bits, win_bits):
+    def judge_bits(self, guess_bits, win_bits) -> FullJudgment:
         pass
