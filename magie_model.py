@@ -1,7 +1,6 @@
-import curses
 import json
 from enum import Enum
-from typing import Dict, Any
+from typing import Any
 
 from binary_encoding import BinaryEncoding
 from fixed_width import FixedWidthEncoding
