@@ -1,8 +1,7 @@
-import curses
 import time
 
 from magie_model import Menu, Correctness, GuessMode
-from magie_display import MAGiEDisplay, ColorScheme
+from magie_display import MAGiEDisplay
 
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
@@ -24,7 +23,6 @@ class Game:
         self.guess_mode = guess_mode or magie.preferred_guess_mode()
         self.on_bit_keys = ['1']
         self.off_bit_keys = ['0']
-        self.backspace_keys = [curses.KEY_BACKSPACE, 127, 0x7f]
 
     def run(self):
         quitos_game = False

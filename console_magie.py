@@ -1,8 +1,9 @@
 from game import Game
 from judgments import FullJudgment, CharJudgment
-from magie_display import MAGiEDisplay, TITLE_LINE
+from magie_display import MAGiEDisplay
 from magie_model import Menu, Category, Puzzle, Level, GuessMode
 
+TITLE_LINE = '============='
 
 class ConsoleMAGiE(MAGiEDisplay):
     def __init__(self):
