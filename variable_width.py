@@ -113,9 +113,9 @@ class VariableWidthEncoding(BinaryEncoding):
                     char_judgment += '0'
                     char_correct = False
                     correct_so_far = False
-                    correct_guess_chars.append(partial_correct)
-                    if bit_index >= len(shorter):
-                        break
+                    if partial_correct:
+                        correct_guess_chars.append(partial_correct)
+                    break
 
             all_correct = all_correct and char_correct
 

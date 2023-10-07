@@ -68,7 +68,7 @@ class TestVariableEncoding(unittest.TestCase):
         actual = self.encoding_under_test.judge_bits(guess, win)
 
         self.assertTrue(actual.correct)
-        self.assertEqual(guess, actual.guess)
+        self.assertEqual(guess, actual.correct_guess)
         self.assertEqual(1, len(actual.char_judgments))
         self.assertEqual(expected_char_judgment, actual.char_judgments[0])
 
@@ -79,7 +79,7 @@ class TestVariableEncoding(unittest.TestCase):
         actual = self.encoding_under_test.judge_bits(guess, win).char_judgments[0]
 
         self.assertFalse(actual.correct)
-        self.assertEqual(guess, actual.guess)
+        self.assertEqual(guess, actual.correct_guess)
         self.assertEqual('1110', actual.judgment)
 
     def test_judge_bits_by_character(self):
@@ -97,7 +97,7 @@ class TestVariableEncoding(unittest.TestCase):
             self.assertEqual(
                 expected.char_judgments[i].correct, actual.char_judgments[i].correct, f'char correct at {i}')
             self.assertEqual(
-                expected.char_judgments[i].guess, actual.char_judgments[i].guess, f'guess char at {i}')
+                expected.char_judgments[i].correct_guess, actual.char_judgments[i].correct_guess, f'guess char at {i}')
             self.assertEqual(
                 expected.char_judgments[i].judgment, actual.char_judgments[i].judgment, f'char judgment at {i}')
 
@@ -123,7 +123,7 @@ class TestVariableEncoding(unittest.TestCase):
         expected_correct_guess_chars = '100110111'
         full_judgment = self.encoding_under_test.judge_bits(guess, win)
         all_correct = full_judgment.correct
-        actual_correct_guess = full_judgment.guess
+        actual_correct_guess = full_judgment.correct_guess
         self.assertFalse(all_correct)
         self.assertEqual(expected_correct_guess_chars, actual_correct_guess)
 
@@ -136,7 +136,7 @@ class TestVariableEncoding(unittest.TestCase):
         full_judgment = self.encoding_under_test.judge_bits(guess, win)
 
         self.assertTrue(full_judgment.correct)
-        self.assertEqual(full_judgment.guess, guess)
+        self.assertEqual(full_judgment.correct_guess, guess)
         actual_char_judgment = full_judgment.char_judgments[0]
         self.assertEqual(expected_char_judgment, actual_char_judgment)
 
@@ -166,7 +166,7 @@ class TestVariableEncoding(unittest.TestCase):
 
         actual = self.encoding_under_test.judge_bits(guess, win)
         self.assertFalse(actual.correct)
-        self.assertEqual(guess, actual.guess)
+        self.assertEqual(guess, actual.correct_guess)
         self.assertEqual(1, len(actual.char_judgments))
         self.assertEqual(expected_char_judgment, actual.char_judgments[0])
 

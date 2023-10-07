@@ -1,4 +1,5 @@
 from game import Game
+from judgments import FullJudgment, CharJudgment
 from magie_display import MAGiEDisplay, TITLE_LINE
 from magie_model import Menu, Category, Puzzle, Level, GuessMode
 
@@ -47,15 +48,20 @@ class ConsoleMAGiE(MAGiEDisplay):
 
         return is_correct, judged
 
-    def get_judgment_display(self, judgment):
+    def get_judgment_display(self, char_judgement: CharJudgment):
         """Return a string of bits, decorated according to their correctness, ready to display"""
         judged = ''
 
-        for i in range(len(judgment)):
-            if judgment[i] in self.on_bits:
-                judged += self.correct_bits[judgment[i]]
+        for i, bit_judgment in enumerate(char_judgement.judgment):
+            if i < len(char_judgement.guess):
+                guessed_bit = char_judgement.judgment[i]
             else:
-                judged += self.incorrect_bits[judgment[i]]
+                guessed_bit = '0'
+
+            if bit_judgment in self.on_bits: # judgment indicates a correct bit
+                judged += self.correct_bits[guessed_bit]
+            else:
+                judged += self.incorrect_bits[guessed_bit]
 
         return judged
 
@@ -120,13 +126,13 @@ class ConsoleMAGiE(MAGiEDisplay):
                 continue  # skip invalid bits
                 # we could skip self.ignore and throw on others, if we want
 
-        all_correct, correct_guess_chars, judgments = puzzle.judge(guess_bits)
+        full_judgment: FullJudgment = puzzle.judge(guess_bits)
 
-        for i, char_judgment in enumerate(judgments):
-            judged_bits = self.get_judgment_display(char_judgment[1])
-            self.out(puzzle.encoding.decode_bit_string(char_judgment[1]) + ' ' + judged_bits)
+        for i, char_judgment in enumerate(full_judgment.char_judgments):
+            judged_bits_display = self.get_judgment_display(char_judgment)
+            self.out(puzzle.encoding.decode_bit_string(char_judgment.guess) + ' ' + judged_bits_display)
 
-        return correct_guess_chars
+        return full_judgment.correct_guess
 
     def guess_1_char(self):
         return input()

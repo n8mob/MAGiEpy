@@ -28,9 +28,9 @@ class CharJudgment:
 class FullJudgment:
     char_judgments: [CharJudgment]
 
-    def __init__(self, correct, guess, char_judgments):
+    def __init__(self, correct, correct_guess, char_judgments):
         self.correct = correct
-        self.guess = guess
+        self.correct_guess = correct_guess
         self.char_judgments: [CharJudgment] = []
 
         for char_judgment in char_judgments:
@@ -40,4 +40,4 @@ class FullJudgment:
                 self.char_judgments.append(CharJudgment(*char_judgment))
 
     def __iter__(self):
-        return iter((self.correct, self.guess, self.char_judgments))
+        return iter((self.correct, self.correct_guess, self.char_judgments))
