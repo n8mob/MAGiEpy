@@ -96,6 +96,15 @@ class ConsoleMAGiE(MAGiEDisplay):
     def start_level(self, level: Level):
         level.current_puzzle_index = 0
 
+    def finish_level(self, level: Level):
+        self.out('GOOD WORK!')
+        self.out('YOU FINISHOS')
+        self.out('THE LEVEL')
+        for line in level.levelName:
+            self.out(line)
+        self.out(TITLE_LINE)
+        self.out('')
+
     def start_puzzle(self, puzzle: Puzzle):
         for line in puzzle.clue:
             self.out(line)
