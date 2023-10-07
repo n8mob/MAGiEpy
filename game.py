@@ -26,14 +26,14 @@ class Game:
 
     def run(self):
         quitos_game = False
-        quitos_level = False
 
         self.magie.boot_up()
 
         while not quitos_game:
+            quitos_category = False
             self.category = self.magie.select_category(self.menu)
 
-            while not quitos_level:
+            while not quitos_category:
                 self.level = self.magie.select_level(self.category)
 
                 self.magie.start_level(self.level)
@@ -47,7 +47,7 @@ class Game:
 
                 self.magie.finish_level(self.level)
 
-                quitos_level = True
+                quitos_category = self.level == self.category.levels[-1]
 
     def start_puzzle(self, puzzle):
         self.magie.start_puzzle(puzzle)
