@@ -77,6 +77,68 @@
   },
   "menuVersion": 1,
   "categories": {
+    "quick alpha": {
+      "levels": [
+        {
+          "levelName":  ["AB CD"],
+          "levelNumber": 19,
+          "sort_order": 1,
+          "puzzles": [
+            {
+              "clue": ["DECODE AB"],
+              "winText": "AB",
+              "type": "Decode",
+              "encoding":"AlphaLengthA1",
+              "init": "",
+              "winMessage": [
+                "YAY!"
+              ],
+              "level": 19
+            },
+            {
+              "clue": ["DECODE CD"],
+              "winText": "CD",
+              "type": "Decode",
+              "encoding":"AlphaLengthA1",
+              "init": "",
+              "winMessage": [
+                "HOORAY!"
+              ],
+              "level": 19
+            }
+          ]
+        },
+        {
+          "levelName":  ["BC DE"],
+          "levelNumber": 20,
+          "sort_order": 2,
+          "puzzles": [
+            {
+              "clue": ["DECODE BC"],
+              "winText": "BC",
+              "type": "Decode",
+              "encoding":"AlphaLengthA1",
+              "init": "",
+              "winMessage": [
+                "YAY!"
+              ],
+              "level": 19
+            },
+            {
+              "clue": ["DECODE DE"],
+              "winText": "DE",
+              "type": "Decode",
+              "encoding":"AlphaLengthA1",
+              "init": "",
+              "winMessage": [
+                "HOORAY!"
+              ],
+              "level": 19
+            }
+          ]
+        }
+      ]
+    },
     "stories": {
       "levels": [
         {
