@@ -156,7 +156,7 @@ class ConsoleMAGiE(MAGiEDisplay):
 
 
 def start_game(json_path):
-    with open(json_path) as menu_file:
+    with open(json_path, encoding='utf-8') as menu_file:
         menu = Menu(file=menu_file)
 
     magie = ConsoleMAGiE()
