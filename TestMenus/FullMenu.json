@@ -137,7 +137,29 @@
             }
           ]
         }
-      ]
+      ],
+      "sort_order": 1
+    },
+    "quick fixed": {
+      "levels": [
+        {
+          "levelName": ["AB CD", "FIXED"],
+          "levelNumber": 21,
+          "sort_order": 1,
+          "puzzles": [
+            {
+              "clue": ["DECODE AB"],
+              "winText": "AB",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winMessage": ["AB INDEED"],
+              "level": 21
+            }
+          ]
+        }
+      ],
+      "sort_order": 2
     },
     "stories": {
       "levels": [
@@ -677,7 +699,7 @@
           ]
         }
       ],
-      "sort_order": 1
+      "sort_order": 3
     },
     "at the mall": {
       "levels": [
@@ -1876,7 +1898,7 @@
           ]
         }
       ],
-      "sort_order": 2
+      "sort_order": 4
     },
     "TEDIUM": {
       "levels": [
@@ -2296,7 +2318,7 @@
           ]
         }
       ],
-      "sort_order": 3
+      "sort_order": 5
     },
     "ALPHA LENGTH ENCODING": {
       "levels": [

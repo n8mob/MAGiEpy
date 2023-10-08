@@ -28,8 +28,6 @@ class FixedWidthEncoding(BinaryEncoding):
                 for char_index in range(0, len(bit_string), self.width):
                     enc = int(bit_string[char_index:char_index + self.width], 2)
                     dec += self.decode(enc)
-        else:
-            dec = self.decode(self.default_encoded)
         return dec
 
     def encode_bit_string(self, s):
@@ -40,23 +38,32 @@ class FixedWidthEncoding(BinaryEncoding):
         return b
 
     def judge_bits(self, guess_bits, win_bits) -> FullJudgment:
-        all_correct = True
+        all_correct = len(guess_bits) == len(win_bits)
         correct_full_guess = ''
 
         char_judgements = []
+
+        trailing_bit_length = len(guess_bits) % self.width
+        if trailing_bit_length > 0:
+            guess_bits = guess_bits[:-trailing_bit_length]
+
         for char_index in range(0, min(len(guess_bits), len(win_bits)), self.width):
             char_judgment = ''
             char_correct = True
             for bit_index in range(char_index, char_index + self.width):
                 if guess_bits[bit_index] == win_bits[bit_index]:
                     char_judgment += '1'
-                    if all_correct:
-                        correct_full_guess += guess_bits[bit_index]
                 else:
                     char_judgment += '0'
                     char_correct = False
                     all_correct = False
 
-            char_judgements.append(CharJudgment(char_correct, guess_bits[char_index:char_index+self.width], char_judgment))
+            if char_correct:
+                correct_full_guess += guess_bits[char_index:char_index+self.width]
+            else:
+                if not guess_bits:
+                    char_judgment = '0' * self.width
+
+            char_judgements.append(CharJudgment(char_correct, guess_bits[char_index:char_index + self.width], char_judgment))
 
         return FullJudgment(all_correct, correct_full_guess, char_judgements)
