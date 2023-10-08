@@ -1,39 +1,5 @@
+from judgments import FullJudgment
 from magie_model import Menu, Category, Puzzle, Level, GuessMode
-
-
-# noinspection PyUnresolvedReferences,PyAttributeOutsideInit,DuplicatedCode
-class Reference:
-    def write_text(self, lines, indicator=''):
-        if isinstance(lines, str):
-            lines = lines.split('\n')
-
-        if indicator:
-            self.scr.addstr(self.y, self.x, indicator)
-            self.x = len(indicator) + 1
-
-        for line in lines:
-            self.scr.addstr(self.y, self.x, line)
-            self.y += 1
-
-        self.x = 0
-
-    def write_bits(self, char_bits=None, bit_colors=None, prefix='  ', suffix=' '):
-        if not char_bits:
-            char_bits = []
-
-        bit_x = self.x
-        known_bit_colors = bit_colors or []
-
-        if len(known_bit_colors) < len(char_bits):
-            known_bit_colors += [self.unknown_color] * (len(char_bits) - len(known_bit_colors))
-
-        self.scr.addstr(self.y, bit_x, prefix)
-        bit_x += len(prefix)
-
-        for i in range(len(char_bits)):
-            self.scr.addch(self.y, bit_x + i, char_bits[i], known_bit_colors[i])
-
-        self.scr.addstr(self.y, bit_x + len(char_bits), suffix)
 
 
 class MAGiEDisplay:
@@ -85,3 +51,11 @@ class MAGiEDisplay:
     def reset(self):
         pass
 
+
+class Guesser:
+    def __init__(self, magie: MAGiEDisplay, puzzle: Puzzle):
+        self.magie = magie
+        self.puzzle = puzzle
+
+    def guess(self, current_correct = None) -> FullJudgment:
+        pass

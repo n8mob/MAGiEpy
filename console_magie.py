@@ -1,6 +1,6 @@
 from game import Game
 from judgments import FullJudgment, CharJudgment
-from magie_display import MAGiEDisplay
+from magie_display import MAGiEDisplay, Guesser
 from magie_model import Menu, Category, Puzzle, Level, GuessMode
 
 TITLE_LINE = '============='
@@ -49,23 +49,6 @@ class ConsoleMAGiE(MAGiEDisplay):
 
         return is_correct, judged
 
-    def get_judgment_display(self, char_judgement: CharJudgment):
-        """Return a string of bits, decorated according to their correctness, ready to display"""
-        judged = ''
-
-        for i, bit_judgment in enumerate(char_judgement.judgment):
-            if i < len(char_judgement.guess):
-                guessed_bit = char_judgement.judgment[i]
-            else:
-                guessed_bit = '0'
-
-            if bit_judgment in self.on_bits: # judgment indicates a correct bit
-                judged += self.correct_bits[guessed_bit]
-            else:
-                judged += self.incorrect_bits[guessed_bit]
-
-        return judged
-
     def boot_up(self):
         self.out('welcome to MAGiE')
         self.out(TITLE_LINE)
@@ -109,40 +92,20 @@ class ConsoleMAGiE(MAGiEDisplay):
         for line in puzzle.clue:
             self.out(line)
 
-        self.out(puzzle.init)
+        guesser = self.guesser(puzzle)
+        judgment = guesser.guess()
 
-    def win_puzzle(self, puzzle: Puzzle):
-        self.out(puzzle.win_text)
-        self.out(TITLE_LINE)
-        for line in puzzle.winMessage:
-            self.out(line)
-        self.out(TITLE_LINE)
+        while not judgment.correct:
+            judgment = guesser.guess(judgment.correct_guess)
 
-    def guess_1_bit(self):
-        return input()
+        self.win_puzzle(puzzle)
 
-    def guess_bits(self, puzzle, guess_bits):
-        if not guess_bits:
-            guess_bits = puzzle.encoding.encode_bit_string(puzzle.init)
-
-        _input = input(guess_bits)
-
-        for b in _input:
-            if b in self.on_bits:
-                guess_bits += '1'
-            elif b in self.off_bits:
-                guess_bits += '0'
-            else:
-                continue  # skip invalid bits
-                # we could skip self.ignore and throw on others, if we want
-
-        full_judgment: FullJudgment = puzzle.judge(guess_bits)
-
-        for i, char_judgment in enumerate(full_judgment.char_judgments):
-            judged_bits_display = self.get_judgment_display(char_judgment)
-            self.out(puzzle.encoding.decode_bit_string(char_judgment.guess) + ' ' + judged_bits_display)
-
-        return full_judgment.correct_guess
+    def guesser(self, puzzle):
+        return ConsoleEncodingGuesser(self, puzzle)
+        if puzzle.type == 'Encoding':
+            return ConsoleEncodingGuesser(self, puzzle)
+        else:
+            return ConsoleDecodingGuesser(self, puzzle)
 
     def guess_1_char(self):
         return input()
@@ -160,8 +123,69 @@ class ConsoleMAGiE(MAGiEDisplay):
         self.out(correct_guesses)
         return correct_guesses.rstrip().upper()
 
+
+    def win_puzzle(self, puzzle: Puzzle):
+        self.out(puzzle.win_text)
+        self.out(TITLE_LINE)
+        for line in puzzle.winMessage:
+            self.out(line)
+        self.out(TITLE_LINE)
+
     def reset(self):
         pass
+
+
+class ConsoleEncodingGuesser(Guesser):
+    def __init__(self, magie: ConsoleMAGiE, puzzle):
+        super().__init__(magie, puzzle)
+        self.magie: ConsoleMAGiE = magie
+
+    def guess(self, current_correct = None) -> FullJudgment:
+        if not current_correct:
+            current_correct = self.puzzle.encoding.encode_bit_string(self.puzzle.init)
+
+        _input = input(current_correct)
+
+        guess_bits = ''
+
+        for b in _input:
+            if b in self.magie.on_bits:
+                guess_bits += '1'
+            elif b in self.magie.off_bits:
+                guess_bits += '0'
+            else:
+                continue  # skip invalid bits
+                # we could skip self.ignore and throw on others, if we want
+
+        full_judgment: FullJudgment = self.puzzle.judge(guess_bits)
+
+        for i, char_judgment in enumerate(full_judgment.char_judgments):
+            judged_bits_display = self.get_judgment_display(char_judgment)
+            self.magie.out(self.puzzle.encoding.decode_bit_string(char_judgment.guess) + ' ' + judged_bits_display)
+
+        return full_judgment
+
+    def get_judgment_display(self, char_judgement: CharJudgment):
+        """Return a string of bits, decorated according to their correctness, ready to display"""
+        judged = ''
+
+        for i, bit_judgment in enumerate(char_judgement.judgment):
+            if i < len(char_judgement.guess):
+                guessed_bit = char_judgement.judgment[i]
+            else:
+                guessed_bit = '0'
+
+            if bit_judgment in self.magie.on_bits: # judgment indicates a correct bit
+                judged += self.magie.correct_bits[guessed_bit]
+            else:
+                judged += self.magie.incorrect_bits[guessed_bit]
+
+        return judged
+
+
+class ConsoleDecodingGuesser(Guesser):
+    def __init__(self, magie, puzzle):
+        super().__init__(magie, puzzle)
 
 
 def start_game(json_path):
