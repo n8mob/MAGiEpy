@@ -101,7 +101,6 @@ class ConsoleMAGiE(MAGiEDisplay):
         self.win_puzzle(puzzle)
 
     def guesser(self, puzzle):
-        return ConsoleEncodingGuesser(self, puzzle)
         if puzzle.type == 'Encoding':
             return ConsoleEncodingGuesser(self, puzzle)
         else:
@@ -135,11 +134,13 @@ class ConsoleMAGiE(MAGiEDisplay):
         pass
 
 
-class ConsoleEncodingGuesser(Guesser):
+class ConsoleGuesser(Guesser):
     def __init__(self, magie: ConsoleMAGiE, puzzle):
         super().__init__(magie, puzzle)
         self.magie: ConsoleMAGiE = magie
 
+
+class ConsoleEncodingGuesser(ConsoleGuesser):
     def guess(self, current_correct = None) -> FullJudgment:
         if not current_correct:
             current_correct = self.puzzle.encoding.encode_bit_string(self.puzzle.init)
@@ -157,7 +158,7 @@ class ConsoleEncodingGuesser(Guesser):
                 continue  # skip invalid bits
                 # we could skip self.ignore and throw on others, if we want
 
-        full_judgment: FullJudgment = self.puzzle.judge(guess_bits)
+        full_judgment: FullJudgment = self.puzzle.encoding.judge_bits(guess_bits)
 
         for i, char_judgment in enumerate(full_judgment.char_judgments):
             judged_bits_display = self.get_judgment_display(char_judgment)
@@ -183,9 +184,39 @@ class ConsoleEncodingGuesser(Guesser):
         return judged
 
 
-class ConsoleDecodingGuesser(Guesser):
-    def __init__(self, magie, puzzle):
-        super().__init__(magie, puzzle)
+class ConsoleDecodingGuesser(ConsoleGuesser):
+    def guess(self, current_correct = None) -> FullJudgment:
+        if not current_correct:
+            current_correct = self.puzzle.init
+
+        _input = input(current_correct)
+
+        full_judgment: FullJudgment = self.puzzle.encoding.judge_text(_input, self.puzzle.win_text)
+
+        encoded_correct_guess = self.puzzle.encoding.encode_bit_string(full_judgment.correct_guess)
+        for encoded_correct_bit
+
+        self.magie.out(encoded_correct_guess)
+
+        return full_judgment
+
+    def get_judgment_display(self, char_judgement: CharJudgment):
+        """Return a string of bits, decorated according to their correctness, ready to display"""
+        judged = ''
+
+        if char_judgement.judgment in self.magie.on_bits: # judgment indicates a correct character
+
+
+        bit_judgment = char_judgement.judgment
+
+        for guessed_bit in self.puzzle.encoding.encode_bit_string(char_judgement.guess):
+            if bit_judgment in self.magie.on_bits: # judgment indicates a correct bit
+                judged += self.magie.correct_bits[guessed_bit]
+            else:
+                judged += self.magie.incorrect_bits[guessed_bit]
+
+        return judged
+
 
 
 def start_game(json_path):

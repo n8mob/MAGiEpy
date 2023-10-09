@@ -4,7 +4,6 @@ from typing import Any
 
 from binary_encoding import BinaryEncoding
 from fixed_width import FixedWidthEncoding
-from judgments import FullJudgment
 from variable_width import VariableWidthEncoding
 
 DEFAULT_ENCODING = '5bA1'
@@ -85,9 +84,6 @@ class Puzzle:
 
         self.encoding: BinaryEncoding = menu.encodings[self.encoding_id]
         self.win_bits = self.encoding.encode_bit_string(self.win_text)
-
-    def judge(self, guess_bits) -> FullJudgment:
-        return self.encoding.judge_bits(guess_bits, self.win_bits)
 
 
 class Level:

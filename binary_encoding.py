@@ -27,3 +27,6 @@ class BinaryEncoding:
 
     def judge_bits(self, guess_bits, win_bits) -> FullJudgment:
         pass
+
+    def judge_text(self, guess_text, win_text) -> FullJudgment:
+        pass
