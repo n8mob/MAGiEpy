@@ -204,9 +204,10 @@ class ConsoleDecodingGuesser(ConsoleGuesser):
             current_correct = self.puzzle.init
         _input = input(current_correct)
 
-        guess_text = current_correct + _input.upper()
+        guess_text = current_correct + self.magie.prep(_input)
+        win_text = self.magie.prep(self.puzzle.win_text)
 
-        full_judgment: FullJudgment = self.puzzle.encoding.judge_text(guess_text, self.puzzle.win_text)
+        full_judgment: FullJudgment = self.puzzle.encoding.judge_text(guess_text, win_text)
 
         encoded_correct_guess = self.puzzle.encoding.encode_bit_string(full_judgment.correct_guess)
 
