@@ -143,7 +143,7 @@
     "quick fixed": {
       "levels": [
         {
-          "levelName": ["AB CD", "FIXED"],
+          "levelName": ["DECODE", ".FIXED."],
           "levelNumber": 21,
           "sort_order": 1,
           "puzzles": [
@@ -154,6 +154,15 @@
               "encoding": "5bA1",
               "init": "",
               "winMessage": ["AB INDEED"],
+              "level": 21
+            },
+            {
+              "clue": ["DECODE CD"],
+              "winText": "CD",
+              "type": "Decode",
+              "encoding": "5bA1",
+              "init": "",
+              "winMessage": ["CD", "THIS TIME"],
               "level": 21
             }
           ]
