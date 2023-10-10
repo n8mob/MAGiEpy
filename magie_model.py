@@ -99,6 +99,9 @@ class Level:
         for puzzle in deserialized.get('puzzles', []):
             self.puzzles.append(Puzzle(puzzle, menu))
 
+    def __repr__(self):
+        return '\n'.join(self.levelName)
+
     def go_to_next_puzzle(self):
         self.current_puzzle_index += 1
         if self.current_puzzle_index >= len(self.puzzles):
@@ -110,6 +113,8 @@ class Level:
 
     def get_current_puzzle(self) -> Puzzle:
         """The puzzle currently being played for this level"""
+        if not self.puzzles or self.current_puzzle_index >= len(self.puzzles):
+            raise IndexError(f'\n{self}\nhas {len(self.puzzles)} puzzles. (Current index: {self.current_puzzle_index}.)')
         return self.puzzles[self.current_puzzle_index]
 
 
