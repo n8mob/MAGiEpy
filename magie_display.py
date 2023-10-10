@@ -51,6 +51,9 @@ class MAGiEDisplay:
     def reset(self):
         pass
 
+    def quit(self):
+        pass
+
 
 class Guesser:
     def __init__(self, magie: MAGiEDisplay, puzzle: Puzzle):

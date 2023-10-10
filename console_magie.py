@@ -3,6 +3,8 @@ from judgments import FullJudgment, CharJudgment
 from magie_display import MAGiEDisplay, Guesser
 from magie_model import Menu, Category, Puzzle, Level, GuessMode
 
+THANK_YOU_FOR_PLAYOS = ['THANK YOU', 'FOR PLAYOS', 'MAGiE']
+
 TITLE_LINE = '============='
 
 
@@ -132,6 +134,17 @@ class ConsoleMAGiE(MAGiEDisplay):
 
     def reset(self):
         pass
+
+    def quit(self, quit_message = None):
+        if not quit_message:
+            quit_message = THANK_YOU_FOR_PLAYOS
+        elif isinstance(quit_message, str):
+            quit_message = [quit_message]
+
+        self.out('')
+        self.out(TITLE_LINE)
+        for line in quit_message:
+            self.out(line)
 
 
 class ConsoleGuesser(Guesser):
