@@ -126,6 +126,28 @@ class VariableWidthEncoding(BinaryEncoding):
 
         return FullJudgment(all_correct, self.join(correct_guess_chars), char_judgments)
 
+    def judge_text(self, guess_text, win_text) -> FullJudgment:
+        all_correct = len(guess_text) == len(win_text)
+        guess_while_correct = ''
+        correct_so_far = True
+
+        char_judgments = []
+
+        for char_index in range(0, min(len(guess_text), len(win_text))):
+            guess_char = guess_text[char_index]
+            char_correct = guess_char == win_text[char_index]
+            all_correct = all_correct and char_correct
+            correct_so_far = correct_so_far and char_correct
+            if correct_so_far:
+                guess_while_correct += guess_char
+
+            char_judgments.append(CharJudgment(char_correct, guess_char, '1' if char_correct else '0'))
+
+        if not char_judgments:
+            char_judgments.append(CharJudgment(False, '', '0'))
+
+        return FullJudgment(all_correct, guess_while_correct, char_judgments)
+
     def join(self, chars):
         if not chars:
             return ''
