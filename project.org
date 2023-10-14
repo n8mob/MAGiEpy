@@ -1,0 +1,129 @@
+#+title: MAGiE: Your Magnetic Interactive Explorer
+#+filetags: :MAGiE:
+#+todo: TODO DOING | DONE CANCELED
+#+todo: BUG | FIXED
+#+startup: fold
+
+* Python Game                                                   :python:game:
+:PROPERTIES:
+:VISIBILITY: children
+:END:
+
+** FIXED after finishing a level, category selection does not work  :console:
+CLOSED: [2023-10-06 Fri 19:32]
+oh! only CursesMAGiE implements finish_level :facepalm:
+
+** FIXED wrong-length guesses are bad                   :console:fixedlength:
+CLOSED: [2023-10-08 Sun 16:19]
+
+
+** DONE alpha-length decoding puzzle
+CLOSED: [2023-10-09 Mon 19:55]
+
+** DOING 5ba1 decoding puzzle
+
+** DONE Remove curses imports from all files that are required for console magie
+CLOSED: [2023-10-06 Fri 18:43]
+This should allow the script to run in Pythonista.
+
+** FIXED variable-length bit-judgment does not indicate incorrect last letter
+CLOSED: [2023-10-06 Fri 18:10]
+
+I think if the guess is too long (of the correct bit) it marks it correct and assumes the next bit is part of the next character... not sure. I think it'll be good to err on the side of leniency in this version of the game.
+
+** FIXED Exclamation point at end of variable win text is not judged correctly
+CLOSED: [2023-09-24 Sun 14:52]
+Seems fixed.
+Unit tests passed.
+
+** FIXED win_bits.pop(0) is crashing
+CLOSED: [2023-09-12 Tue 11:33]
+I think I put that on when win_bits was a list of lists (or list of strings)
+1 bit-string(list) for each character
+Now I'm using win_bits as a full string with no breaks (better for variable-width encodings)
+
+Removed the pop and just judged the whole string at once.
+
+** FIXED character-level correctness is lost
+CLOSED: [2023-09-20 Wed 19:12]
+
+** FIXED "judged" bits of first correct character displaying for every character
+CLOSED: [2023-09-20 Wed 19:12]
+And sometimes incorrectly at that.
+
+** DONE output guess and correctness on separate lines
+CLOSED: [2023-09-12 Tue 11:34]
+
+** DONE do not add wrong guesses to guess text
+CLOSED: [2023-09-04 Mon 16:28]
+
+** DONE Multi-bit guess
+CLOSED: [2023-09-04 Mon 16:21]
+for ConsoleMAGiE (where you have to press <enter> every time)
+
+** DONE Extract Display
+CLOSED: [2023-08-29 Tue 17:32]
+Idea: make the rest of the code more modular and therefore easier to test
+- [X] Categories don't show up
+"done", but not really.  
+
+** DONE backspace over mistakes
+*** backspace fifth bit
+(that is: bit where index = encoding.width)
+1. [X] if guess bits are not empty, pop the last one
+
+** DONE sixth bit crashes the game
+CLOSED: [2023-08-20 Sun 10:04]
+** DONE bug decoded letter padding changes as bits are entered
+CLOSED: [2023-08-20 Sun 10:01]
+** DONE take in bits
+CLOSED: [2023-08-19 Sat 19:56]
+** DONE correct width                                                   :bug:
+CLOSED: [2023-08-19 Sat 18:27]
+** DONE overwrite wrong guesses
+CLOSED: [2023-08-19 Sat 18:19]
+** DONE print guess bits
+CLOSED: [2023-08-19 Sat 18:12]
+** DONE print init in bits
+CLOSED: [2023-08-19 Sat 18:11]
+** DONE color bits according to correctness
+CLOSED: [2023-08-18 Fri 17:17]
+
+** DONE implement encode +and decode+ puzzles
+CLOSED: [2023-08-18 Fri 12:20]
+
+** DONE take input after puzzle clue
+CLOSED: [2023-08-14 Sun 17:05]
+
+** DONE Choosing a level crashes the game
+CLOSED: [2023-08-13 Sun 16:09]
+** DONE letters in front of level names
+CLOSED: [2023-08-13 Sun 16:09]
+
+** TODO Add a win message to levels
+1. [X] Generic "you won the level"
+2. [ ] New field on levels
+
+
+* Similar Things That Exist
+** Games from [[https://youtu.be/PeDNuITuJPA?si=AjejCgR_8m3uDH_m][this YouTube video]]
+*** Chants of Sennaar
+The subject of the video
+Decipher languages - the people on each "level" of a "tower" (of Babel) speak a different language.
+
+*** Return of the Obra Dinn
+*** Heaven's Vault
+*** Sethian
+
+* Unity Game                                                          :unity:
+
+** iOS                                                                  :ios:
+
+** Android                                                          :android:
+
+* Puzzle Editor                                                :puzzleeditor:
+** DONE Figure out a new hierarchy of menus and puzzles               :MAGiE:
+** TODO Create Model for Encoding
+* http://www.catb.org/~esr/faqs/things-every-hacker-once-knew/
+* https://punkx.org/overflow/
+
