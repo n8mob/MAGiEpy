@@ -42,16 +42,16 @@ class FixedWidthEncoding(BinaryEncoding):
         correct_full_guess = ''
 
         char_judgements = []
+        split_guess = self.split_bitstring(guess_bits)
+        split_win = self.split_bitstring(win_bits)
 
-        trailing_bit_length = len(guess_bits) % self.width
-        if trailing_bit_length > 0:
-            guess_bits = guess_bits[:-trailing_bit_length]
-
-        for char_index in range(0, min(len(guess_bits), len(win_bits)), self.width):
+        for char_index in range(0, min(len(split_guess), len(split_win))):
             char_judgment = ''
             char_correct = True
-            for bit_index in range(char_index, char_index + self.width):
-                if guess_bits[bit_index] == win_bits[bit_index]:
+            guess_char_bits = split_guess[char_index]
+            win_char_bits = split_win[char_index]
+            for bit_index in range(0, self.width):
+                if guess_char_bits[bit_index] == win_char_bits[bit_index]:
                     char_judgment += '1'
                 else:
                     char_judgment += '0'
@@ -59,14 +59,25 @@ class FixedWidthEncoding(BinaryEncoding):
                     all_correct = False
 
             if char_correct:
-                correct_full_guess += guess_bits[char_index:char_index+self.width]
+                correct_full_guess += guess_char_bits
             else:
-                if not guess_bits:
+                if not split_guess:
                     char_judgment = '0' * self.width
 
-            char_judgements.append(CharJudgment(char_correct, guess_bits[char_index:char_index + self.width], char_judgment))
+            char_judgements.append(CharJudgment(char_correct, guess_char_bits, char_judgment))
 
         return FullJudgment(all_correct, correct_full_guess, char_judgements)
+
+    def split_bitstring(self, bitstring):
+        trailing_bit_length = len(bitstring) % self.width
+        if trailing_bit_length > 0:
+            bitstring = bitstring[:-trailing_bit_length]
+
+        split = []
+        for char_index in range(0, len(bitstring), self.width):
+            split.append(bitstring[char_index:char_index+self.width])
+        return split
+
 
     def judge_text(self, guess_text, win_text) -> FullJudgment:
         all_correct = len(guess_text) == len(win_text)

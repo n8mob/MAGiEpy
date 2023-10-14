@@ -166,6 +166,22 @@
               "level": 21
             }
           ]
+        },
+        {
+          "levelName": ["ENCODE", ".FIXED."],
+          "levelNumber": 22,
+          "sort_order": 7,
+          "puzzles": [
+            {
+              "clue": ["ENCODE AB"],
+              "winText": "AB",
+              "type": "Encode",
+              "encoding": "5bA1",
+              "init": "",
+              "winMessage": ["ENCODOS!"],
+              "level": 22
+            }
+          ]
         }
       ],
       "sort_order": 2

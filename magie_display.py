@@ -57,8 +57,8 @@ class MAGiEDisplay:
 
 class Guesser:
     def __init__(self, magie: MAGiEDisplay, puzzle: Puzzle):
-        self.magie = magie
-        self.puzzle = puzzle
+        self.magie: MAGiEDisplay = magie
+        self.puzzle: Puzzle = puzzle
 
     def guess(self, current_correct = None) -> FullJudgment:
         pass

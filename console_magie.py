@@ -1,3 +1,4 @@
+from fixed_width import FixedWidthEncoding
 from game import Game
 from judgments import FullJudgment, CharJudgment
 from magie_display import MAGiEDisplay, Guesser
@@ -152,13 +153,16 @@ class ConsoleGuesser(Guesser):
         super().__init__(magie, puzzle)
         self.magie: ConsoleMAGiE = magie
 
+    def prompt(self, current_correct) -> str:
+        return input(current_correct)
+
 
 class ConsoleEncodingGuesser(ConsoleGuesser):
     def guess(self, current_correct=None) -> FullJudgment:
         if not current_correct:
             current_correct = self.puzzle.encoding.encode_bit_string(self.puzzle.init)
 
-        _input = input(current_correct)
+        _input = self.prompt(current_correct)
 
         guess_bits = ''
 
@@ -171,11 +175,13 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
                 continue  # skip invalid bits
                 # we could skip self.ignore and throw on others, if we want
 
-        full_judgment: FullJudgment = self.puzzle.encoding.judge_bits(guess_bits)
+        full_judgment: FullJudgment = self.puzzle.encoding.judge_bits(current_correct + guess_bits, self.puzzle.win_bits)
 
         for i, char_judgment in enumerate(full_judgment.char_judgments):
             judged_bits_display = self.get_judgment_display(char_judgment)
-            self.magie.out(self.puzzle.encoding.decode_bit_string(char_judgment.guess) + ' ' + judged_bits_display)
+
+            decoded_guess = self.puzzle.encoding.decode_bit_string(char_judgment.guess)
+            self.magie.out(decoded_guess + ' ' + char_judgment.guess + ' ' + judged_bits_display)
 
         return full_judgment
 
@@ -195,6 +201,25 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
                 judged += self.magie.incorrect_bits[guessed_bit]
 
         return judged
+
+    def split_characters(self, bitstring):
+        return
+
+
+class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
+    def __init__(self, magie: ConsoleMAGiE, puzzle):
+        super().__init__(magie, puzzle)
+        if isinstance(puzzle.encoding, FixedWidthEncoding):
+            self.encoding:FixedWidthEncoding = puzzle.encoding
+        else:
+            raise TypeError(f'Expecting a fixed-width encoding, not {puzzle.encoding.encoding_type}')
+
+    def prompt(self, current_correct):
+        for char_bits in self.split_characters(current_correct):
+            self.magie.out(self.encoding.decode_bit_string(char_bits) + ' ' + char_bits)
+
+    def split_characters(self, bitstring):
+        return self.encoding.split_bitstring(bitstring)
 
 
 class ConsoleDecodingGuesser(ConsoleGuesser):
