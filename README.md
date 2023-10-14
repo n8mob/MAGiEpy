@@ -10,7 +10,6 @@ I fully intend to release this as **free** software, but I haven't figured out t
 If all you want to do is play the game and tinker with the code, then please, be my guest.
 But for now I, Nate Grigg, retain the copyright: all rights reserved.
 Please contact me for any use cases falling outside of "tinkering with" and "playing" the game.
-gainst Python v3.10(ish) I'm not sure what incompatibilities will 
 
 # To Play
 If you just run console_magie.py with a recent(ish) release of Python 3 it should work.
