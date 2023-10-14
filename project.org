@@ -9,6 +9,8 @@
 :VISIBILITY: children
 :END:
 
+** TODO Add a "back" option to the menus
+
 ** FIXED after finishing a level, category selection does not work  :console:
 CLOSED: [2023-10-06 Fri 19:32]
 oh! only CursesMAGiE implements finish_level :facepalm:
