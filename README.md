@@ -6,7 +6,7 @@ Python Version
 # Long story short
 This is a binary-encoding puzzle game implemented as a Python console application.
 
-I fully intend to release this as *free* software, but I haven't figured out the details, like settling on a license.
+I fully intend to release this as **free** software, but I haven't figured out the details, like settling on a license.
 If all you want to do is play the game and tinker with the code, then please, be my guest.
 But for now I, Nate Grigg, retain the copyright: all rights reserved.
 Please contact me for any use cases falling outside of "tinkering with" and "playing" the game.
