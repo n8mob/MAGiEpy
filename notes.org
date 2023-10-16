@@ -1,0 +1,131 @@
+#+title: MAGiE Technical Notes
+
+* Magnetic Storage Density
+** Credit cards
+** Linear Tape-Open
+[[https://en.wikipedia.org/wiki/Linear_Tape-Open#Physical_structure][Wikipedia: Linear Tape-Open]]
+- LTO-1
+  - Native capacity: 100 GB
+  - Tape length: 609 m
+  - Tape width: 12.65 mm (± 0.006 mm)
+  - Data bands: 4
+  - Wraps per band: 12
+  - Tracks per wrap: 8
+  - Total tracks: 384
+  - Linear density: 4,880 bits/mm
+  - Encoding: RLL 1,7
+  - End-to-end passes required to fill tape: 48
+  - Expected tape durability, end-to-end passes: 9,600
+    I assume this is a description of expected tape-life
+
+*** Bits/mm/track
+
+800,000,000,000 (100 GB * 8 bits)
+---
+609,000 (609 m * 1,000 mm/m)
+
+= 1,313,628.8998357964 bits / mm of tape
+
+100,000 MB / 609 m of tape ≈ 164 MB / m
+164,000 kB / 1,000 mm of tape ≈ 164 kB / mm
+⇒ 1,312,000 bits / mm ✓
+
+1,312,000 / 384 ≈ 3,400 bits / mm / track
+
+which is ≠ 4,880... perhaps the 'servo bands' or error correction or something.
+
+LTO also uses a back-and-forth reading technique for whatever reason.
+It's not practical to do that with a swipe card. (Maybe one back-and-forth pass...)
+
+** Floppy Disks
+https://en.wikipedia.org/wiki/History_of_the_floppy_disk
+*** 3.5 Diskettes
+Introduced by Sony around 1981
+
+A 1.44MB floppy diskette has about 6,207 mm^2 minus about 506 mm^2 for the spindle
+So, rounding down to about 5,500 mm^2
+
+1,440,000 MB * 8 = 11,520,000 bits / 5,500 mm^2 = 2,094.5454545455
+2,000 bits / mm^2
+
+Wait - I think those disks were double-sided
+
+"double-sided double-density"...
+
+so, 1,440,000 / 4 ≈ 500 bits / mm^2
+And those motors were computer-controlled, much more precise than a hand swiping a card.
+
+*** 5.25 floppies
+Initial release in 1976, 90kB / single-sided disk
+
+Technical innovations got it up to a max of around 400 kB / side.
+
+5.25" * 25.4mm/inch gives a diameter of 133.35mm / 2 for a radius of 66.675
+Let's estimate the spindle-hole radius around 16mm for about 800 mm^2.
+so, ~13,966 - 800 = 13,200 mm^2
+
+at 90 kB => 720,000 bits / 13,200 mm^2 = 54.5454545455 bits / mm^2
+
+Ah! Not too far from the 37 bits that I came up with earlier (see below)!
+
+** MAGiE Cards
+Okay
+
+*** 5.25 floppies
+55 bits / mm^2
+- 45% for handheld (not a speed-controlled motor) ~= 25 bits
++ 40% increase for 10 years of innovation
+
+*** LTO-1
+3,400 bits/mm/track
+So, let's go ahead and divide that by 2 or 8 for a more practical hand-driven density of...
+I dunno 1,000 bits / mm ⇒ 100 bytes/mm
+With credit card-lengths at about 85mm that gives us 100 * 85 = 8.5kB
+Not too shabby. At that density a 1.44MB floppy is equivalent to about 170 cards.
+
+3,400 is also per track with 384 tracks on a 12.65 mm tape.
+I'm imagining a similar width for MAGiE stripes. So let's imagine 8 tracks
+I think to get that many tracks, we'll reduce the bits/mm of each track and call it +40kB+ kbits per magstripe.
+
+609 m x 12.65 mm = 7,703,850 mm^2
+800,000,000,000 / 7,703,850 = 103,844.1818052013 bits / mm^2
+
+my proposal above is 85 * 12.65 = 1,075.25 mm^2
+with 8 tracks * 5,000 bits / track gives 40,000 bits / 1,075 mm^2 ≈ 37 bits / mm^2
+
+Honestly, that seems pretty modest.
+103,800 LTO-1 / 37
+
+Wikipedia has LTO-1 released in the year 2000
+the MAGiE universe is quite a few years earlier. (~10-20 years earlier)
+
+
+** Settled
+Okay - MAGiE cards can hold about +40kB+ 40kbits per mag. stripe
+If we had an exotic 4-stripe card (one on each edge on both sides), that would be 160kbits => 20kB
+That's plenty for a plain-text magazine. Is it?
+
+A publication could also come on a stack of cards.
+A novel could probably fit a chapter per stripe...
+
+Googling says a book chapter is 2,000-4,000 words
+words average just less than 5 letters.
+2,000 words * 5 characters - even with 8-bit encoding that's... 10kB... oh, wait
+MAGiE cards don't hold 40kB, they hold 40,000 bits.
+So, 40,000 / 8 = 5,000 letters => 1,000 words.
+BUT if we use less than 8-bits/char...
+5bA1 is 5 bits, so that's more like 8,000 letters ≈ 1,600 words.
+It will still do. If we do the double-sided and double-ended thing we get over 6,000 words per card.
+
+Oh, publications could also come on larger cards!
+It's easy to imagine a binder of "long cards" that end up being about as big as a paperback book.
+
+Google says typical magazine articles are 1,000 - 5,000 words.
+So, a magazine article per card is quite feasible.
+
+OOooo! "Magazine"! Like, a firearm's magazine holds several rounds of ammunition.
+A MagnetZine could be a little bundle of mag-stripe cards!!
+
+So good!
+
+

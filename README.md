@@ -9,7 +9,7 @@ This is a binary-encoding puzzle game implemented as a Python console applicatio
 I fully intend to release this as **free** software, but I haven't figured out the details, like settling on a license.
 If all you want to do is play the game and tinker with the code, then please, be my guest.
 But for now I, Nate Grigg, retain the copyright: all rights reserved.
-Please contact me for any use cases falling outside of "tinkering with" and "playing" the game.
+Please contact me for any use cases which fall outside of "tinkering with" and "playing" the game.
 
 # To Play
 If you just run console_magie.py with a recent(ish) release of Python 3 it should work.
@@ -20,6 +20,16 @@ The only way to quit right now is to CTRL-C out.
 
 I have "add a back option to the menus" on my [TODO list](project.org)
 
+## Narrow output
+A lot of the lines of text are constrained to 13 characters.
+This reflects the stylistic choices from the Mobile/Unity versions of the game.
+
+It had a very retro asthetic, with an LCD-screen motif.
+My designer buddy had created a nice-looking, chunky pixel font for us.
+That, plus the retro-ness of it kept the text display narrow.
+
+So if you feel cramped, it may help if you imagine yourself as
+a 10 year old who's family apartment and school are both attached to a rad, retro-future, 80's shopping mall.
 
 # Long story long(er)
 I originally implemented this game in the Unity 3D game engine
@@ -31,7 +41,7 @@ And I can't seem to find it in the Google Play Store, but I believe it's there.
 Anyway - there is probably a large overlap between
 (a) people who will enjoy this game and
 (b) people who use Raspberry Pi and Linux. 
-So set out to create a version of the game that runs in Python.
+So I set out to create a version of the game that runs in Python.
 
 The Unity/Mobile game was very interactive. And my initial goal was to duplicate the same experience here.
 I thought Curses looked like a good way to provide that immediate interaction.

@@ -22,7 +22,8 @@ CLOSED: [2023-10-08 Sun 16:19]
 ** DONE alpha-length decoding puzzle
 CLOSED: [2023-10-09 Mon 19:55]
 
-** DOING 5ba1 decoding puzzle
+** DONE 5ba1 decoding puzzle
+CLOSED: [2023-10-14 Sat 12:46]
 
 ** DONE Remove curses imports from all files that are required for console magie
 CLOSED: [2023-10-06 Fri 18:43]
