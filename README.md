@@ -53,7 +53,7 @@ But it was very hard to debug as the implementation got more complex.
 So, you will see references to Curses (and maybe even a bit of working code),
 but the active development right now is in the plain "console" version of the game.
 
-(Where you have to press <enter> every time you want to submit a guess 😩)
+(Where you have to press [enter] every time you want to submit a guess 😩)
 
 # Python compatibility
 I've been developing against fairly recent releases of Python 3. (I believe I have used v3.9 and v3.10 quite a bit.)
