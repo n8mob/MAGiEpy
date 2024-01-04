@@ -9,6 +9,10 @@
 :VISIBILITY: children
 :END:
 
+
+** TODO add menu option to quit
+** DONE take menu path or URL from input
+CLOSED: [2024-01-04 Thu 16:10]
 ** DONE Add a "back" option when selecting levels
 CLOSED: [2024-01-04 Thu 15:47]
 
