@@ -69,14 +69,23 @@ class ConsoleMAGiE(MAGiEDisplay):
 
         return menu.categories[category_number]
 
-    def select_level(self, category: Category):
+    def select_level(self, category: Category, menu_commands):
         for i, level in enumerate(category.levels):
             pre = f'{i:>2}'
             for line in level.levelName:
                 self.out(f'{pre} {line}')
                 pre = ' ' * len(pre)
 
-        level_number = int(input('select level: '))
+        if menu_commands:
+            self.out('  or')
+            for command_input, menu_command in menu_commands.items():
+                self.out(f'{command_input} {menu_command}')
+
+        selected = input('select level: ').upper()
+        if selected in menu_commands:
+            return selected
+
+        level_number = int(selected)
 
         return category.levels[level_number]
 

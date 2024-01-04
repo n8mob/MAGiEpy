@@ -3,6 +3,8 @@ import time
 from magie_model import Menu, Correctness, GuessMode
 from magie_display import MAGiEDisplay
 
+MENU_COMMANDS = {'B': 'GO BACK'}
+
 TITLE_LINE = '============='
 SUBTITLE_LINE = '-------------'
 DEBUG = True
@@ -11,7 +13,6 @@ SYSTEM_WINDOW_HEIGHT = 4
 MENU_PAUSE = 0.4
 LEVEL_START_PAUSE = 0.2
 WIN_PAUSE = 0.6
-
 
 class Game:
     def __init__(
@@ -40,7 +41,12 @@ class Game:
                 self.category = self.magie.select_category(self.menu)
 
                 while not quitos_category:
-                    self.level = self.magie.select_level(self.category)
+                    selected = self.magie.select_level(self.category, MENU_COMMANDS)
+                    if selected in MENU_COMMANDS:
+                        quitos_category = True
+                        continue
+
+                    self.level = selected
 
                     self.magie.start_level(self.level)
 

@@ -9,7 +9,8 @@
 :VISIBILITY: children
 :END:
 
-** TODO Add a "back" option to the menus
+** DONE Add a "back" option when selecting levels
+CLOSED: [2024-01-04 Thu 15:47]
 
 ** FIXED after finishing a level, category selection does not work  :console:
 CLOSED: [2023-10-06 Fri 19:32]

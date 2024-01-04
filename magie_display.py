@@ -15,7 +15,7 @@ class MAGiEDisplay:
     def select_category(self, menu: Menu) -> Category:
         pass
 
-    def select_level(self, category: Category) -> Level:
+    def select_level(self, category: Category, menu_commands) -> Level:
         pass
 
     def start_level(self, level: Level):
