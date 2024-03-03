@@ -14,13 +14,14 @@ MENU_PAUSE = 0.4
 LEVEL_START_PAUSE = 0.2
 WIN_PAUSE = 0.6
 
+
 class Game:
     def __init__(
             self,
             menu: Menu,
             magie: MAGiEDisplay,
             guess_mode: GuessMode = None
-            ):
+    ):
         self.menu = menu
         self.magie = magie
         self.category = None
@@ -51,14 +52,21 @@ class Game:
                     self.magie.start_level(self.level)
 
                     time.sleep(LEVEL_START_PAUSE)
-
                     while not self.level.is_finished():
                         self.magie.start_puzzle(self.level.get_current_puzzle())
                         self.level.go_to_next_puzzle()
 
-                    self.magie.finish_level(self.level)
+                self.magie.finish_level(self.level)
 
-                    quitos_category = self.level == self.category.levels[-1]
+                quitos_category = self.level == self.category.levels[-1]
+            except IndexError:
+                self.magie.show_error([
+                    "SOME KIND",
+                    "OF PROBLEM",
+                    "WITH THAT",
+                    "LEVEL"
+                ])
+                continue
             except KeyboardInterrupt:
                 quitos_game = True
 

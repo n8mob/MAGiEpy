@@ -28,8 +28,12 @@ class ConsoleMAGiE(MAGiEDisplay):
     def preferred_guess_mode(self) -> GuessMode:
         return GuessMode.MULTI_BIT
 
-    def out(self, text=''):
-        print(self.prep(text))
+    def out(self, text):
+        if isinstance(text, str):
+            print(self.prep(text))
+        else:
+            for line in text:
+                print(self.prep(line))
 
     def read(self, prompt='', include_prompt=False):
         prompt = self.prep(prompt)
@@ -59,12 +63,16 @@ class ConsoleMAGiE(MAGiEDisplay):
         return is_correct, judged
 
     def boot_up(self):
-        self.out('welcome to MAGiE')
-        self.out(TITLE_LINE)
-        self.out()
+        self.out([
+            'welcome to MAGiE',
+            TITLE_LINE,
+            ''
+        ])
 
     def show_error(self, error):
-        self.out(error)
+        if isinstance(error, str):
+            error = [error]
+        self.out([TITLE_LINE] + error + [TITLE_LINE])
 
     def select_category(self, menu: Menu):
         for i, category in enumerate(menu.categories):
@@ -98,13 +106,10 @@ class ConsoleMAGiE(MAGiEDisplay):
         level.current_puzzle_index = 0
 
     def finish_level(self, level: Level):
-        self.out('GOOD WORK!')
-        self.out('YOU FINISHOS')
-        self.out('THE LEVEL')
-        for line in level.levelName:
-            self.out(line)
-        self.out(TITLE_LINE)
-        self.out('')
+        self.out(['GOOD WORK!', 'YOU FINISHOS', 'THE LEVEL']
+                 + level.levelName
+                 + [TITLE_LINE, '']
+                 )
 
     def start_puzzle(self, puzzle: Puzzle):
         for line in puzzle.clue:
@@ -150,7 +155,7 @@ class ConsoleMAGiE(MAGiEDisplay):
     def reset(self):
         pass
 
-    def quit(self, quit_message = None):
+    def quit(self, quit_message=None):
         if not quit_message:
             quit_message = THANK_YOU_FOR_PLAYOS
         elif isinstance(quit_message, str):
@@ -224,7 +229,7 @@ class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
     def __init__(self, magie: ConsoleMAGiE, puzzle):
         super().__init__(magie, puzzle)
         if isinstance(puzzle.encoding, FixedWidthEncoding):
-            self.encoding:FixedWidthEncoding = puzzle.encoding
+            self.encoding: FixedWidthEncoding = puzzle.encoding
         else:
             raise TypeError(f'Expecting a fixed-width encoding, not {puzzle.encoding.encoding_type}')
 
