@@ -4,6 +4,9 @@
 #+todo: BUG | FIXED
 #+startup: fold
 
+* TODO Hook u
+* DONE import rgb1602, smbus2
+CLOSED: [2024-03-18 Mon 14:46]
 * DONE Fix crash when level has no puzzles
 CLOSED: [2024-01-13 Sat 16:27]
 

@@ -1,8 +1,8 @@
 import sys
 import os
-sys.path.append(os.path.expanduser('~/c/DFRobot_RGB1602_RaspberryPi/python'))
+import smbus2 as smbus
+sys.path.append(os.path.expanduser('~/code/radio/DFRobot_RGB1602_RaspberryPi/python'))
 import rgb1602
-import RPi.GPIO as GPIO
 import time
 
 import argparse
@@ -65,18 +65,18 @@ class ConsoleMAGiE(MAGiEDisplay):
         else:
             return prep_array(text)
 
-    def prep_string(text):
+    def prep_string(self, text):
             u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
             if len(u) <= self.w:
                 return [u]
             else:
                 lines = []
                 for i in range(0, len(u), self.w):
-                    lines.append(u[i:i+self.w]
+                    lines.append(u[i:i+self.w])
                 return lines
                                  
-    def prep_array(text):
-                                
+    def prep_array(self, text):
+        pass
 
     def judge_bitstring(self, guess, win):
         max_possible = min(len(guess), len(win))
@@ -196,7 +196,7 @@ class ConsoleMAGiE(MAGiEDisplay):
             self.out(line)
 
 
-class ConsoleGuesser(Guesser):
+class GpioGuesser(Guesser):
     def __init__(self, magie: ConsoleMAGiE, puzzle):
         super().__init__(magie, puzzle)
         self.magie: ConsoleMAGiE = magie
@@ -205,7 +205,7 @@ class ConsoleGuesser(Guesser):
         return input(current_correct)
 
 
-class ConsoleEncodingGuesser(ConsoleGuesser):
+class ConsoleEncodingGuesser(GpioGuesser):
     def guess(self, current_correct=None) -> FullJudgment:
         if not current_correct:
             current_correct = self.puzzle.encoding.encode_bit_string(self.puzzle.init)
@@ -270,7 +270,7 @@ class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
         return self.encoding.split_bitstring(bitstring)
 
 
-class ConsoleDecodingGuesser(ConsoleGuesser):
+class ConsoleDecodingGuesser(GpioGuesser):
     def guess(self, current_correct=None) -> FullJudgment:
         self.magie.out(self.puzzle.win_bits)
         if not current_correct:
