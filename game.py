@@ -56,9 +56,9 @@ class Game:
                         self.magie.start_puzzle(self.level.get_current_puzzle())
                         self.level.go_to_next_puzzle()
 
-                self.magie.finish_level(self.level)
+                    self.magie.finish_level(self.level)
 
-                quitos_category = self.level == self.category.levels[-1]
+                    quitos_category = self.level == self.category.levels[-1]
             except IndexError:
                 self.magie.show_error([
                     "SOME KIND",
