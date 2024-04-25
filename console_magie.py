@@ -83,7 +83,7 @@ class ConsoleMAGiE(MAGiEDisplay):
     while category_number < 0:
       try:
         category_number = int(input('select category: '))
-      except ValueError as vex:
+      except ValueError:
         print(f'Please choose a number: 0-{len(menu.categories)}')
         category_number = -1
 
