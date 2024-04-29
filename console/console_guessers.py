@@ -1,14 +1,8 @@
-from console.magie import ConsoleMAGiE
+from console.console_magie import ConsoleMAGiE
 from fixed_width import FixedWidthEncoding
 from judgments import FullJudgment, CharJudgment
 from magie_display import Guesser
-from magie_model import Puzzle
-
-
-class MissingEncodingError(Exception):
-  def __init__(self, missing_encoding):
-    super().__init__(f'Puzzle type {missing_encoding} not supported')
-    self.missing_encoding = missing_encoding
+from magie_model import Puzzle, MissingEncodingError
 
 
 class ConsoleGuesser(Guesser):
@@ -140,5 +134,5 @@ class ConsoleXorGuesser(ConsoleGuesser):
     super().__init__(magie, puzzle)
 
   def guess(self, current_correct=None) -> FullJudgment:
-
     xor_result = self.puzzle.win_bits ^ current_correct
+    return FullJudgment(correct=None, correct_guess=None, char_judgments=xor_result)

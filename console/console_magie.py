@@ -1,5 +1,4 @@
-from console.guessers import ConsoleGuesser
-from magie_display import MAGiEDisplay
+from magie_display import MAGiEDisplay, Guesser
 from magie_model import GuessMode, Menu, Category, Level, Puzzle
 
 TITLE_LINE = '============='
@@ -114,7 +113,7 @@ class ConsoleMAGiE(MAGiEDisplay):
     for line in puzzle.clue:
       self.out(line)
 
-    guesser = ConsoleGuesser.for_puzzle(self, puzzle)
+    guesser = Guesser.for_puzzle(self, puzzle)
     judgment = guesser.guess()
 
     while not judgment.correct:

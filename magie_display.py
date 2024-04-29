@@ -60,5 +60,9 @@ class Guesser:
         self.magie: MAGiEDisplay = magie
         self.puzzle: Puzzle = puzzle
 
+    @classmethod
+    def for_puzzle(cls, magie, puzzle: Puzzle):
+        return Guesser(magie, puzzle)
+
     def guess(self, current_correct = None) -> FullJudgment:
         pass
