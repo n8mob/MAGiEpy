@@ -1,8 +1,8 @@
 import time
 
+import audioio
 import board
 import digitalio
-import audioio
 
 BLINK_TIME = 0.4
 
@@ -20,4 +20,3 @@ if __name__ == '__main__':
     led.value = False
     audioOut.stop()
     time.sleep(BLINK_TIME)
-

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import time
+
 import smbus2 as smbus
 
 BUS = smbus.SMBus(1)

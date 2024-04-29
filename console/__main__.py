@@ -1,8 +1,8 @@
 import argparse
+import os
 
 import requests
 from urllib3.util import parse_url
-import os
 
 from console.console_magie import ConsoleMAGiE
 from game import Game

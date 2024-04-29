@@ -1,7 +1,8 @@
+import time
+
 import adafruit_pcf8574
 import board
 import busio
-import time
 
 INIT_WAIT = 0.005
 WRITE_WAIT = 0.002

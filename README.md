@@ -4,6 +4,7 @@ Python Version
 -------------------------------------------------
 
 # Long story short
+
 This is a binary-encoding puzzle game implemented as a Python console application.
 
 I fully intend to release this as **free** software, but I haven't figured out the details, like settling on a license.
@@ -12,6 +13,7 @@ But for now I, Nate Grigg, retain the copyright: all rights reserved.
 Please contact me for any use cases which fall outside of "tinkering with" and "playing" the game.
 
 # To Play
+
 If you just run console_magie.py with a recent(ish) release of Python 3 it should work.
 There's nothing very exotic going on.
 
@@ -21,6 +23,7 @@ The only way to quit right now is to CTRL-C out.
 I have "add a back option to the menus" on my [TODO list](project.org)
 
 ## Narrow output
+
 A lot of the lines of text are constrained to 13 characters.
 This reflects the stylistic choices from the Mobile/Unity versions of the game.
 
@@ -32,6 +35,7 @@ So if you feel cramped, it may help if you imagine yourself as
 a 10 year old who's family apartment and school are both attached to a rad, retro-future, 80's shopping mall.
 
 # Long story long(er)
+
 I originally implemented this game in the Unity 3D game engine
 and made it available in the Apple App Store and the Google Play Store.
 
@@ -40,7 +44,7 @@ And I can't seem to find it in the Google Play Store, but I believe it's there.
 
 Anyway - there is probably a large overlap between
 (a) people who will enjoy this game and
-(b) people who use Raspberry Pi and Linux. 
+(b) people who use Raspberry Pi and Linux.
 So I set out to create a version of the game that runs in Python.
 
 The Unity/Mobile game was very interactive. And my initial goal was to duplicate the same experience here.
@@ -56,6 +60,7 @@ but the active development right now is in the plain "console" version of the ga
 (Where you have to press [enter] every time you want to submit a guess 😩)
 
 # Python compatibility
+
 I've been developing against fairly recent releases of Python 3. (I believe I have used v3.9 and v3.10 quite a bit.)
 I have also played it a bit in Pythonista on my iPhone, which I believe is Python 3.6.
 If you find any compatibility issues or bugs, don't hesitate to let me know.

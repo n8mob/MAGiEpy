@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import time
+
 import better_lcd_2004
 
 SHORT_PAUSE = 0.06
