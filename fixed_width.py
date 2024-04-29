@@ -78,7 +78,6 @@ class FixedWidthEncoding(BinaryEncoding):
             split.append(bitstring[char_index:char_index+self.width])
         return split
 
-
     def judge_text(self, guess_text, win_text) -> FullJudgment:
         all_correct = len(guess_text) == len(win_text)
         guess_while_correct = ''
