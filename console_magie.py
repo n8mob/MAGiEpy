@@ -59,10 +59,10 @@ class ConsoleMAGiE(MAGiEDisplay):
     return u
 
   def prep_correct(self, guessed_bit):
-    return ANSI_CODES[CORRECT] + guessed_bit + ANSI_CODES[RESET]
+    return ANSI_CODES[CORRECT] + guessed_bit
 
   def prep_incorrect(self, guessed_bit):
-    return ANSI_CODES[INCORRECT] + guessed_bit + ANSI_CODES[RESET]
+    return ANSI_CODES[INCORRECT] + guessed_bit
 
   def is_on(self, bit):
     return bit in self.on_bits
