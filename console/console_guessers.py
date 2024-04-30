@@ -67,13 +67,13 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
     """Return a string of bits, decorated according to their correctness, ready to display"""
     judged = ''
 
-    for i, bit_judgment in enumerate(char_judgement.judgment):
+    for i, bit_judgment in enumerate(char_judgement.bit_judgments):
       if i < len(char_judgement.guess_bits):
-        guessed_bit = char_judgement.judgment[i]
+        guessed_bit = char_judgement.bit_judgments[i]
       else:
         guessed_bit = '0'
 
-      if bit_judgment in self.magie.on_bits:  # judgment indicates a correct bit
+      if bit_judgment in self.magie.on_bits:  # bit_judgments indicates a correct bit
         judged += self.magie.correct_bits[guessed_bit]
       else:
         judged += self.magie.incorrect_bits[guessed_bit]
@@ -107,7 +107,7 @@ class ConsoleDecodingGuesser(ConsoleGuesser):
     judged = ''
 
     for guessed_bit in self.puzzle.encoding.encode_bit_string(char_judgement.guess_bits):
-      if char_judgement.judgment in self.magie.on_bits:  # judgment indicates a correct bit
+      if char_judgement.bit_judgments in self.magie.on_bits:  # bit_judgments indicates a correct bit
         judged += self.magie.correct_bits[guessed_bit]
       else:
         judged += self.magie.incorrect_bits[guessed_bit]

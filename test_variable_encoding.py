@@ -80,7 +80,7 @@ class TestVariableEncoding(unittest.TestCase):
 
     self.assertFalse(actual.is_char_correct)
     self.assertEqual(guess, actual.guess_bits)
-    self.assertEqual('1110', actual.judgment)
+    self.assertEqual('1110', actual.bit_judgments)
 
   def test_judge_bits_by_character(self):
     guess = '101011101111'
@@ -99,7 +99,7 @@ class TestVariableEncoding(unittest.TestCase):
       self.assertEqual(
         expected.char_judgments[i].guess_bits, actual.char_judgments[i].guess_bits, f'guess char at {i}')
       self.assertEqual(
-        expected.char_judgments[i].judgment, actual.char_judgments[i].judgment, f'char judgment at {i}')
+        expected.char_judgments[i].bit_judgments, actual.char_judgments[i].bit_judgments, f'char judgment at {i}')
 
   def test_partial_correct_guess_char_is_returned(self):
     guess = '1010101'
@@ -147,7 +147,7 @@ class TestVariableEncoding(unittest.TestCase):
     expected_char_judgment = '10'
 
     actual = self.encoding_under_test.judge_bits(guess, win).char_judgments[0]
-    self.assertEqual(expected_char_judgment, actual.judgment)
+    self.assertEqual(expected_char_judgment, actual.bit_judgments)
 
   def test_ones_guess_too_long(self):
     guess = '111'
@@ -156,7 +156,7 @@ class TestVariableEncoding(unittest.TestCase):
     expected_char_judgment = '10'
     actual = self.encoding_under_test.judge_bits(guess, win).char_judgments[0]
 
-    self.assertEqual(expected_char_judgment, actual.judgment)
+    self.assertEqual(expected_char_judgment, actual.bit_judgments)
 
   def test_zeros_guess_too_short(self):
     guess = '00'
