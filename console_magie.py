@@ -1,3 +1,5 @@
+from console_guessers import ConsoleFixedWidthEncodingGuesser, ConsoleEncodingGuesser, ConsoleDecodingGuesser, \
+  ConsoleXorGuesser
 from magie_display import MAGiEDisplay, Guesser
 from magie_model import GuessMode, Menu, Category, Level, Puzzle
 
@@ -15,6 +17,12 @@ class ConsoleMAGiE(MAGiEDisplay):
     self.decode_bits = ['0', '1', '?']
     self.incorrect_bits = {'0': '⓿', '1': '➊'}
     self.correct_bits = {'0': '0', '1': '1'}
+
+    Guesser.register_guesser('5bA1', 'Encoding', ConsoleFixedWidthEncodingGuesser)
+    Guesser.register_guesser('5bA1', 'Decoding', ConsoleDecodingGuesser)
+    Guesser.register_guesser('AlphaLengthA1', 'Encoding', ConsoleEncodingGuesser)
+    Guesser.register_guesser('AlphaLengthA1', 'Decoding', ConsoleDecodingGuesser)
+    Guesser.register_guesser('xorF', 'Other', ConsoleXorGuesser)
 
   def preferred_guess_mode(self) -> GuessMode:
     return GuessMode.MULTI_BIT

@@ -56,13 +56,19 @@ class MAGiEDisplay:
 
 
 class Guesser:
+  registered_guessers = {}
+
+  @classmethod
+  def register_guesser(cls, encoding, puzzle_type, guesser):
+    cls.registered_guessers[(encoding, puzzle_type)] = guesser
+
   def __init__(self, magie: MAGiEDisplay, puzzle: Puzzle):
     self.magie: MAGiEDisplay = magie
     self.puzzle: Puzzle = puzzle
 
   @classmethod
-  def for_puzzle(cls, magie, puzzle: Puzzle) -> 'Guesser':
-    return Guesser(magie, puzzle)
+  def for_puzzle(cls, magie, puzzle: Puzzle):
+    return cls.registered_guessers[puzzle.encoding](magie, puzzle)
 
   def guess(self, current_correct=None) -> FullJudgment:
     return FullJudgment(correct=None, correct_guess=None, char_judgments=None)

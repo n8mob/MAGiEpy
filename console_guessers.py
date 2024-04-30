@@ -1,4 +1,3 @@
-from console_magie import ConsoleMAGiE
 from fixed_width import FixedWidthEncoding
 from judgments import FullJudgment, CharJudgment
 from magie_display import Guesser
@@ -6,35 +5,16 @@ from magie_model import Puzzle, MissingEncodingError
 
 
 class ConsoleGuesser(Guesser):
-  registered_guessers = {}
-
-  def __init__(self, magie: ConsoleMAGiE, puzzle):
+  def __init__(self, magie, puzzle):
     super().__init__(magie, puzzle)
-    self.magie: ConsoleMAGiE = magie
 
   def prompt(self, current_correct) -> str:
     return input(current_correct)
-
-  @classmethod
-  def register_guesser(cls, encoding, guesser: Guesser):
-    cls.registered_guessers[encoding] = guesser
-
-  @classmethod
-  def for_puzzle(cls, magie, puzzle: Puzzle):
-    if puzzle.type == 'Decode':
-      return ConsoleDecodingGuesser(magie, puzzle)
-    elif puzzle.type == 'Encode':
-      return ConsoleEncodingGuesser(magie, puzzle)
-    elif puzzle.type == 'Other':
-      return ConsoleXorGuesser(magie, puzzle)
-    else:
-      raise MissingEncodingError(puzzle.type)
 
 
 class ConsoleEncodingGuesser(ConsoleGuesser):
   def __init__(self, magie, puzzle):
     super().__init__(magie, puzzle)
-    super().register_guesser(puzzle.encoding_id, self)
 
   def guess(self, current_correct=None) -> FullJudgment:
     if not current_correct:
@@ -116,7 +96,7 @@ class ConsoleDecodingGuesser(ConsoleGuesser):
 
 
 class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
-  def __init__(self, magie: ConsoleMAGiE, puzzle):
+  def __init__(self, magie, puzzle):
     super().__init__(magie, puzzle)
     if isinstance(puzzle.encoding, FixedWidthEncoding):
       self.encoding: FixedWidthEncoding = puzzle.encoding
@@ -132,7 +112,7 @@ class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
 
 
 class ConsoleXorGuesser(ConsoleGuesser):
-  def __init__(self, magie: ConsoleMAGiE, puzzle: Puzzle):
+  def __init__(self, magie, puzzle: Puzzle):
     super().__init__(magie, puzzle)
 
   def guess(self, current_correct=None) -> FullJudgment:
