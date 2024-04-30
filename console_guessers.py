@@ -106,6 +106,7 @@ class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
   def prompt(self, current_correct):
     for char_bits in self.split_characters(current_correct):
       self.magie.out(self.encoding.decode_bit_string(char_bits) + ' ' + char_bits)
+    return input()
 
   def split_characters(self, bitstring):
     return self.encoding.split_bitstring(bitstring)

@@ -18,10 +18,10 @@ class ConsoleMAGiE(MAGiEDisplay):
     self.incorrect_bits = {'0': '⓿', '1': '➊'}
     self.correct_bits = {'0': '0', '1': '1'}
 
-    Guesser.register_guesser('5bA1', 'Encoding', ConsoleFixedWidthEncodingGuesser)
-    Guesser.register_guesser('5bA1', 'Decoding', ConsoleDecodingGuesser)
-    Guesser.register_guesser('AlphaLengthA1', 'Encoding', ConsoleEncodingGuesser)
-    Guesser.register_guesser('AlphaLengthA1', 'Decoding', ConsoleDecodingGuesser)
+    Guesser.register_guesser('5bA1', 'Encode', ConsoleFixedWidthEncodingGuesser)
+    Guesser.register_guesser('5bA1', 'Decode', ConsoleDecodingGuesser)
+    Guesser.register_guesser('AlphaLengthA1', 'Encode', ConsoleEncodingGuesser)
+    Guesser.register_guesser('AlphaLengthA1', 'Decode', ConsoleDecodingGuesser)
     Guesser.register_guesser('xorF', 'Other', ConsoleXorGuesser)
 
   def preferred_guess_mode(self) -> GuessMode:

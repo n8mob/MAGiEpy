@@ -68,7 +68,7 @@ class Guesser:
 
   @classmethod
   def for_puzzle(cls, magie, puzzle: Puzzle):
-    return cls.registered_guessers[puzzle.encoding](magie, puzzle)
+    return cls.registered_guessers[(puzzle.encoding_id, puzzle.type)](magie, puzzle)
 
   def guess(self, current_correct=None) -> FullJudgment:
     return FullJudgment(correct=None, correct_guess=None, char_judgments=None)
