@@ -33,11 +33,12 @@ class FullJudgment:
     self.correct_guess = correct_guess
     self.char_judgments: [CharJudgment] = []
 
-    for char_judgment in char_judgments:
-      if isinstance(char_judgment, CharJudgment):
-        self.char_judgments.append(char_judgment)
-      elif isinstance(char_judgment, tuple):
-        self.char_judgments.append(CharJudgment(*char_judgment))
+    if char_judgments:
+      for char_judgment in char_judgments:
+        if isinstance(char_judgment, CharJudgment):
+          self.char_judgments.append(char_judgment)
+        elif isinstance(char_judgment, tuple):
+          self.char_judgments.append(CharJudgment(*char_judgment))
 
   def __iter__(self):
     return iter((self.correct, self.correct_guess, self.char_judgments))
