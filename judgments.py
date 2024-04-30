@@ -1,6 +1,6 @@
 class CharJudgment:
   """
-  is_char_correct: is the guessed character (the letter encoded by the guess bits) correct
+  is_char_correct: is the guessed character (the letter encoded by guess_bits) correct
   guess_bits: a bit-string representing the player's guess
   bit_judgements: a bitstring representing the correctness of each symbol (bit) in the guess
   """
@@ -8,15 +8,15 @@ class CharJudgment:
   guess_bits: str
   bit_judgments: str
 
-  def __init__(self, correct, guess, judgment):
+  def __init__(self, is_char_correct, guess_bits, bit_judgements):
     """
-    :param correct:
-    :param guess:
-    :param judgment:
+    :param is_char_correct:
+    :param guess_bits:
+    :param bit_judgements:
     """
-    self.is_char_correct = correct
-    self.guess_bits = guess
-    self.bit_judgments = judgment
+    self.is_char_correct = is_char_correct
+    self.guess_bits = guess_bits
+    self.bit_judgments = bit_judgements
 
   def __repr__(self):
     return f"({self.is_char_correct}, '{self.guess_bits}', '{self.bit_judgments})"
