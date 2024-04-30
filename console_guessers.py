@@ -1,4 +1,4 @@
-from console.console_magie import ConsoleMAGiE
+from console_magie import ConsoleMAGiE
 from fixed_width import FixedWidthEncoding
 from judgments import FullJudgment, CharJudgment
 from magie_display import Guesser
