@@ -25,6 +25,8 @@ class ConsoleGuesser(Guesser):
       return ConsoleDecodingGuesser(magie, puzzle)
     elif puzzle.type == 'Encode':
       return ConsoleEncodingGuesser(magie, puzzle)
+    elif puzzle.type == 'Other':
+      return ConsoleXorGuesser(magie, puzzle)
     else:
       raise MissingEncodingError(puzzle.type)
 
