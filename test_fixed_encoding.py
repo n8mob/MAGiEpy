@@ -94,7 +94,7 @@ class TestFixedEncoding(unittest.TestCase):
 
     self.assertFalse(full_judgement.correct)
     self.assertEqual(4, len(full_judgement.char_judgments))
-    self.assertFalse(full_judgement.char_judgments[0].correct)
+    self.assertFalse(full_judgement.char_judgments[0].is_char_correct)
     for i in range(len(expected_char_judgments)):
       self.assertEqual(expected_char_judgments[i], full_judgement.char_judgments[i], f'character index {i}')
 

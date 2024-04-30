@@ -58,8 +58,8 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
     for i, char_judgment in enumerate(full_judgment.char_judgments):
       judged_bits_display = self.get_judgment_display(char_judgment)
 
-      decoded_guess = self.puzzle.encoding.decode_bit_string(char_judgment.guess)
-      self.magie.out(decoded_guess + ' ' + char_judgment.guess + ' ' + judged_bits_display)
+      decoded_guess = self.puzzle.encoding.decode_bit_string(char_judgment.guess_bits)
+      self.magie.out(decoded_guess + ' ' + char_judgment.guess_bits + ' ' + judged_bits_display)
 
     return full_judgment
 
@@ -68,7 +68,7 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
     judged = ''
 
     for i, bit_judgment in enumerate(char_judgement.judgment):
-      if i < len(char_judgement.guess):
+      if i < len(char_judgement.guess_bits):
         guessed_bit = char_judgement.judgment[i]
       else:
         guessed_bit = '0'
@@ -106,7 +106,7 @@ class ConsoleDecodingGuesser(ConsoleGuesser):
     """Return a string of bits, decorated according to their correctness, ready to display"""
     judged = ''
 
-    for guessed_bit in self.puzzle.encoding.encode_bit_string(char_judgement.guess):
+    for guessed_bit in self.puzzle.encoding.encode_bit_string(char_judgement.guess_bits):
       if char_judgement.judgment in self.magie.on_bits:  # judgment indicates a correct bit
         judged += self.magie.correct_bits[guessed_bit]
       else:

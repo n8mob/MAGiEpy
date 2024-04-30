@@ -17,7 +17,7 @@ class MenuTest(unittest.TestCase):
     self.assertEqual(plain_json['menuVersion'], 1)
     self.assertIsNotNone(plain_json['categories'])
 
-    actual_menu = Menu(serialized)
+    actual_menu = Menu(serialized=serialized)
 
     self.assertIsNotNone(actual_menu)
     self.assertIsNotNone(actual_menu.categories)
@@ -50,17 +50,23 @@ class MenuTest(unittest.TestCase):
     self.assertEqual(actual_puzzle.winMessage, ['THAT IS', 'CORRECT!'])
 
   def test_fullMenu(self):
-    with open('TestMenus/FullMenu.json') as full_file:
+    with open('TestMenus/BigGame.json') as full_file:
       full_menu = Menu(file=full_file)
 
     self.assertIsNotNone(full_menu)
-    self.assertEqual(5, len(full_menu.categories))
+    self.assertEqual(7, len(full_menu.categories))
 
-    self.assertEqual('stories', full_menu.categories[0].name)
-    self.assertEqual('at the mall', full_menu.categories[1].name)
-    self.assertEqual('TEDIUM', full_menu.categories[2].name)
-    self.assertEqual('ALPHA LENGTH ENCODING', full_menu.categories[3].name)
-    self.assertEqual('FIVE BIT A1  ENCODING', full_menu.categories[4].name)
+    expected_categories = [
+      'quick alpha',
+      'quick fixed',
+      'stories',
+      'at the mall',
+      'TEDIUM',
+      'ALPHA LENGTH ENCODING',
+      'FIVE BIT A1  ENCODING'
+    ]
+
+    self.assertEqual(expected_categories, [cat.name for cat in full_menu.categories])
 
     at_the_mall = full_menu.categories_by_name['at the mall']
     self.assertEqual(len(at_the_mall.levels), 7)

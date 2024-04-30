@@ -1,28 +1,38 @@
 class CharJudgment:
-  correct: bool
-  guess: str
+  """
+  is_char_correct: is the guessed character (the letter encoded by the guess bits) correct
+  guess: a bit-string representing the player's guess
+  judgement: a bitstring representing the correctness of each symbol (bit) in the guess
+  """
+  is_char_correct: bool
+  guess_bits: str
   judgment: str
 
   def __init__(self, correct, guess, judgment):
-    self.correct = correct
-    self.guess = guess
+    """
+    :param correct:
+    :param guess:
+    :param judgment:
+    """
+    self.is_char_correct = correct
+    self.guess_bits = guess
     self.judgment = judgment
 
   def __repr__(self):
-    return f"({self.correct}, '{self.guess}', '{self.judgment})"
+    return f"({self.is_char_correct}, '{self.guess_bits}', '{self.judgment})"
 
   def __eq__(self, o) -> bool:
     if isinstance(o, CharJudgment):
-      return ((self.correct == o.correct)
-              and (self.guess == o.guess)
+      return ((self.is_char_correct == o.is_char_correct)
+              and (self.guess_bits == o.guess_bits)
               and (self.judgment == o.judgment))
     elif hasattr(o, '__getitem__'):
-      return ((self.correct == o[0])
-              and (self.guess == o[1])
+      return ((self.is_char_correct == o[0])
+              and (self.guess_bits == o[1])
               and (self.judgment == o[2]))
 
   def __hash__(self) -> int:
-    return hash(self.correct) + hash(self.guess) + hash(self.judgment)
+    return hash(self.is_char_correct) + hash(self.guess_bits) + hash(self.judgment)
 
 
 class FullJudgment:

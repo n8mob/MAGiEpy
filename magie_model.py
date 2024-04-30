@@ -23,6 +23,8 @@ class Menu:
         deserialized = json.loads(serialized)
       elif file:
         deserialized = json.load(file)
+      else:
+        deserialized = {}
 
     self.encodings = {}
     if 'encodings' in deserialized:
