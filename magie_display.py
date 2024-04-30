@@ -65,4 +65,4 @@ class Guesser:
     return Guesser(magie, puzzle)
 
   def guess(self, current_correct=None) -> FullJudgment:
-    pass
+    return FullJudgment(correct=None, correct_guess=None, char_judgments=None)
