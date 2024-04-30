@@ -6,6 +6,16 @@ from magie_model import GuessMode, Menu, Category, Level, Puzzle
 TITLE_LINE = '============='
 THANK_YOU_FOR_PLAYOS = ['THANK YOU', 'FOR PLAYOS', 'MAGiE']
 
+CORRECT = 'correct'
+INCORRECT = 'incorrect'
+RESET = 'reset'
+
+ANSI_CODES = {
+  CORRECT: '\u001B[36m',
+  INCORRECT: '\u001B[31m',
+  RESET: '\u001B[0m',
+}
+
 
 class ConsoleMAGiE(MAGiEDisplay):
   def __init__(self):
@@ -15,8 +25,6 @@ class ConsoleMAGiE(MAGiEDisplay):
     self.ignore = [' ', ',', '_']
 
     self.decode_bits = ['0', '1', '?']
-    self.incorrect_bits = {'0': '⓿', '1': '➊'}
-    self.correct_bits = {'0': '0', '1': '1'}
 
     Guesser.register_guesser('5bA1', 'Encode', ConsoleFixedWidthEncodingGuesser)
     Guesser.register_guesser('5bA1', 'Decode', ConsoleDecodingGuesser)
@@ -29,10 +37,12 @@ class ConsoleMAGiE(MAGiEDisplay):
 
   def out(self, text):
     if isinstance(text, str):
-      print(self.prep(text))
+      prepared = self.prep(text)
+      print(prepared)
     else:
       for line in text:
-        print(self.prep(line))
+        prepared = self.prep(line)
+        print(prepared)
 
   def read(self, prompt='', include_prompt=False):
     prompt = self.prep(prompt)
@@ -42,24 +52,26 @@ class ConsoleMAGiE(MAGiEDisplay):
     else:
       return _input
 
-  @staticmethod
-  def prep(text):
+  def prep(self, text):
     u = ''.join((c.lower() if c in ['i', 'I'] else c.upper() for c in text))
+    for code in ANSI_CODES:
+      u = u.replace(ANSI_CODES[code].upper(), ANSI_CODES[code])
     return u
 
-  def judge_bitstring(self, guess, win):
-    max_possible = min(len(guess), len(win))
-    is_correct = max_possible > 0
-    judged = ''
+  def prep_correct(self, guessed_bit):
+    return ANSI_CODES[CORRECT] + guessed_bit + ANSI_CODES[RESET]
 
-    for i in range(max_possible):
-      is_correct = is_correct and guess[i] == win[i]
-      if guess[i] == win[i]:
-        judged += self.correct_bits[guess[i]]
-      else:
-        judged += self.incorrect_bits[guess[i]]
+  def prep_incorrect(self, guessed_bit):
+    return ANSI_CODES[INCORRECT] + guessed_bit + ANSI_CODES[RESET]
 
-    return is_correct, judged
+  def is_on(self, bit):
+    return bit in self.on_bits
+
+  def is_off(self, bit):
+    return bit in self.off_bits
+
+  def prep_judgement(self, char_judgement):
+    return super().prep_judgement(char_judgement) + ANSI_CODES[RESET]
 
   def boot_up(self):
     self.out([
