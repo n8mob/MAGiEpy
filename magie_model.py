@@ -6,9 +6,10 @@ from typing import Any
 from binary_encoding import BinaryEncoding
 from fixed_width import FixedWidthEncoding
 from variable_width import VariableWidthEncoding
+from xor_encoding import XorEncoding
 
 DEFAULT_ENCODING = '5bA1'
-
+DEFAULT_ENCODING_WIDTH = 5
 DEFAULT_PUZZLE_TYPE = 'Decode'
 
 
@@ -27,9 +28,12 @@ class Menu:
     if 'encodings' in deserialized:
       for encoding_id, encoding in deserialized['encodings'].items():
         if encoding['type'] == 'fixed':
-          self.encodings[encoding_id] = FixedWidthEncoding(encoding['width'], encoding['encoding'])
-        else:
+          width = encoding['width'] if 'width' in encoding else DEFAULT_ENCODING_WIDTH
+          self.encodings[encoding_id] = FixedWidthEncoding(width, encoding['encoding'])
+        elif encoding['type'] == 'variable':
           self.encodings[encoding_id] = VariableWidthEncoding(encoding['encoding'])
+        else:
+          self.encodings[encoding_id] = XorEncoding(**encoding['encoding'])
 
     self.categories_by_name = {}
     self.categories = []

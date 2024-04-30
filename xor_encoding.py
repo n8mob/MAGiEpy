@@ -6,10 +6,18 @@ XOR_ENCODING = 'xor_encoding'
 
 
 class XorEncoding(BinaryEncoding):
-  def __init__(self, key):
+  def __init__(self, key=None, base=16, **kwargs):
+    """
+    :param key: key as string encoded in the given base (default to base 16)
+    :param base: defaults to 16-bit (hexadecimal)
+    :param kwargs: key_int is the integer key (thus bypassing the parsing and base arguments)
+    """
     super().__init__(XOR_ENCODING)
-    self.key = key
-    self.key_length = len(f'{key:X}')
+    if not key:
+      self.key = kwargs['key_int']
+    else:
+      self.key = int(key, base)
+    self.key_length = len(f'{self.key:X}')
 
   def xor(self, c, base=16):
     if isinstance(c, str):

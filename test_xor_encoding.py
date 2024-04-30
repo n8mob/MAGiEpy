@@ -5,9 +5,9 @@ from xor_encoding import XorEncoding
 
 class TestXorEncoding(TestCase):
   def setUp(self):
-    self.xorF = XorEncoding(key=0xF)
-    self.xor0 = XorEncoding(key=0x0)
-    self.xor0000 = XorEncoding(key=0x0000)
+    self.xorF = XorEncoding(key='F')
+    self.xor0 = XorEncoding(key='0')
+    self.xor0000 = XorEncoding(key='0000')
 
   def test_0_and_0(self):
     expected = 0x0
@@ -43,7 +43,7 @@ class TestXorEncoding(TestCase):
     0xABCD = 1010 1011 1100 1101
     0xB9F9 = 1011 1001 1111 1001
     """
-    unit = XorEncoding(key=0x1234)
+    unit = XorEncoding(key_int=0x1234)
     abcd = 0xABCD
     expected = 0xB9F9
     actual = unit.encode(abcd)
