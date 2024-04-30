@@ -90,8 +90,8 @@ class Puzzle:
       self.win_text = ''
     self.winMessage = deserialized.get('winMessage', [])
 
-    self.type = deserialized.get('type', DEFAULT_PUZZLE_TYPE)
-    self.encoding_id = deserialized.get('encoding', DEFAULT_ENCODING)
+    self.type = deserialized.get('type') or DEFAULT_PUZZLE_TYPE
+    self.encoding_id = deserialized.get('encoding') or DEFAULT_ENCODING
     if self.encoding_id not in menu.encodings:
       raise MissingEncodingError(self.encoding_id, menu.encodings)
 
