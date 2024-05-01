@@ -116,5 +116,5 @@ class Guesser(ABC):
     return cls.registered_guessers[(puzzle.encoding_id, puzzle.type)](magie, puzzle)
 
   @abstractmethod
-  def guess(self, current_correct=None) -> FullJudgment:
+  def guess(self, current_guess=None) -> FullJudgment:
     pass

@@ -87,10 +87,10 @@ class Puzzle:
     if not self.init:
       self.init = ''
 
-    self.win_text = deserialized.get('winText', '')
+    self.win_text = deserialized.get('winText') or ''
     if not self.win_text:
       self.win_text = ''
-    self.winMessage = deserialized.get('winMessage', [])
+    self.winMessage = deserialized.get('winMessage') or []
 
     self.type = deserialized.get('type') or DEFAULT_PUZZLE_TYPE
     self.encoding_id = deserialized.get('encoding') or DEFAULT_ENCODING

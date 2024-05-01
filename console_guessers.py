@@ -19,11 +19,11 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
   def __init__(self, magie, puzzle):
     super().__init__(magie, puzzle)
 
-  def guess(self, current_correct=None) -> FullJudgment:
-    if not current_correct:
-      current_correct = self.puzzle.encoding.encode_bit_string(self.puzzle.init)
+  def guess(self, current_guess=None) -> FullJudgment:
+    if not current_guess:
+      current_guess = self.puzzle.encoding.encode_bit_string(self.puzzle.init)
 
-    _input = self.prompt(current_correct)
+    _input = self.prompt(current_guess)
 
     guess_bits = ''
 
@@ -36,7 +36,7 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
         continue  # skip invalid bits
         # we could skip self.ignore and throw on others, if we want
 
-    full_judgment: FullJudgment = self.puzzle.encoding.judge_bits(current_correct + guess_bits, self.puzzle.win_bits)
+    full_judgment: FullJudgment = self.puzzle.encoding.judge_bits(current_guess + guess_bits, self.puzzle.win_bits)
 
     for i, char_judgment in enumerate(full_judgment.char_judgments):
       judged_bits_display = self.magie.prep_judgement(char_judgment)
@@ -52,13 +52,13 @@ class ConsoleEncodingGuesser(ConsoleGuesser):
 
 
 class ConsoleDecodingGuesser(ConsoleGuesser):
-  def guess(self, current_correct=None) -> FullJudgment:
+  def guess(self, current_guess=None) -> FullJudgment:
     self.magie.out(self.puzzle.win_bits)
-    if not current_correct:
-      current_correct = self.puzzle.init
-    _input = input(current_correct)
+    if not current_guess:
+      current_guess = self.puzzle.init
+    _input = input(current_guess)
 
-    guess_text = current_correct + self.magie.prep(_input)
+    guess_text = current_guess + self.magie.prep(_input)
     win_text = self.magie.prep(self.puzzle.win_text)
 
     full_judgment: FullJudgment = self.puzzle.encoding.judge_text(guess_text, win_text)
@@ -88,9 +88,23 @@ class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
 
 
 class ConsoleXorGuesser(ConsoleGuesser):
+  """A special-case guesser: encode and decode are the same."""
   def __init__(self, magie, puzzle: Puzzle):
     super().__init__(magie, puzzle)
 
-  def guess(self, current_correct=None) -> FullJudgment:
-    xor_result = self.puzzle.win_bits ^ current_correct
-    return FullJudgment(correct=None, correct_guess=None, char_judgments=xor_result)
+  def guess(self, current_guess=None) -> FullJudgment:
+    if not self.puzzle.win_bits:  # No win_bits to compare, so defaults to correct
+      return FullJudgment(is_correct=True, correct_guess='', char_judgments=[])
+
+    current_guess = self.prompt(current_guess or '')
+
+    xor_result = int(self.puzzle.encoding.encode_bit_string(current_guess), 16)
+
+    xor_is_correct = f'{xor_result:X}' == self.puzzle.win_bits
+    if xor_is_correct:
+      correct_guess = current_guess
+    else:
+      correct_guess = f'{xor_result:X}'
+    return FullJudgment(is_correct=xor_is_correct, correct_guess=correct_guess)
+
+

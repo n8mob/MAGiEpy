@@ -67,7 +67,7 @@ class TestVariableEncoding(unittest.TestCase):
     expected_char_judgment = (True, '1111', '1111')
     actual = self.encoding_under_test.judge_bits(guess, win)
 
-    self.assertTrue(actual.correct)
+    self.assertTrue(actual.is_correct)
     self.assertEqual(guess, actual.correct_guess)
     self.assertEqual(1, len(actual.char_judgments))
     self.assertEqual(expected_char_judgment, actual.char_judgments[0])
@@ -91,7 +91,7 @@ class TestVariableEncoding(unittest.TestCase):
       (True, '1111', '1111')])
     actual = self.encoding_under_test.judge_bits(guess, win)
 
-    self.assertFalse(actual.correct)
+    self.assertFalse(actual.is_correct)
     self.assertEqual(4, len(actual.char_judgments))
     for i in range(len(expected.char_judgments)):
       self.assertEqual(
@@ -122,7 +122,7 @@ class TestVariableEncoding(unittest.TestCase):
     win = '100110111000'  # 'A BC.'
     expected_correct_guess_chars = '100110111'
     full_judgment = self.encoding_under_test.judge_bits(guess, win)
-    all_correct = full_judgment.correct
+    all_correct = full_judgment.is_correct
     actual_correct_guess = full_judgment.correct_guess
     self.assertFalse(all_correct)
     self.assertEqual(expected_correct_guess_chars, actual_correct_guess)
@@ -135,7 +135,7 @@ class TestVariableEncoding(unittest.TestCase):
 
     full_judgment = self.encoding_under_test.judge_bits(guess, win)
 
-    self.assertTrue(full_judgment.correct)
+    self.assertTrue(full_judgment.is_correct)
     self.assertEqual(full_judgment.correct_guess, guess)
     actual_char_judgment = full_judgment.char_judgments[0]
     self.assertEqual(expected_char_judgment, actual_char_judgment)
@@ -165,7 +165,7 @@ class TestVariableEncoding(unittest.TestCase):
     expected_char_judgment = (False, '00', '110')
 
     actual = self.encoding_under_test.judge_bits(guess, win)
-    self.assertFalse(actual.correct)
+    self.assertFalse(actual.is_correct)
     self.assertEqual(guess, actual.correct_guess)
     self.assertEqual(1, len(actual.char_judgments))
     self.assertEqual(expected_char_judgment, actual.char_judgments[0])

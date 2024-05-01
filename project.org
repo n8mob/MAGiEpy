@@ -4,7 +4,10 @@
 #+todo: BUG | FIXED
 #+startup: fold
 
-* TODO Hook u
+* TODO Create test levels for XOR input
+
+* DONE color 5bA1 guess output
+CLOSED: [2024-04-30 Tue 17:24]
 * DONE import rgb1602, smbus2
 CLOSED: [2024-03-18 Mon 14:46]
 * DONE Fix crash when level has no puzzles

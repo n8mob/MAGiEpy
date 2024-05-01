@@ -92,7 +92,7 @@ class TestFixedEncoding(unittest.TestCase):
       (False, '0100', '1101')]
     full_judgement = self.encoding_under_test.judge_bits(guess, win)
 
-    self.assertFalse(full_judgement.correct)
+    self.assertFalse(full_judgement.is_correct)
     self.assertEqual(4, len(full_judgement.char_judgments))
     self.assertFalse(full_judgement.char_judgments[0].is_char_correct)
     for i in range(len(expected_char_judgments)):

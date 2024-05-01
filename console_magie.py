@@ -30,7 +30,8 @@ class ConsoleMAGiE(MAGiEDisplay):
     Guesser.register_guesser('5bA1', 'Decode', ConsoleDecodingGuesser)
     Guesser.register_guesser('AlphaLengthA1', 'Encode', ConsoleEncodingGuesser)
     Guesser.register_guesser('AlphaLengthA1', 'Decode', ConsoleDecodingGuesser)
-    Guesser.register_guesser('xorF', 'Other', ConsoleXorGuesser)
+    Guesser.register_guesser('xorF', 'Encode', ConsoleXorGuesser)
+    Guesser.register_guesser('xorF', 'Decode', ConsoleXorGuesser)
 
   def preferred_guess_mode(self) -> GuessMode:
     return GuessMode.MULTI_BIT
@@ -136,7 +137,7 @@ class ConsoleMAGiE(MAGiEDisplay):
     guesser = Guesser.for_puzzle(self, puzzle)
     judgment = guesser.guess()
 
-    while not judgment.correct:
+    while not judgment.is_correct:
       judgment = guesser.guess(judgment.correct_guess)
 
     self.win_puzzle(puzzle)

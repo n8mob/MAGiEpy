@@ -36,10 +36,19 @@ class CharJudgment:
 
 
 class FullJudgment:
+  """A judgment for the entire puzzle.
+
+  related: CharJudgment holds a judgment for a single character."""
   char_judgments: [CharJudgment]
 
-  def __init__(self, correct, correct_guess, char_judgments):
-    self.correct = correct
+  def __init__(self, is_correct, correct_guess, char_judgments=None):
+    """
+    :param is_correct: True if the entire puzzle is correct.
+    :param correct_guess: those parts (bits) of the guess that are correct
+    Usually only up to the first incorrect bit or character.
+    :param char_judgments: list of CharJudgments for each character in the guess
+    """
+    self.is_correct = is_correct
     self.correct_guess = correct_guess
     self.char_judgments: [CharJudgment] = []
 
@@ -49,6 +58,8 @@ class FullJudgment:
           self.char_judgments.append(char_judgment)
         elif isinstance(char_judgment, tuple):
           self.char_judgments.append(CharJudgment(*char_judgment))
+    else:
+      char_judgments = []
 
   def __iter__(self):
-    return iter((self.correct, self.correct_guess, self.char_judgments))
+    return iter((self.is_correct, self.correct_guess, self.char_judgments))

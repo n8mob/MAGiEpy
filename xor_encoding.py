@@ -19,7 +19,7 @@ class XorEncoding(BinaryEncoding):
       self.key = int(key, base)
     self.key_length = len(f'{self.key:X}')
 
-  def xor(self, c, base=16):
+  def xor_with_key(self, c, base=16):
     if isinstance(c, str):
       i = int(c, base)
     else:
@@ -34,17 +34,17 @@ class XorEncoding(BinaryEncoding):
     for chunk_index in range(chunks):
       chunk = c_hex[chunk_index:chunk_index + self.key_length]
       chunk_i = int(chunk, base)
-      xor = chunk_i ^ self.key
+      xor = chunk_i ^ self.key  # ah! x-oring as part of "encoding"... is that the right thing? maybe not.
       output += f'{xor:X}'
     return int(output, 16)
 
   def encode(self, c):
-    return self.xor(c)
+    return self.xor_with_key(c)
 
   def decode(self, c):
-    return self.xor(c)
+    return self.xor_with_key(c)
 
-  def xor_string(self, bit_string):
+  def xor_string(self, bit_string):  # not really a "bit" string, is it...
     b = ''
     for c in bit_string:
       i = int(c, 16)
