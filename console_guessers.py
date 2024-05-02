@@ -12,7 +12,7 @@ class ConsoleGuesser(Guesser, ABC):
     super().__init__(magie, puzzle)
 
   def prompt(self, current_correct) -> str:
-    return input(current_correct)
+    return (current_correct or '') + input(current_correct or '')
 
 
 class ConsoleEncodingGuesser(ConsoleGuesser):
@@ -96,15 +96,17 @@ class ConsoleXorGuesser(ConsoleGuesser):
     if not self.puzzle.win_bits:  # No win_bits to compare, so defaults to correct
       return FullJudgment(is_correct=True, correct_guess='', char_judgments=[])
 
-    current_guess = self.prompt(current_guess or '')
+    current_guess = self.prompt(current_guess)
 
-    xor_result = int(self.puzzle.encoding.encode_bit_string(current_guess), 16)
+    xored_guess = self.puzzle.encoding.encode_bit_string(current_guess)
+    if not xored_guess:
+      return FullJudgment(is_correct=False, correct_guess='')
 
-    xor_is_correct = f'{xor_result:X}' == self.puzzle.win_bits
+    xor_is_correct = xored_guess == self.puzzle.win_bits
     if xor_is_correct:
       correct_guess = current_guess
     else:
-      correct_guess = f'{xor_result:X}'
+      correct_guess = ''
     return FullJudgment(is_correct=xor_is_correct, correct_guess=correct_guess)
 
 
