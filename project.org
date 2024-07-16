@@ -136,6 +136,7 @@ Decipher languages - the people on each "level" of a "tower" (of Babel) speak a 
 ** Android                                                          :android:
 
 * Puzzle Editor                                                :puzzleeditor:
+** TODO create __str__ for FullJudgment
 ** DONE Figure out a new hierarchy of menus and puzzles               :MAGiE:
 ** TODO Create Model for Encoding
 * http://www.catb.org/~esr/faqs/things-every-hacker-once-knew/

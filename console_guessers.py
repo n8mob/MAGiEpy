@@ -2,7 +2,7 @@ from abc import ABC
 
 import console_magie
 from fixed_width import FixedWidthEncoding
-from judgments import FullJudgment
+from judgments import CharJudgment, FullJudgment
 from magie_display import Guesser
 from magie_model import Puzzle
 
@@ -87,26 +87,15 @@ class ConsoleFixedWidthEncodingGuesser(ConsoleEncodingGuesser):
     return self.encoding.split_bitstring(bitstring)
 
 
-class ConsoleXorGuesser(ConsoleGuesser):
+class ConsoleXorGuesser(ConsoleEncodingGuesser):
   """A special-case guesser: encode and decode are the same."""
   def __init__(self, magie, puzzle: Puzzle):
     super().__init__(magie, puzzle)
 
-  def guess(self, current_guess=None) -> FullJudgment:
+  def broken_guess(self, current_guess=None) -> FullJudgment:
     if not self.puzzle.win_bits:  # No win_bits to compare, so defaults to correct
       return FullJudgment(is_correct=True, correct_guess='', char_judgments=[])
 
     current_guess = self.prompt(current_guess)
 
-    xored_guess = self.puzzle.encoding.encode_bit_string(current_guess)
-    if not xored_guess:
-      return FullJudgment(is_correct=False, correct_guess='')
-
-    xor_is_correct = xored_guess == self.puzzle.win_bits
-    if xor_is_correct:
-      correct_guess = current_guess
-    else:
-      correct_guess = ''
-    return FullJudgment(is_correct=xor_is_correct, correct_guess=correct_guess)
-
-
+    return self.puzzle.encoding.judge_bits(current_guess)

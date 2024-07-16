@@ -38,8 +38,8 @@ class TestVariableEncoding(unittest.TestCase):
     self.assertEqual('1011', self.encoding_under_test.encode_bit_string('AB'))
 
   def test_encode_sentence(self):
-    sentence = 'A CAB'
-    expected_encoding = '10011101011'
+    sentence = 'A CAB.'
+    expected_encoding = '10011101011000'
     self.assertEqual(expected_encoding, self.encoding_under_test.encode_bit_string(sentence))
 
   def test_split_by_switch_with_punk_at_end(self):
@@ -169,6 +169,12 @@ class TestVariableEncoding(unittest.TestCase):
     self.assertEqual(guess, actual.correct_guess)
     self.assertEqual(1, len(actual.char_judgments))
     self.assertEqual(expected_char_judgment, actual.char_judgments[0])
+
+  def test_10000011_gives_AdotB(self):
+    guess = '10000011'
+    expected = 'A. B'
+    actual = self.encoding_under_test.decode_bit_string(guess)
+    self.assertEqual(expected, actual)
 
 
 if __name__ == '__main__':
