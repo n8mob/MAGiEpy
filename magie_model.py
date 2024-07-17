@@ -31,7 +31,7 @@ class Menu:
       for encoding_id, encoding in deserialized['encodings'].items():
         if encoding['type'] == 'fixed':
           width = encoding['width'] if 'width' in encoding else DEFAULT_ENCODING_WIDTH
-          self.encodings[encoding_id] = FixedWidthEncoding(width, encoding['encoding'])
+          self.encodings[encoding_id] = FixedWidthEncoding(width, encoding['encoding']['encodingMap'])
         elif encoding['type'] == 'variable':
           self.encodings[encoding_id] = VariableWidthEncoding(encoding['encoding'])
         else:
